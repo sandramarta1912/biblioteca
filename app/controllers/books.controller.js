@@ -33,8 +33,7 @@ module.exports = {
 	
 	function showSingle(req,res) {
 		//get a single book
-
-		Book.findOne({ description:req.params.description }, (err, book) => {
+		Book.findOne({ description:req.params.slug }, (err, book) => {
 
 			if (err) {
 				res.status(404);
