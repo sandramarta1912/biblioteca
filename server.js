@@ -1,13 +1,26 @@
 //load enviroment variables
 require('dotenv').config();
 // grab our dependencies
-const express 		= require('express'),
-	app 			= express(),
-	port 			= process.env.PORT || 8080,
-	expressLayouts  = require('express-ejs-layouts'),
-	mongoose 		= require('mongoose');
-	
+const express 		 = require('express'),
+	app 			 = express(),
+	port 			 = process.env.PORT || 8080,
+	expressLayouts   = require('express-ejs-layouts'),
+	mongoose 		 = require('mongoose'),
+	bodyParser       = require('body-parser'),
+	session			 = require('express-session'),
+	cookieParser	 = require('cookie-parser'),
+	flash			 = require('connect-flash'),
+	expressValidator = require('express-validator');
 // configure our application =========================
+//set sessions and cookie parser
+app.use(cookieParser());
+app.use(session({
+	secret:process.env.SECRET,
+	cookie: { maxAge: 60000 },
+	resave: false, //forces the session to be save back to the  back to the store
+	saveUnitialized: false //don't save unmodified
+}));
+app.use(flash());
 
 //tell express where to look for static assets
 app.use(express.static(__dirname + '/public'));
@@ -21,6 +34,8 @@ app.use(expressLayouts);
 mongoose.connect(process.env.DB_URI);
 
 //use body parser to grab info from a form
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator());
 
 
 // set the routes =========================

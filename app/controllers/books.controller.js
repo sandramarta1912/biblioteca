@@ -3,8 +3,9 @@ module.exports = {
 
 	showBooks: showBooks,
 	showSingle: showSingle,
-	seedBooks: seedBooks
-	
+	seedBooks: seedBooks,
+	showCreate: showCreate,
+	processCreate: processCreate
 
 }
 
@@ -40,7 +41,10 @@ module.exports = {
 				res.send('Book not found!');
 			}
 
-		res.render('pages/single', { book: book });
+		res.render('pages/single', { 
+			book: book,
+			success: req.flash('success')
+			 });
 
 		});
 
@@ -78,7 +82,40 @@ module.exports = {
 /**
 *Show the create form
 */
+	function showCreate(req, res) {
 
+		res.render('pages/create')
+	}
+
+/**
+*Process the creation form 
+*/
+	function processCreate(req, res) {
+		//validate information
+		
+
+		//create new book
+		const book = new Book({
+
+			name: req.body.name,
+			author: req.body.author
+			
+		});
+		//save book
+	book.save((err) =>{
+		if(err)
+			throw err;
+
+		//set a successful flash message
+		req.flash('success', 'Successfuly created book!');
+		//redirect to the newly created book
+		res.redirect(`/books/${book.description}`);
+
+	});
+
+	}
+
+	
 
 
 	

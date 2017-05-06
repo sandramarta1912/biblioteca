@@ -12,16 +12,16 @@ module.exports = router;
 router.get('/', mainController.showHome);
 //event routes
 router.get('/books', 		 booksController.showBooks);
-
-
-
-
 //seed books
 router.get('/books/seed', booksController.seedBooks);
-//show a single book
 
-router.get('/books/:slug', booksController.showSingle);
+
 //create books
+router.post('/books/create', booksController.processCreate);
+router.get('/books/create', booksController.showCreate);
 
 //edit books
 //delete books
+
+//show a single book
+router.get('/books/:slug', booksController.showSingle);
