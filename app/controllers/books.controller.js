@@ -5,7 +5,9 @@ module.exports = {
 	showSingle: showSingle,
 	seedBooks: seedBooks,
 	showCreate: showCreate,
-	processCreate: processCreate
+	processCreate: processCreate,
+	showEdit: showEdit,
+	processEdit: processEdit
 
 }
 
@@ -123,6 +125,57 @@ module.exports = {
 
 	});
 
+	}
+
+	/**
+	* show the edit form
+	*/
+	function showEdit (req, res) {
+		Book.findOne({description: req.params.slug },(err, book) => {
+			res.render('pages/edit', {
+				book: book,
+				errors: req.flash('errors')
+			});
+		});
+		
+
+	}
+
+	/**
+	* process the edit form
+	*/
+
+	function processEdit (req, res) {
+		req.checkBody('name', 'Name is require.').notEmpty();
+		req.checkBody('description', 'Description is require.').notEmpty();
+		
+		// if there are errors, redirect  and save eroors to flash
+		const errors = req.validationErrors();
+
+		if (errors) {
+			req.flash('errors', errors.map(err => err.msg));
+			return res.redirect(`/books/${req.params.slug}/edit`);
+		}
+		// finding a current book
+		Book.findOne({ description: req.params.slug }, (err, book) => {
+		//updating that book
+		book.name   = req.body.name;
+		book.author = req.body.author;
+		
+		book.save((err) => {
+			if(err)
+				throw err;
+
+		//succes flash message
+
+
+		// redirect back to the books
+			res.flash('success', 'Successfuly updated book!');
+			res.redirect('/books');
+		});	
+
+		});
+		
 	}
 
 	

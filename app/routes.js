@@ -13,14 +13,17 @@ router.get('/', mainController.showHome);
 //event routes
 router.get('/books', 		 booksController.showBooks);
 //seed books
-router.get('/books/seed', booksController.seedBooks);
+router.get('/books/seed', 	 booksController.seedBooks);
 
 
 //create books
 router.post('/books/create', booksController.processCreate);
-router.get('/books/create', booksController.showCreate);
+router.get('/books/create',  booksController.showCreate);
 
 //edit books
+router.post('/books/:slug', 	booksController.processEdit);
+router.get('/books/:slug/edit', booksController.showEdit);
+
 //delete books
 
 //show a single book
