@@ -83,8 +83,9 @@ module.exports = {
 *Show the create form
 */
 	function showCreate(req, res) {
-
-		res.render('pages/create')
+		res.render('pages/create',{
+			errors: req.flash('errors')
+		});
 	}
 
 /**
@@ -92,7 +93,16 @@ module.exports = {
 */
 	function processCreate(req, res) {
 		//validate information
+		req.checkBody('name', 'Name is require.').notEmpty();
+		req.checkBody('description', 'Description is require.').notEmpty();
 		
+		// if there are errors, redirect  and save eroors to flash
+		const errors = req.validationErrors();
+
+		if (errors) {
+			req.flash('errors', errors.map(err => err.msg));
+			return res.redirect('/books/create');
+		}
 
 		//create new book
 		const book = new Book({
