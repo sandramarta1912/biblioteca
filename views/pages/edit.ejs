@@ -13,7 +13,7 @@
           </div>
       <% } %>
 
-      <form action="/books/<%= book.slug %>" method="POST">
+      <form action="/books/<%= book.description %>" method="POST">
 			 <div class="form-group">
         		<label>Name</label>
         		<input type="text" name="name" class="form-control" value="<%= book.name %>">

@@ -17,14 +17,18 @@ router.get('/books/seed', 	 booksController.seedBooks);
 
 
 //create books
-router.post('/books/create', booksController.processCreate);
+
 router.get('/books/create',  booksController.showCreate);
+router.post('/books/create', booksController.processCreate);
 
 //edit books
-router.post('/books/:slug', 	booksController.processEdit);
+
 router.get('/books/:slug/edit', booksController.showEdit);
+router.post('/books/:slug', 	booksController.processEdit);
 
 //delete books
+router.get('/books/:slug/delete', booksController.deleteBook);
+
 
 //show a single book
 router.get('/books/:slug', booksController.showSingle);

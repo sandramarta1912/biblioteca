@@ -7,7 +7,8 @@ module.exports = {
 	showCreate: showCreate,
 	processCreate: processCreate,
 	showEdit: showEdit,
-	processEdit: processEdit
+	processEdit: processEdit,
+	deleteBook: deleteBook
 
 }
 
@@ -96,7 +97,7 @@ module.exports = {
 	function processCreate(req, res) {
 		//validate information
 		req.checkBody('name', 'Name is require.').notEmpty();
-		req.checkBody('description', 'Description is require.').notEmpty();
+		req.checkBody('author', 'Description is require.').notEmpty();
 		
 		// if there are errors, redirect  and save eroors to flash
 		const errors = req.validationErrors();
@@ -135,6 +136,7 @@ module.exports = {
 			res.render('pages/edit', {
 				book: book,
 				errors: req.flash('errors')
+				
 			});
 		});
 		
@@ -147,7 +149,7 @@ module.exports = {
 
 	function processEdit (req, res) {
 		req.checkBody('name', 'Name is require.').notEmpty();
-		req.checkBody('description', 'Description is require.').notEmpty();
+		req.checkBody('author', 'Description is require.').notEmpty();
 		
 		// if there are errors, redirect  and save eroors to flash
 		const errors = req.validationErrors();
@@ -170,13 +172,27 @@ module.exports = {
 
 
 		// redirect back to the books
-			res.flash('success', 'Successfuly updated book!');
+			req.flash('success', 'Successfuly updated book!');
 			res.redirect('/books');
 		});	
 
 		});
 		
 	}
+
+	/**
+	* delete a book
+	*/
+	function deleteBook(req, res) {
+		Book.remove({ description: req.params.slug }, ( err ) => {
+			//set flash data
+			//redirect back to the book page
+			req.flash('success', 'Book deleted!');
+			res.redirect('/books');
+
+		});
+	}
+
 
 	
 
