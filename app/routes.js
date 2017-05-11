@@ -3,6 +3,7 @@ const express = require('express'),
 	router = express.Router();
 	mainController = require('./controllers/main.controller');
 	booksController = require('./controllers/books.controller');
+	searchController = require('./controllers/search.controller');
 	readersController = require('./controllers/readers.controller');
 //export router
 module.exports = router;
@@ -13,14 +14,14 @@ module.exports = router;
 router.get('/', mainController.showHome);
 //book routes
 router.get('/books', 		 booksController.showBooks);
+
+router.get('/search',		 searchController.searchBook);
+
+
 //reader routes
 router.get('/readers',		 readersController.showReaders);
 //seed books
 router.get('/books/seed', 	 booksController.seedBooks);
-
-
-
-
 
 
 //create books
