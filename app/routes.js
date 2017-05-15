@@ -5,6 +5,8 @@ const express = require('express'),
 	booksController = require('./controllers/books.controller');
 	searchController = require('./controllers/search.controller');
 	readersController = require('./controllers/readers.controller');
+	userController = require('./controllers/user.controller');
+	
 //export router
 module.exports = router;
 
@@ -20,8 +22,22 @@ router.get('/search',		 searchController.searchBook);
 
 //reader routes
 router.get('/readers',		 readersController.showReaders);
+
+//user controller
+
+
+
 //seed books
 router.get('/books/seed', 	 booksController.seedBooks);
+
+
+//create user
+router.get('/user/register', userController.showCreate);
+router.post('/user/register', userController.processCreate);
+
+//login user
+router.post('/login', userController.showLogin);
+
 
 
 //create books
