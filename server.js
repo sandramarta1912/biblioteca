@@ -2,6 +2,7 @@
 require('dotenv').config();
 // grab our dependencies
 const express 		 = require('express'),
+	passport 		 = require('passport'),
 	app 			 = express(),
 	port 			 = process.env.PORT || 8080,
 	expressLayouts   = require('express-ejs-layouts'),
@@ -10,8 +11,10 @@ const express 		 = require('express'),
 	session			 = require('express-session'),
 	cookieParser	 = require('cookie-parser'),
 	flash			 = require('connect-flash'),
-	expressValidator = require('express-validator');
-// configure our application =========================
+	expressValidator = require('express-validator'),	
+	localStrategy 	 = require('passport-local').Strategy
+;
+
 //set sessions and cookie parser
 app.use(cookieParser());
 app.use(session({
@@ -21,6 +24,14 @@ app.use(session({
 	saveUnitialized: false //don't save unmodified
 }));
 app.use(flash());
+
+//passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Initialize Passport
+var initPassport = require('./app/authentication/init');
+initPassport(passport);
 
 //tell express where to look for static assets
 app.use(express.static(__dirname + '/public'));
@@ -35,22 +46,14 @@ mongoose.connect(process.env.DB_URI);
 
 //use body parser to grab info from a form
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.use(expressValidator());
 
-
-//gffddf
-
-
-
-
-// set the routes =========================
+// set the routes
 app.use(require('./app/routes'));
 
-// start our server ==========================
+// start our server
 app.listen(port, () => {
 	console.log(`App listening on http://localhost:${port}`);
 });
-
-
-
-

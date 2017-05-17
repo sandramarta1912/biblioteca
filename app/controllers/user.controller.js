@@ -1,27 +1,26 @@
 const User = require('../models/user');
 var createUser = require('../models/user').createUser;
-module.exports = {
 
+module.exports = {
 	
 	showCreate: showCreate,
 	processCreate: processCreate,
 	showLogin: showLogin,
-	
+	processLogin: processLogin
 
 }
 
 
-var passport = require("passport");
+const passport = require("passport");
+const LocalStrategy = require('passport-local').Strategy
+
 var ObjectID = require('mongodb').ObjectID;
 
 function showCreate (req, res) {
-	res.render('pages/register',{
-		
+	res.render('pages/register',{		
 		errors: req.flash('errors')
-		});
+	});
  }
-
-
 
 function processCreate (req, res) {
 	
@@ -57,40 +56,22 @@ function processCreate (req, res) {
   			return console.error(err);
   		}
 		req.flash('success', 'You are register and can login!' );
-		res.redirect('/user/register');	
+		res.redirect('user/login');	
 	});
 
 }
 
 function showLogin(req, res) {
+	res.render('pages/login', {
+		errors: req.flash('errors')
+	});	
+}
 
-  if(req.method.toLowerCase() != "post") {
-    res.render('pages/login');
-  }
-  else {
-    user.findOne({email: req.body.email}, function(err, result) {
-       if(err) console.log(err);
-
-         if(result == null) {
-           res.send('invalid username', 
-		    {'Content-type' : 'text/plain'}, 
-                    403);
-         }
-	 else {
-           auth(result);
-         }
-    });
-
-    function auth( userRes ) {
-      if(!UserModel.encrypt(req.body.password) == userRes.password) {
-         res.send('invalid password', 
-		  {'Content-type' : 'text/plain'}, 
-                  403);
-      } else {
-         console.log(userRes._id);
-         user.update({_id : userRes._id}, {'$set' : {token : Date.now}});
-         res.send(userRes);
-      }
-    }
-  }
+function processLogin(req, res) {
+	console.log('test');
+	passport.authenticate('login', {
+		successRedirect: '/',
+		failureRedirect: '/user/login',
+		failureFlash : true  
+	})
 }
