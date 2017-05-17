@@ -25,7 +25,7 @@ module.exports = {
 				res.send('Books not found!');
 			}
 		//return a view with data
-		res.render('pages/books', { books: books });
+		res.render('pages/books/books', { books: books });
 
 		});
 
@@ -44,7 +44,7 @@ module.exports = {
 				res.send('Book not found!');
 			}
 
-		res.render('pages/single', { 
+		res.render('pages/books/single', { 
 			book: book,
 			success: req.flash('success')
 			 });
@@ -86,7 +86,7 @@ module.exports = {
 *Show the create form
 */
 	function showCreate(req, res) {
-		res.render('pages/create',{
+		res.render('pages/books/create',{
 			errors: req.flash('errors')
 		});
 	}
@@ -133,7 +133,7 @@ module.exports = {
 	*/
 	function showEdit (req, res) {
 		Book.findOne({description: req.params.slug },(err, book) => {
-			res.render('pages/edit', {
+			res.render('pages/books/edit', {
 				book: book,
 				errors: req.flash('errors')
 				
@@ -150,6 +150,7 @@ module.exports = {
 	function processEdit (req, res) {
 		req.checkBody('name', 'Name is require.').notEmpty();
 		req.checkBody('author', 'Description is require.').notEmpty();
+		
 		
 		// if there are errors, redirect  and save eroors to flash
 		const errors = req.validationErrors();
@@ -193,6 +194,8 @@ module.exports = {
 		});
 	}
 
+
+	
 
 	
 

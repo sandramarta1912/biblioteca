@@ -19,7 +19,7 @@ function searchBook (req, res) {
 		}
 
 		res.render(
-			'pages/books', 
+			'pages/books/books', 
 			{ 
 				books: books,
 				searchTerm: searchTerm,
