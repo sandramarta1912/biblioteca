@@ -4,7 +4,9 @@ var createUser = require('../models/user').createUser;
 module.exports = {
 	showCreate: showCreate,
 	processCreate: processCreate,
-	showLogin: showLogin
+	showLogin: showLogin,
+	reset: reset
+
 };
 
 const passport = require("passport");
@@ -13,7 +15,7 @@ const LocalStrategy = require('passport-local').Strategy
 var ObjectID = require('mongodb').ObjectID;
 
 function showCreate (req, res) {
-	res.render('pages/register',{		
+	res.render('pages/users/register',{
 		errors: req.flash('errors')
 	});
 }
@@ -56,8 +58,16 @@ function processCreate (req, res) {
 }
 
 function showLogin(req, res) {
-	res.render('pages/login', {
+	res.render('pages/users/login', {
 		errors: req.flash('errors')
 	});	
 }
 
+
+function reset (req, res) {
+	res.render('pages/users/change', {
+		errors: req.flash('errors')
+	});
+}
+
+	

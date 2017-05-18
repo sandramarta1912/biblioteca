@@ -67,4 +67,5 @@ router.get('/user/logout', function(req, res) {
 	req.logout();
 	res.redirect('/');
 });
+router.get('/reset', userController.reset );
 //router.post('/user/login', userController.processLogin);

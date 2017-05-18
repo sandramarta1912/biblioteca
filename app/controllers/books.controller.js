@@ -22,7 +22,7 @@ function showBooks(req, res) {
 			return res.send('Oops... Something is awfully wrong!');
 		}
 		// return a view with data
-		res.render('pages/books', { books: books });
+		res.render('pages/books/books', { books: books });
 	});
 }
 /**
@@ -37,7 +37,7 @@ function showSingle(req,res) {
 			return res.send('Book not found!');
 		}
 
-		res.render('pages/single', {
+		res.render('pages/books/single', {
 			book: book,
 			success: req.flash('success')
 		});
@@ -75,7 +75,7 @@ function seedBooks(req, res) {
 * Show the create form
 */
 function showCreate(req, res) {
-	res.render('pages/create',{
+	res.render('pages/books/create',{
 		errors: req.flash('errors')
 	});
 }
@@ -123,7 +123,7 @@ function showEdit (req, res) {
             res.status(404);
             return res.send('Oops... That book does not exist!');
         }
-		res.render('pages/edit', {
+		res.render('pages/books/edit', {
 			book: book
 		});
 	});
