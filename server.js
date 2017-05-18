@@ -59,6 +59,11 @@ app.use(bodyParser.json());
 
 app.use(expressValidator());
 
+app.use(function (req, res, next) {
+	res.locals.isAuthenticated = req.isAuthenticated();
+	next();
+});
+
 // set the routes
 app.use(require('./app/routes'));
 
