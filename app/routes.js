@@ -49,3 +49,4 @@ router.get('/user/register', userController.showCreate);
 router.post('/user/register', userController.processCreate);                           
 router.get('/user/login', userController.showLogin);
 router.post('/user/login', userController.processLogin);
+router.get('/change', userController.change);

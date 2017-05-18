@@ -6,7 +6,8 @@ module.exports = {
 	showCreate: showCreate,
 	processCreate: processCreate,
 	showLogin: showLogin,
-	processLogin: processLogin
+	processLogin: processLogin,
+	change: change
 
 }
 
@@ -74,4 +75,8 @@ function processLogin(req, res) {
 		failureRedirect: '/user/login',
 		failureFlash : true  
 	})
+}
+
+function change(req, res) {
+	
 }
