@@ -29,7 +29,7 @@ router.get('/', mainController.showHome);
 // Books
 router.get('/books', 		 booksController.showBooks);
 router.get('/search',		 searchController.searchBook);
-router.get('/books/create',  booksController.showCreate);
+router.get('/books/create', isAuthenticated, booksController.showCreate);
 router.post('/books/create', booksController.processCreate);
 router.get('/books/:slug/edit', booksController.showEdit);
 router.post('/books/:slug', 	booksController.processEdit);
@@ -55,7 +55,7 @@ router.post('/user/register', passport.authenticate('local-signup', {
 router.get('/user/login', userController.showLogin);
 router.post('/user/login',
 	passport.authenticate(
-		'login',
+		'local-login',
 		{
 			successRedirect: '/',
 			failureRedirect: '/user/login',

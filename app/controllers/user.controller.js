@@ -4,8 +4,7 @@ var createUser = require('../models/user').createUser;
 module.exports = {
 	showCreate: showCreate,
 	processCreate: processCreate,
-	showLogin: showLogin,
-	processLogin: processLogin
+	showLogin: showLogin
 };
 
 const passport = require("passport");
@@ -62,28 +61,3 @@ function showLogin(req, res) {
 	});	
 }
 
-function processLogin(req, res) {
-
-	User.find(req.body.username, (err, user) => {
-		if (err) {
-			req.flash('error', 'User does not exits!');
-			return res.redirect('/');
-		}
-		req.login(user, function(err){
-			if(err) {
-				req.flash('error', 'Wrong username or password!');
-				return res.redirect('/');
-			}
-			res.redirect('/books');
-		});
-	});
-
-	//console.log('test');
-	//passport.authenticate('login')(req, res, next);
-	//res.redirect('/books');
-	//return passport.authenticate('login', {
-	//	successRedirect: '/',
-	//	failureRedirect: '/user/login',
-	//	failureFlash : true
-	//});
-}

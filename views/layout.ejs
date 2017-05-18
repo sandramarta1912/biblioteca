@@ -28,12 +28,19 @@
               <button onclick="">Search</button>
             </form>
           </li>
-          <li>
-            <a href="/user/register">Register</a>
-          </li>
-          <li>
-            <a href="user/login">LogIn</a>
-          </li>
+
+          <% if (isAuthenticated) {%>
+            <li>
+              <a href="/user/logout">Logout</a>
+            </li>
+          <% } else { %>
+            <li>
+              <a href="/user/register">Register</a>
+            </li>
+            <li>
+              <a href="/user/login">LogIn</a>
+            </li>
+          <% } %>%>
 
         </ul>
 
