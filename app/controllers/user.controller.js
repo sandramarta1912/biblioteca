@@ -2,14 +2,11 @@ const User = require('../models/user');
 var createUser = require('../models/user').createUser;
 
 module.exports = {
-	
 	showCreate: showCreate,
 	processCreate: processCreate,
 	showLogin: showLogin,
 	processLogin: processLogin
-
-}
-
+};
 
 const passport = require("passport");
 const LocalStrategy = require('passport-local').Strategy
@@ -20,10 +17,9 @@ function showCreate (req, res) {
 	res.render('pages/register',{		
 		errors: req.flash('errors')
 	});
- }
+}
 
 function processCreate (req, res) {
-	
 	// Valiation
 	req.checkBody('name', 'Name is require.').notEmpty();
 	req.checkBody('username', 'Username is required.').notEmpty();
@@ -38,8 +34,7 @@ function processCreate (req, res) {
 	if (errors) {
 		req.flash('errors', errors.map(err => err.msg));
 		return res.redirect('/user/register');
-	
-	} 
+	}
 
 	var requestBody = req.body;
 
@@ -68,10 +63,27 @@ function showLogin(req, res) {
 }
 
 function processLogin(req, res) {
-	console.log('test');
-	passport.authenticate('login', {
-		successRedirect: '/',
-		failureRedirect: '/user/login',
-		failureFlash : true  
-	})
+
+	User.find(req.body.username, (err, user) => {
+		if (err) {
+			req.flash('error', 'User does not exits!');
+			return res.redirect('/');
+		}
+		req.login(user, function(err){
+			if(err) {
+				req.flash('error', 'Wrong username or password!');
+				return res.redirect('/');
+			}
+			res.redirect('/books');
+		});
+	});
+
+	//console.log('test');
+	//passport.authenticate('login')(req, res, next);
+	//res.redirect('/books');
+	//return passport.authenticate('login', {
+	//	successRedirect: '/',
+	//	failureRedirect: '/user/login',
+	//	failureFlash : true
+	//});
 }

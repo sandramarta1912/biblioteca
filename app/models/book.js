@@ -1,6 +1,6 @@
- const mongoose = require('mongoose');
+const
+	mongoose = require('mongoose');
 	Schema = mongoose.Schema;
-
 
 // create a schema
 const bookSchema = new Schema({
@@ -12,28 +12,20 @@ const bookSchema = new Schema({
 	author: String
 });
 
-
-//middleware----
-
-//make sure that the slug is created from the name
+// Middleware - make sure that the slug is created from the name
 bookSchema.pre('save', function(next) {
-	this.description = slugfy(this.name);
+	this.description = slugify(this.name);
 	next();
 });
 
 // create the model
-
 const bookModel = mongoose.model('Book', bookSchema);
 
-
-
-
 // export the model
-
 module.exports = bookModel;
 
 //function to slugfy a name
-function slugfy(text) {
+function slugify(text) {
   return text.toString().toLowerCase()
     .replace(/\s+/g, '-')           // Replace spaces with -
     .replace(/[^\w\-]+/g, '')       // Remove all non-word chars

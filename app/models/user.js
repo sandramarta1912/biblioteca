@@ -1,33 +1,53 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
-var PassportLocalStrategy = require('passport-local').Strategy;
 
 var UserSchema = mongoose.Schema({
-  username:{
-    type: String,
-    index: true,
-    unique: true
-  },
-  password:{
-    type: String
-  },
-  email: {
-    type: String,
-    unique: true
-  },
-  name: {
-    type: String
-  }
+    local: {
+        email: {
+            type: String,
+            unique: true
+        },
+        password: String
+    },
+    facebook: {
+        id: String,
+        token: String,
+        email: String,
+        name: String
+    },
+    twitter: {
+        id: String,
+        token: String,
+        displayName: String,
+        username: String
+    },
+    google: {
+        id: String,
+        token: String,
+        email: String,
+        name: String
+    },
+    username: {
+        type: String,
+        index: true,
+        unique: true
+    },
+    firstName: {
+        type: String
+    },
+    lastName: {
+        type: String
+    }
 });
 
-var User = module.exports = mongoose.model('User', UserSchema);
+// generating a hash
+UserSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
 
-User.createUser = function(newUser, callback) {
+// checking if password is valid
+UserSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.local.password);
+};
 
-    bcrypt.genSalt(10, function(err, salt) {
-      bcrypt.hash(newUser.password, salt, function(err, hash) {
-        newUser.password = hash;
-        newUser.save(callback);
-    });
-});
- }
+module.exports = mongoose.model('User', UserSchema);

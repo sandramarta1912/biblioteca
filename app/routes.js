@@ -5,7 +5,10 @@ const express = require('express'),
 	booksController = require('./controllers/books.controller');
 	searchController = require('./controllers/search.controller');
 	readersController = require('./controllers/readers.controller');
-	userController = require('./controllers/user.controller');
+	userController = require('./controllers/user.controller')
+;
+
+const passport = require('passport');
 
 var isAuthenticated = function (req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
@@ -15,7 +18,7 @@ var isAuthenticated = function (req, res, next) {
 		return next();
 	// if the user is not authenticated then redirect him to the login page
 	res.redirect('/');
-}	
+};
 	
 //export router
 module.exports = router;
@@ -43,6 +46,25 @@ router.get('/readers/:slug', readersController.showSingle);
 
 // Users
 router.get('/user/register', userController.showCreate);
-router.post('/user/register', userController.processCreate);                           
+// process the signup form
+router.post('/user/register', passport.authenticate('local-signup', {
+	successRedirect : '/', // redirect to the secure profile section
+	failureRedirect : '/user/register', // redirect back to the signup page if there is an error
+	failureFlash : true // allow flash messages
+}));
 router.get('/user/login', userController.showLogin);
-router.post('/user/login', userController.processLogin);
+router.post('/user/login',
+	passport.authenticate(
+		'login',
+		{
+			successRedirect: '/',
+			failureRedirect: '/user/login',
+			failureFlash: true
+		}
+	)
+);
+router.get('/user/logout', function(req, res) {
+	req.logout();
+	res.redirect('/');
+});
+//router.post('/user/login', userController.processLogin);

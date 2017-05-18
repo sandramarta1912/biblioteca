@@ -25,6 +25,15 @@ app.use(session({
 }));
 app.use(flash());
 
+// Custom flash middleware -- from Ethan Brown's book, 'Web Development with Node & Express'
+// found at https://gist.github.com/brianmacarthur/a4e3e0093d368aa8e423
+app.use(function(req, res, next){
+	// if there's a flash message in the session request, make it available in the response, then delete it
+	res.locals.sessionFlash = req.session.sessionFlash;
+	delete req.session.sessionFlash;
+	next();
+});
+
 //passport
 app.use(passport.initialize());
 app.use(passport.session());
