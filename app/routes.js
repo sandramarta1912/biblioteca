@@ -30,18 +30,18 @@ router.get('/', mainController.showHome);
 router.get('/books', 		 booksController.showBooks);
 router.get('/search',		 searchController.searchBook);
 router.get('/books/create', isAuthenticated, booksController.showCreate);
-router.post('/books/create', booksController.processCreate);
-router.get('/books/:slug/edit', booksController.showEdit);
-router.post('/books/:slug', 	booksController.processEdit);
-router.get('/books/:slug/delete', booksController.deleteBook);
+router.post('/books/create', isAuthenticated, booksController.processCreate);
+router.get('/books/:slug/edit', isAuthenticated, booksController.showEdit);
+router.post('/books/:slug', isAuthenticated, booksController.processEdit);
+router.get('/books/:slug/delete',  isAuthenticated, booksController.deleteBook);
 router.get('/books/:slug', booksController.showSingle);
 //router.get('/books/seed', 	 booksController.seedBooks);
 
 // Readers
 router.get('/readers',		 readersController.showReaders);
-router.get('/readers/create',  readersController.showCreate);
-router.post('/readers/create', readersController.processCreate);
-router.get('/readers/:slug/delete', readersController.deleteReader);
+router.get('/readers/create', isAuthenticated, readersController.showCreate);
+router.post('/readers/create', isAuthenticated, readersController.processCreate);
+router.get('/readers/:slug/delete', isAuthenticated, readersController.deleteReader);
 router.get('/readers/:slug', readersController.showSingle);
 
 // Users

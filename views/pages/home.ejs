@@ -12,8 +12,12 @@
 	<br><br><br><br>
 
 
-<a href="/books" class="btn btn-lg btn-danger">Books</a> 
-<a href="/readers" class="btn btn-lg btn-danger">Readers</a> 
+<a href="/books" class="btn btn-lg btn-danger">Books</a>
+  <% if (isAuthenticated) {%>
+<a href="/readers" class="btn btn-lg btn-danger">Readers</a>
+  <a href="/books/create" class="btn btn-lg btn-danger">New Book</a>
+  <a href="/readers/create" class="btn btn-lg btn-danger">New Reader</a>
+  <% }%>
 
  </div> 
 

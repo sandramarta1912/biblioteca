@@ -22,10 +22,12 @@
 					<td><%= book.name %></td>
 					<td><%= book.author %></td>
 					<td>
-					
-						<a href="/books/<%= book.description %>" class="btn btn-sm btn-primary">View</a>
-						<a href="/books/<%= book.description %>/edit" class="btn btn-sm btn-primary">Edit</a>
-						<a href="/books/<%= book.description %>/delete" class="btn btn-sm btn-danger">Delete</a>
+						<% if (isAuthenticated) {%>
+							<a href="/books/<%= book.description %>/edit" class="btn btn-sm btn-primary">Edit</a>
+							<a href="/books/<%= book.description %>/delete" class="btn btn-sm btn-danger">Delete</a>
+						<% } else {  %>
+							<a href="/books/<%= book.description %>" class="btn btn-sm btn-primary">View</a>
+						<% } %>
 					</td>
 				</tr>
 
