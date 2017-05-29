@@ -46,12 +46,12 @@ router.get('/readers/:slug', readersController.showSingle);
 
 // Users
 router.get('/user/register', userController.showCreate);
-// process the signup form
 router.post('/user/register', passport.authenticate('local-signup', {
 	successRedirect : '/', // redirect to the secure profile section
 	failureRedirect : '/user/register', // redirect back to the signup page if there is an error
 	failureFlash : true // allow flash messages
 }));
+
 router.get('/user/login', userController.showLogin);
 router.post('/user/login',
 	passport.authenticate(
@@ -63,9 +63,14 @@ router.post('/user/login',
 		}
 	)
 );
+
 router.get('/user/logout', function(req, res) {
 	req.logout();
 	res.redirect('/');
 });
-router.get('/reset', userController.reset );
-//router.post('/user/login', userController.processLogin);
+
+router.get('/user/forgot-password', userController.forgotPasswordShow);
+router.post('/user/forgot-password', userController.forgotPasswordProcess);
+
+router.get('/user/reset-password', userController.resetPasswordShow);
+router.post('/user/reset-password', userController.resetPasswordProcess);
