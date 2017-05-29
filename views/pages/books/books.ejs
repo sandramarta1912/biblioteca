@@ -9,7 +9,13 @@
 		<tr>
 			<th>Books Name</th>
 			<th>Author</th>
-			<th></th>
+			<th>
+				<% if (isAuthenticated) { %>
+					<a href="/books/create" class="btn btn-sm btn-success">
+						Create a book
+					</a>
+				<% } %>
+			</th>
 		</tr>
 	</thead>
 

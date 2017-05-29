@@ -3,83 +3,168 @@
 <head>
   <meta charset="UTF-8">
   <title>Biblioteca</title>
-
-<!--css -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/style.css">
-
-<!-- header -->
+</head>
+<body>
+  <!-- header -->
   <header id="site-header">
-    <div class="navbar navbar-inverse">
-      <div class="container">
-        <div class="navbar-header">
-          <a href="/" class="navbar-brand">Biblioteca Bisericii Emanuel
-            </a>
-        </div>
 
-        <ul class="nav navbar-nav">
-          <li><a href="/books">Books</a></li>
-          <% if (isAuthenticated) {%>
-          <li><a href="/readers">Readers</a></li>
-          <% } %>
-          <li>
-            <form action="/search">
-              <input name="term" type="text" id="search" value="<%= typeof searchTerm!='undefined' ? searchTerm : '' %>">
-              <button onclick="">Search</button>
-            </form>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="/">
+        <img src="/images/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        Biserica Emanuel
+      </a>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Prima pagină <span class="sr-only">(current)</span></a>
           </li>
-
+          <li class="nav-item">
+            <a class="nav-link" href="/books">Bibliotecă</a>
+          </li>
           <% if (isAuthenticated) {%>
-            <li>
-              <a href="/user/logout">Logout</a>
+            <li class="nav-item">
+              <a class="nav-link" href="/readers">Cititori</a>
+            </li>
+          <% } %>
+
+          <!--
+          Ce-i mai jos trebui tras la dreapta - uita-te in documentatia Bootstrap 4
+          http://v4-alpha.getbootstrap.com/components/navbar/
+          -->
+          <% if (isAuthenticated) {%>
+            <li class="nav-item">
+              <a class="nav-link" href="/user/logout">Logout</a>
             </li>
           <% } else { %>
-            <li>
-              <a href="/user/register">Register</a>
+            <li class="nav-item">
+              <a class="nav-link" href="/user/register">Register</a>
             </li>
-            <li>
-              <a href="/user/login">LogIn</a>
+            <li class="nav-item">
+              <a class="nav-link" href="/user/login">Login</a>
             </li>
-          <% } %>%>
-
+          <% } %>
         </ul>
-
+        <!-- if currentPage == books then show search form -->
+        <!--<form class="form-inline my-2 my-lg-0">-->
+          <!--<input class="form-control mr-sm-2" type="text" placeholder="Search">-->
+          <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+        <!--</form>-->
       </div>
-    </div>
-
-
+    </nav>
   </header>
 
-
-
-
-<!--main -->
-<main id="site-main">
-  <div class="container">
-    <% if (typeof errors !== 'undefined' && errors.length) { %>
+  <!--main -->
+  <main id="site-main">
+    <div class="container">
+      <% if (typeof errors !== 'undefined' && errors.length) { %>
       <div class="alert alert-danger">
         <% for (error of errors) { %>
         <%= error %><br>
         <% } %>
       </div>
-    <% } %>
-    <% if (typeof error !== 'undefined' && error.length) { %>
+      <% } %>
+      <% if (typeof error !== 'undefined' && error.length) { %>
       <div class="alert alert-danger">
         <%= error %><br>
       </div>
-    <% } %>
-    <%- body -%> 
-  </div>
+      <% } %>
+      <%- body -%>
+    </div>
 
-</main>
+  </main>
 
-<!-- footer -->
-<footer id="site-footer">
-  Copyright &copy; 2017 Sandra Marta
-</footer>
+  <!-- footer -->
+  <footer class="mainfooter" role="contentinfo">
+    <div class="footer-middle">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+            <!--Column1-->
+            <div class="footer-pad">
+              <h4>Address</h4>
+              <address>
+                <ul class="list-unstyled">
+                  <li>
+                    City Hall<br>
+                    212  Street<br>
+                    Lawoma<br>
+                    735<br>
+                  </li>
+                  <li>
+                    Phone: 0
+                  </li>
+                </ul>
+              </address>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <!--Column1-->
+            <div class="footer-pad">
+              <h4>Popular Services</h4>
+              <ul class="list-unstyled">
+                <li><a href="#"></a></li>
+                <li><a href="#">Payment Center</a></li>
+                <li><a href="#">Contact Directory</a></li>
+                <li><a href="#">Forms</a></li>
+                <li><a href="#">News and Updates</a></li>
+                <li><a href="#">FAQs</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <!--Column1-->
+            <div class="footer-pad">
+              <h4>Website Information</h4>
+              <ul class="list-unstyled">
+                <li><a href="#">Website Tutorial</a></li>
+                <li><a href="#">Accessibility</a></li>
+                <li><a href="#">Disclaimer</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Webmaster</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <!--Column1-->
+            <div class="footer-pad">
+              <h4>Popular Departments</h4>
+              <ul class="list-unstyled">
+                <li><a href="#">Parks and Recreation</a></li>
+                <li><a href="#">Public Works</a></li>
+                <li><a href="#">Police Department</a></li>
+                <li><a href="#">Fire</a></li>
+                <li><a href="#">Mayor and City Council</a></li>
+                <li>
+                  <a href="#"></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <!--Footer Bottom-->
+            <p class="text-xs-center">&copy; Copyright 2017 - Șandra Marta.  All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-
-</head>
-<body>
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </body>
 </html>
