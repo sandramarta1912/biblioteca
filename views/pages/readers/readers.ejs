@@ -9,7 +9,13 @@
 		<tr>
 			<th>Name</th>
 			<th>Age</th>
-			<th></th>
+			<th>
+				<% if (isAuthenticated) { %>
+				<a href="/readers/create" class="btn btn-sm btn-success">
+					Create a reader
+				</a>
+				<% } %>
+			</th>
 		</tr>
 	</thead>
 

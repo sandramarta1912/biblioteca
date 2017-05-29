@@ -17,7 +17,7 @@ function showReaders(req, res) {
 			return res.send('Reader not found!');
 		}
 		//return a view with data
-		res.render('pages/readers', { readers: readers });
+		res.render('pages/readers/readers', { readers: readers });
 	});
 }
 
@@ -28,7 +28,7 @@ function showSingle(req,res) {
 			res.status(404);
 			return res.send('Reader not found!');
 		}
-		res.render('pages/singl', {
+		res.render('pages/readers/single', {
 			reader: reader,
 			success: req.flash('success')
 	 	});
@@ -63,7 +63,7 @@ function seedReaders(req, res) {
 * Show the create form
 */
 function showCreate(req, res) {
-	res.render('pages/creat',{
+	res.render('pages/readers/create',{
 		errors: req.flash('errors')
 	});
 }
@@ -81,7 +81,7 @@ function processCreate(req, res) {
 
 	if (errors) {
 		req.flash('errors', errors.map(err => err.msg));
-		return res.redirect('/readers/creat');
+		return res.redirect('/readers/create');
 	}
 
 	//create new book

@@ -1,0 +1,49 @@
+<div class="jumbotron text-center">
+	<h1>
+	 Books
+	</h1>
+</div>
+
+<table class="table table-border table-hover table-striped">
+	<thead>
+		<tr>
+			<th>Books Name</th>
+			<th>Author</th>
+			<th>
+				<% if (isAuthenticated) { %>
+					<a href="/books/create" class="btn btn-sm btn-success">
+						Create a book
+					</a>
+				<% } %>
+			</th>
+		</tr>
+	</thead>
+
+	<tbody>
+
+		<% if (typeof books != 'undefined' && books.length > 0) { %>
+
+			<% for (var book of books) { %>
+				<tr>
+					<td><%= book.name %></td>
+					<td><%= book.author %></td>
+					<td>
+						<% if (isAuthenticated) {%>
+							<a href="/books/<%= book.description %>" class="btn btn-sm btn-primary">View</a>
+							<a href="/books/<%= book.description %>/edit" class="btn btn-sm btn-primary">Edit</a>
+							<a href="/books/<%= book.description %>/delete" class="btn btn-sm btn-danger">Delete</a>
+						<% } else {  %>
+							<a href="/books/<%= book.description %>" class="btn btn-sm btn-primary">View</a>
+						<% } %>
+					</td>
+				</tr>
+
+			<% } %>
+
+		<% } else { %>
+			Nu ai nici o carte;
+		<% } %>
+
+
+	</tbody>
+</table>
