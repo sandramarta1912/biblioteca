@@ -1,3 +1,7 @@
+<% if (success.length > 0) { %>
+<div class="alert alert-success"><%= success %></div>
+<% } %>
+
 <div class="jumbotron text-center">
 	<h1>
 	Readers
@@ -11,7 +15,7 @@
 			<th>Age</th>
 			<th>
 				<% if (isAuthenticated) { %>
-				<a href="/readers/create" class="btn btn-sm btn-success">
+				<a href="/readers/create" class="btn btn-sm btn-primary">
 					Create a reader
 				</a>
 				<% } %>
@@ -28,7 +32,7 @@
 				<td>
 				
 					<a href="/readers/<%= reader.description %>" class="btn btn-sm btn-primary">View</a>
-					
+					<a href="/readers/<%= reader.description %>/edit" class="btn btn-sm btn-primary">Edit</a>
 					<a href="/readers/<%= reader.description %>/delete" class="btn btn-sm btn-danger">Delete</a>
 				</td>
 			</tr>

@@ -1,6 +1,6 @@
 const async = require('async');
 const crypto = require('crypto');
-const nodemailer = require('nodemailer');
+//const nodemailer = require('nodemailer');
 
 const User = require('../models/user');
 
@@ -68,7 +68,7 @@ function showLogin(req, res) {
 }
 
 function forgotPasswordShow(req, res) {
-	res.render('pages/forgot-password', {
+	res.render('pages/users/forgot-password', {
 		errors: req.flash('errors')
 	});
 }

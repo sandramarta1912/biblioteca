@@ -4,10 +4,11 @@ body {
 }
 
 /*header*/
-#site-header.navbar {
+.navbar {
 	border-radius: 0;
 	border: none;
 	margin: 0;
+    background: #c0c2be;
 }
 
 
@@ -57,14 +58,14 @@ footer a:hover{
 }
 
 .footer-bottom{
-    background: #3d6277;
+    background: #393b37;
     padding: 2em;
 }
 .footer-top{
-    background: #2d4958;
+    background: #30322e;
 }
 .footer-middle{
-    background: #3d6277;
+    background: #525450;
     padding-top: 2em;
     color: white;
 }
@@ -73,7 +74,7 @@ footer a:hover{
     background: #3d6277;
 }
 .subnavigation .nav-link{
-    color: white;
+    color: #ff3302;
     font-weight: bold;
 }
 .subnavigation-container{
@@ -83,16 +84,31 @@ footer a:hover{
     display: inline-block;
     margin-bottom: -6px; /* Inline-block margin offffset HACK -Gilron */
 }
-.col-subnav a{
-    padding: 1rem 1rem;
-    color: white;
-    font-weight: bold;
+
+
+
+.btn {
+    padding: 8px 15px;
+    border: 0 none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
-.col-subnav .active{
-    border-top:5px solid orange;
-    background: white;
-    co
 
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: 0 none;
+}
 
+.btn-primary {
+    background: #999b98;
+    color: #ffffff;
+}
 
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    background: #858784;
+}
 
+.btn-primary:active, .btn-primary.active {
+    background: rgba(50, 52, 49, 0.82);
+    box-shadow: none;
+}

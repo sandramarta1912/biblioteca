@@ -1,5 +1,6 @@
 const
-	mongoose = require('mongoose');
+	mongoose = require('mongoose'),
+	mongoosePaginate = require('mongoose-paginate'),
 	Schema = mongoose.Schema;
 
 // create a schema
@@ -9,7 +10,11 @@ const bookSchema = new Schema({
 		type: String,
 		unique: true
 	},
-	author: String
+	author:  {
+		type: String
+
+	},
+	about: String
 });
 
 // Middleware - make sure that the slug is created from the name
@@ -17,6 +22,8 @@ bookSchema.pre('save', function(next) {
 	this.description = slugify(this.name);
 	next();
 });
+
+bookSchema.plugin(mongoosePaginate);
 
 // create the model
 const bookModel = mongoose.model('Book', bookSchema);

@@ -1,17 +1,23 @@
+
+<% if (success.length > 0) { %>
+<div class="alert alert-success"><%= success %></div>
+<% } %>
+
 <div class="jumbotron text-center">
 	<h1>
 	 Books
 	</h1>
 </div>
 
-<table class="table table-border table-hover table-striped">
+<table class="table table-border  ">
 	<thead>
 		<tr>
+
 			<th>Books Name</th>
 			<th>Author</th>
 			<th>
 				<% if (isAuthenticated) { %>
-					<a href="/books/create" class="btn btn-sm btn-success">
+					<a href="/books/create" class="btn btn-small btn-primary ">
 						Create a book
 					</a>
 				<% } %>
@@ -44,6 +50,7 @@
 			Nu ai nici o carte;
 		<% } %>
 
+		<%- include('../../pagination', {pagination: pagination}) %>
 
 	</tbody>
 </table>

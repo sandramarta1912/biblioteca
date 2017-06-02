@@ -1,4 +1,7 @@
-const Book = require('../models/book');
+const Book = require('../models/book'),
+	url = require('url')
+;
+var Pagination = require('../utils/Pagination');
 
 module.exports = {
 	showBooks:      showBooks,
@@ -15,14 +18,29 @@ module.exports = {
 * show all books
 */
 function showBooks(req, res) {
+
+	let itemsPerPage = 10;
+	let currentPage = req.query.page != undefined ? req.query.page : 1;
+	let offset = itemsPerPage * (currentPage - 1);
+
+	console.log(itemsPerPage, offset);
+
 	// get all books
-	Book.find({}, function(err, books) {
+	Book.paginate({}, { offset: offset, limit: itemsPerPage }, function(err, result) {
 		if (err) {
 			res.status(404);
 			return res.send('Oops... Something is awfully wrong!');
 		}
+		
+		let pagination = new Pagination(req.url, result.total, itemsPerPage);
+
 		// return a view with data
-		res.render('pages/books/books', { books: books });
+		res.render('pages/books/books', {
+			books: result.docs,
+			pagination: pagination.paginate(),
+			success: req.flash('success')
+		});
+		
 	});
 }
 /**
@@ -87,6 +105,7 @@ function processCreate(req, res) {
 	//validate information
 	req.checkBody('name', `Name is required.`).notEmpty();
 	req.checkBody('author', `Description is required.`).notEmpty();
+	req.checkBody('about', 'About is required.').notEmpty();
 
 	// if there are errors, redirect  and save errors to flash
 	const errors = req.validationErrors();
@@ -99,7 +118,8 @@ function processCreate(req, res) {
 	//create new book
 	const book = new Book({
 		name: req.body.name,
-		author: req.body.author
+		author: req.body.author,
+		about : req.body.about
 	});
 
 	//save book
@@ -110,8 +130,10 @@ function processCreate(req, res) {
 		//set a successful flash message
 		req.flash('success', 'Successfuly created book!');
 		//redirect to the newly created book
-		res.redirect(`/books/${book.description}`);
+		res.redirect(`/books`);
 	});
+
+
 }
 
 /**
@@ -136,6 +158,7 @@ function showEdit (req, res) {
 function processEdit (req, res) {
 	req.checkBody('name', `Name is required.`).notEmpty();
 	req.checkBody('author', `Description is required.`).notEmpty();
+	req.checkBody('about', 'About is required.').notEmpty();
 
 	// if there are errors, redirect  and save errors to flash
 	const errors = req.validationErrors();
@@ -149,6 +172,7 @@ function processEdit (req, res) {
         // updating that book
         book.name   = req.body.name;
         book.author = req.body.author;
+		book.about = req.body.about;
 
         book.save((err) => {
             if(err) {

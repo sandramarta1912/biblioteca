@@ -9,12 +9,18 @@ const readerSchema = new Schema({
 		type: String,
 		unique: true
 	},
-	age: String
+	age: {
+		type: Number,
+		min: 10,
+		max: 65
+
+	}
 });
 
 // Middleware - make sure that the slug is created from the name
 readerSchema.pre('save', function(next) {
 	this.description = slugify(this.name);
+	
 	next();
 });
 

@@ -6,7 +6,10 @@ module.exports = {
 	seedreaders: seedReaders,
 	showCreate: showCreate,
 	processCreate: processCreate,
+	showEdit: showEdit,
+	processEdit: processEdit,
 	deleteReader: deleteReader
+	
 };
 
 function showReaders(req, res) {
@@ -17,7 +20,10 @@ function showReaders(req, res) {
 			return res.send('Reader not found!');
 		}
 		//return a view with data
-		res.render('pages/readers/readers', { readers: readers });
+		res.render('pages/readers/readers', { 
+			readers: readers, 
+			success: req.flash('success') 
+		});
 	});
 }
 
@@ -28,10 +34,6 @@ function showSingle(req,res) {
 			res.status(404);
 			return res.send('Reader not found!');
 		}
-		res.render('pages/readers/single', {
-			reader: reader,
-			success: req.flash('success')
-	 	});
 	});
 		
 }
@@ -59,6 +61,8 @@ function seedReaders(req, res) {
 }
 
 
+
+
 /**
 * Show the create form
 */
@@ -75,6 +79,8 @@ function processCreate(req, res) {
 	//validate information
 	req.checkBody('name', `Name is required.`).notEmpty();
 	req.checkBody('age', `Description is required.`).notEmpty();
+	req.checkBody('age', `Age must be between 10 and 65`).isInt().gte(10).lte(65);
+
 
 	// if there are errors, redirect  and save eroors to flash
 	const errors = req.validationErrors();
@@ -84,25 +90,77 @@ function processCreate(req, res) {
 		return res.redirect('/readers/create');
 	}
 
-	//create new book
+	//create new reader
 	const reader = new Reader({
 
 		name: req.body.name,
 		age: req.body.age
 
 	});
-	//save book
-	reader.save((err) =>{
-		if(err)
-			throw err;
-
+	
+	//save reader
+	reader.save((err, reader) =>{
+		if(err){
+			req.flash('errors', 'The reader could not be created. There are errors!');
+			return res.redirect('/readers/create');
+		}
 		//set a successful flash message
 		req.flash('success', 'Successfuly created reader!');
-		//redirect to the newly created book
-		res.redirect(`/readers/${reader.description}`);
+		//redirect to the newly created reader
+		res.redirect(`/readers`);
 
 	});
 }
+
+/**
+ * Show the edit form
+ */
+function showEdit (req, res) {
+	Reader.findOne({description: req.params.slug }, (err, reader) => {
+		if (err) {
+			res.status(404);
+			return res.send('Oops... That reader does not exist!');
+		}
+		res.render('pages/readers/edit', {
+		reader: reader
+	});
+});
+}
+
+/**
+ * process the edit form
+ */
+
+function processEdit (req, res) {
+	req.checkBody('name', `Name is required.`).notEmpty();
+	req.checkBody('age', `Age is required.`).notEmpty();
+
+	// if there are errors, redirect  and save errors to flash
+	const errors = req.validationErrors();
+
+	if (errors) {
+		req.flash('errors', errors.map(err => err.msg));
+		return res.redirect(`/readers/${req.params.slug}/edit`);
+	}
+	Reader.findOne({ description: req.params.slug }, (err, reader) => {
+		// updating that book
+		reader.name   = req.body.name;
+		reader.age = req.body.age;
+
+		reader.save((err) => {
+			if(err) {
+				req.flash('error', 'The book could not be updated!');
+				return res.redirect(`/readers/${req.params.slug}/edit`);
+			}
+
+			// redirect back to the books
+			req.flash('success', 'Successfully updated book!');
+			res.redirect('/readers');
+		});
+
+	});
+}
+
 
 function deleteReader(req, res) {
 	Reader.remove({ description: req.params.slug }, ( err ) => {

@@ -59,6 +59,17 @@ app.use(bodyParser.json());
 
 app.use(expressValidator());
 
+app.use(expressValidator({
+	customValidators: {
+		lte: function(param, num) {
+			return param <= num;
+		},
+		gte: function(param, num) {
+			return param >= num;
+		}
+	}
+}));
+
 app.use(function (req, res, next) {
 	res.locals.isAuthenticated = req.isAuthenticated();
 	next();

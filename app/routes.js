@@ -41,6 +41,8 @@ router.get('/books/:slug', booksController.showSingle);
 router.get('/readers',		 readersController.showReaders);
 router.get('/readers/create', isAuthenticated, readersController.showCreate);
 router.post('/readers/create', isAuthenticated, readersController.processCreate);
+router.get('/readers/:slug/edit', isAuthenticated, readersController.showEdit);
+router.post('/readers/:slug', isAuthenticated, readersController.processEdit);
 router.get('/readers/:slug/delete', isAuthenticated, readersController.deleteReader);
 router.get('/readers/:slug', readersController.showSingle);
 
