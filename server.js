@@ -26,7 +26,7 @@ app.use(function (err, req, res, next) {
 
 	// handle CSRF token errors here
 	res.status(403);
-	res.send('Invalid CSRF token.');
+	res.render('pages/error/403');
 });
 
 app.use(session({
@@ -89,6 +89,12 @@ app.use(function (req, res, next) {
 
 // set the routes
 app.use(require('./app/routes'));
+
+app.use(function(req, res, next) {
+	res.status(400);
+	res.render('pages/error/404');
+});
+
 
 // start our server
 app.listen(port, () => {

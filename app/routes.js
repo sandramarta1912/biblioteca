@@ -6,6 +6,7 @@ const express = require('express'),
 	searchController = require('./controllers/search.controller');
 	readersController = require('./controllers/readers.controller');
 	userController = require('./controllers/user.controller');
+	contactController = require('./controllers/contact.controller');
 ;
 
 const passport = require('passport');
@@ -75,8 +76,14 @@ router.get('/user/logout', function(req, res) {
 	res.redirect('/');
 });
 
+router.get('/program', mainController.showProgram);
+router.get('/contact', contactController.showContact);
+router.post('/contact', contactController.processContact);
+
 router.get('/user/forgot-password', userController.forgotPasswordShow);
 router.post('/user/forgot-password', userController.forgotPasswordProcess);
 
 router.get('/user/reset-password', userController.resetPasswordShow);
 router.post('/user/reset-password', userController.resetPasswordProcess);
+
+
