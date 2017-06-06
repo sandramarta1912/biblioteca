@@ -1,4 +1,8 @@
-const Reader = require('../models/reader');
+const Reader = require('../models/reader'),
+	url = require('url');
+var Pagination = require('../utils/Pagination');
+
+
 
 module.exports = {
 	showReaders: showReaders,
@@ -13,15 +17,23 @@ module.exports = {
 };
 
 function showReaders(req, res) {
-	// get all books
-	Reader.find({}, (err, readers) => {
+	let itemsPerPage = 3;
+	let currentPage = req.query.page != undefined ? req.query.page : 1;
+	let offset = itemsPerPage * (currentPage - 1);
+	
+	// get all reader
+	Reader.paginate({}, { offset: offset, limit: itemsPerPage }, function (err, result) {
 		if (err) {
 			res.status(404);
 			return res.send('Reader not found!');
 		}
+
+		let pagination = new Pagination(req.url, result.total, itemsPerPage);
+		
 		//return a view with data
 		res.render('pages/readers/readers', { 
-			readers: readers, 
+			readers: result.docs,
+			pagination: pagination.paginate(),
 			success: req.flash('success') 
 		});
 	});

@@ -1,6 +1,5 @@
 const Book = require('../models/book'),
-	url = require('url')
-;
+	url = require('url');
 var Pagination = require('../utils/Pagination');
 
 module.exports = {
@@ -22,8 +21,6 @@ function showBooks(req, res) {
 	let itemsPerPage = 10;
 	let currentPage = req.query.page != undefined ? req.query.page : 1;
 	let offset = itemsPerPage * (currentPage - 1);
-
-	console.log(itemsPerPage, offset);
 
 	// get all books
 	Book.paginate({}, { offset: offset, limit: itemsPerPage }, function(err, result) {

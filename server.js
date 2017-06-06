@@ -2,6 +2,7 @@
 require('dotenv').config();
 // grab our dependencies
 const express 		 = require('express'),
+	csrf			 = require('csurf'),
 	passport 		 = require('passport'),
 	app 			 = express(),
 	port 			 = process.env.PORT || 8080,
@@ -11,12 +12,23 @@ const express 		 = require('express'),
 	session			 = require('express-session'),
 	cookieParser	 = require('cookie-parser'),
 	flash			 = require('connect-flash'),
-	expressValidator = require('express-validator'),	
-	localStrategy 	 = require('passport-local').Strategy
+	expressValidator = require('express-validator')
 ;
 
 //set sessions and cookie parser
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(csrf({ cookie: true }));
+
+// error handler
+app.use(function (err, req, res, next) {
+	if (err.code !== 'EBADCSRFTOKEN') return next(err)
+
+	// handle CSRF token errors here
+	res.status(403);
+	res.send('Invalid CSRF token.');
+});
+
 app.use(session({
 	secret:process.env.SECRET,
 	cookie: { maxAge: 60000 },
@@ -74,7 +86,6 @@ app.use(function (req, res, next) {
 	res.locals.isAuthenticated = req.isAuthenticated();
 	next();
 });
-
 
 // set the routes
 app.use(require('./app/routes'));

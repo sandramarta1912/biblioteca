@@ -1,5 +1,6 @@
 const
-	mongoose = require('mongoose');
+	mongoose = require('mongoose'),
+	mongoosePaginate = require('mongoose-paginate'),
 	Schema = mongoose.Schema;
 
 // create a schema
@@ -23,6 +24,8 @@ readerSchema.pre('save', function(next) {
 	
 	next();
 });
+
+readerSchema.plugin(mongoosePaginate);
 
 // Create the model
 const readerModel = mongoose.model('Reader', readerSchema);

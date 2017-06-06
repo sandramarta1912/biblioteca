@@ -63,7 +63,8 @@ function processCreate (req, res) {
 
 function showLogin(req, res) {
 	res.render('pages/users/login', {
-		errors: req.flash('errors')
+		errors: req.flash('errors'),
+		csrfToken: req.csrfToken()
 	});	
 }
 

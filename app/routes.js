@@ -5,7 +5,7 @@ const express = require('express'),
 	booksController = require('./controllers/books.controller');
 	searchController = require('./controllers/search.controller');
 	readersController = require('./controllers/readers.controller');
-	userController = require('./controllers/user.controller')
+	userController = require('./controllers/user.controller');
 ;
 
 const passport = require('passport');
@@ -55,7 +55,8 @@ router.post('/user/register', passport.authenticate('local-signup', {
 }));
 
 router.get('/user/login', userController.showLogin);
-router.post('/user/login',
+router.post(
+	'/user/login',
 	passport.authenticate(
 		'local-login',
 		{
@@ -65,6 +66,9 @@ router.post('/user/login',
 		}
 	)
 );
+
+
+
 
 router.get('/user/logout', function(req, res) {
 	req.logout();

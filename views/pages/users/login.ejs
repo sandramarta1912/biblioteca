@@ -65,7 +65,7 @@
 <h2>Login Form</h2>
 
 <form action="/user/login" method="POST">
-
+  <input type="hidden" name="_csrf" value=<%= csrfToken %>>
 
   <div class="container">
     <label><b>Username</b></label>

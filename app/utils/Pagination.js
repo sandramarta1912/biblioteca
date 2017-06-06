@@ -24,7 +24,7 @@ module.exports = class Pagination {
 
         this.urlParts.query.page = 0;
 
-        for (let i=1; i < this.itemsCount; i +=  this.itemsPerPage) {
+        for (let i=1; i <= this.itemsCount; i +=  this.itemsPerPage) {
             this.urlParts.query.page++;
             delete this.urlParts.path;
             delete this.urlParts.href;
