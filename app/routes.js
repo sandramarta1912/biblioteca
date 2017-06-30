@@ -7,7 +7,7 @@ const express = require('express'),
 	readersController = require('./controllers/readers.controller');
 	userController = require('./controllers/user.controller');
 	contactController = require('./controllers/contact.controller');
-;
+
 
 const passport = require('passport');
 
@@ -68,9 +68,6 @@ router.post(
 	)
 );
 
-
-
-
 router.get('/user/logout', function(req, res) {
 	req.logout();
 	res.redirect('/');
@@ -85,5 +82,3 @@ router.post('/user/forgot-password', userController.forgotPasswordProcess);
 
 router.get('/user/reset-password', userController.resetPasswordShow);
 router.post('/user/reset-password', userController.resetPasswordProcess);
-
-
