@@ -2,9 +2,9 @@
 const express = require('express'),
 	router = express.Router();
 	mainController = require('./controllers/main.controller');
-	booksController = require('./controllers/books.controller');
-	searchController = require('./controllers/search.controller');
-	readersController = require('./controllers/readers.controller');
+	booksController = require('./books/books.controller');
+	searchController = require('./books/search.controller');
+	readersController = require('./readers/readers.controller');
 	userController = require('./controllers/user.controller');
 	contactController = require('./controllers/contact.controller');
 
@@ -30,12 +30,23 @@ router.get('/', mainController.showHome);
 // Books
 router.get('/books', 		 booksController.showBooks);
 router.get('/search',		 searchController.searchBook);
+
 router.get('/books/create', isAuthenticated, booksController.showCreate);
 router.post('/books/create', isAuthenticated, booksController.processCreate);
 router.get('/books/:slug/edit', isAuthenticated, booksController.showEdit);
 router.post('/books/:slug', isAuthenticated, booksController.processEdit);
 router.get('/books/:slug/delete',  isAuthenticated, booksController.deleteBook);
+
+router.get('/books/create',  booksController.showCreate);
+router.post('/books/create', booksController.processCreate);
+
+router.get('/books/:slug/edit', booksController.showEdit);
+router.post('/books/:slug/', 	booksController.processEdit);
+
+router.get('/books/:slug/delete', booksController.deleteBook);
+
 router.get('/books/:slug', booksController.showSingle);
+
 //router.get('/books/seed', 	 booksController.seedBooks);
 
 // Readers
@@ -56,6 +67,7 @@ router.post('/user/register', passport.authenticate('local-signup', {
 }));
 
 router.get('/user/login', userController.showLogin);
+
 router.post(
 	'/user/login',
 	passport.authenticate(
@@ -82,3 +94,7 @@ router.post('/user/forgot-password', userController.forgotPasswordProcess);
 
 router.get('/user/reset-password', userController.resetPasswordShow);
 router.post('/user/reset-password', userController.resetPasswordProcess);
+
+router.post('/user/login', userController.processLogin);
+router.get('/change', userController.change);
+

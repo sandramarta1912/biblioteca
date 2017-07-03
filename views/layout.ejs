@@ -11,6 +11,7 @@
   <!-- header -->
   <header id="site-header">
 
+
     <nav class="navbar navbar-default navbar-toggleable-md navbar-light  bg-faded navbar-fixed-top">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -56,12 +57,17 @@
           <li class="nav-item">
             <a class="nav-link" href="/contact">Contact</a>
           </li>
+          <li class="nav-item">
+            <form action="/search">
+              <input name="term" type="text" id="search" value="<%= typeof searchTerm!='undefined' ? searchTerm : '' %>">
+              <button onclick="">Search</button>
+            </form>
+          </li>
         </ul>
-        <!-- if currentPage == books then show search form -->
-        <!--<form class="form-inline my-2 my-lg-0">-->
-          <!--<input class="form-control mr-sm-2" type="text" placeholder="Search">-->
-          <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-        <!--</form>-->
+
+
+
+
       </div>
     </nav>
   </header>
@@ -171,3 +177,4 @@
   <script src='https://www.google.com/recaptcha/api.js'></script>
 </body>
 </html>
+

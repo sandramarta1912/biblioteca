@@ -31,15 +31,17 @@ function showReaders(req, res) {
 		let pagination = new Pagination(req.url, result.total, itemsPerPage);
 		
 		//return a view with data
-		res.render('pages/readers/readers', { 
+
+		res.render('pages/readers/readers', {
 			readers: result.docs,
 			pagination: pagination.paginate(),
-			success: req.flash('success') 
+			success: req.flash('success')
 		});
 	});
 }
 
 function showSingle(req,res) {
+
 	//get a single reader
 	Reader.findOne({ description:req.params.slug }, (err, reader) => {
 		if (err) {
@@ -47,6 +49,23 @@ function showSingle(req,res) {
 			return res.send('Reader not found!');
 		}
 	});
+
+		//get a single reader
+		Reader.findOne({ description:req.params.slug }, (err, reader) => {
+
+			if (err) {
+				res.status(404);
+				res.send('Reader not found!');
+			}
+
+		res.render('pages/readers/singl', { 
+			reader: reader,
+			success: req.flash('success')
+			 });
+
+		});
+
+
 		
 }
 
@@ -78,11 +97,14 @@ function seedReaders(req, res) {
 /**
 * Show the create form
 */
-function showCreate(req, res) {
-	res.render('pages/readers/create',{
-		errors: req.flash('errors')
-	});
-}
+
+
+	function showCreate(req, res) {
+		res.render('pages/readers/creat',{
+			errors: req.flash('errors')
+		});
+	}
+
 
 /**
 * Process the creation form
@@ -92,6 +114,13 @@ function processCreate(req, res) {
 	req.checkBody('name', `Name is required.`).notEmpty();
 	req.checkBody('age', `Description is required.`).notEmpty();
 	req.checkBody('age', `Age must be between 10 and 65`).isInt().gte(10).lte(65);
+
+
+
+		if (errors) {
+			req.flash('errors', errors.map(err => err.msg));
+			return res.redirect('/readers/create');
+		}
 
 
 	// if there are errors, redirect  and save eroors to flash

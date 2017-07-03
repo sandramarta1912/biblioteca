@@ -8,18 +8,27 @@ module.exports = {
 	showCreate: showCreate,
 	processCreate: processCreate,
 	showLogin: showLogin,
+
 	forgotPasswordShow: forgotPasswordShow,
 	forgotPasswordProcess: forgotPasswordProcess,
     resetPasswordShow: resetPasswordShow,
-    resetPasswordProcess: resetPasswordProcess
-};
+    resetPasswordProcess: resetPasswordProcess,
+
+	processLogin: processLogin,
+	change: change
+
+}
+
+
 
 const passport = require("passport");
 
 var ObjectID = require('mongodb').ObjectID;
 
 function showCreate (req, res) {
-	res.render('pages/users/register',{
+
+	res.render('pages/users/register',{		
+
 		errors: req.flash('errors')
 	});
 }
@@ -63,6 +72,7 @@ function processCreate (req, res) {
 
 function showLogin(req, res) {
 	res.render('pages/users/login', {
+		
 		errors: req.flash('errors'),
 		csrfToken: req.csrfToken()
 	});	
@@ -194,3 +204,18 @@ function reset (req, res) {
 		errors: req.flash('errors')
 	});
 }
+
+
+function processLogin(req, res) {
+	console.log('test');
+	passport.authenticate('login', {
+		successRedirect: '/',
+		failureRedirect: '/user/login',
+		failureFlash : true  
+	})
+}
+
+function change(req, res) {
+	
+}
+

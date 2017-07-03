@@ -11,7 +11,7 @@ function searchBook (req, res) {
 			return res.send('Book not found!');
 		}
 		res.render(
-			'pages/books', 
+			'pages/books/books', 
 			{ 
 				books: books,
 				searchTerm: searchTerm,
