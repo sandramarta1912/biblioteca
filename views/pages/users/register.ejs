@@ -6,8 +6,10 @@
             <% } %>
           </div>
       <% } %>
+
 	 
 	<form name="register" action="/user/register" method="POST">
+		<input type="hidden" name="_csrf" value=<%= csrfToken %> >
 		<div class="form-group">
 			<lable>Name</lable>
 				<input type="text" name="name" class="form-control" placeholder="Name">
@@ -30,3 +32,5 @@
 		</div>
 		<button type="submit" class="btn btn-default" value="">Submit</button>
 	</form>
+<br><br>
+

@@ -3,6 +3,7 @@ const crypto = require('crypto');
 //const nodemailer = require('nodemailer');
 
 const User = require('../models/user');
+var createUser = require('../models/user').createUser;
 
 module.exports = {
 	showCreate: showCreate,
@@ -29,7 +30,8 @@ function showCreate (req, res) {
 
 	res.render('pages/users/register',{		
 
-		errors: req.flash('errors')
+		errors: req.flash('errors'),
+		csrfToken: req.csrfToken()
 	});
 }
 
@@ -201,7 +203,8 @@ function resetPasswordProcess(req, res) {
 
 function reset (req, res) {
 	res.render('pages/users/change', {
-		errors: req.flash('errors')
+		errors: req.flash('errors'),
+		csrfToken: req.csrfToken()
 	});
 }
 
