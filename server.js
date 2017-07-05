@@ -12,8 +12,25 @@ const express 		 = require('express'),
 	session			 = require('express-session'),
 	cookieParser	 = require('cookie-parser'),
 	flash			 = require('connect-flash'),
-	expressValidator = require('express-validator')
-;
+	expressValidator = require('express-validator'),
+	MongoClient 	 = require('mongodb').MongoClient;
+
+var url = 'mongodb://localhost:27017';
+var findDocuments = function(db , callback) {
+	var collection = db.collection('tours');
+	collection.find().toArray(function(err, docs){
+		console.log(docs);
+		callback;
+	})
+};
+
+MongoClient.connect(url, function(err, db) {
+	console.log("Connected succefully to server!");
+	findDocuments(db, function () {
+		db.close();
+	});
+
+});
 
 //set sessions and cookie parser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -56,6 +73,7 @@ app.use(expressLayouts);
 //connect to our database
 mongoose.connect(process.env.DB_URI);
 
+
 //use body parser to grab info from a form
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -88,6 +106,7 @@ app.use(function(req, res, next) {
 
 
 // start our server
-app.listen(port, () => {
+app.listen( port, () => {
 	console.log(`App listening on http://localhost:${port}`);
+
 });

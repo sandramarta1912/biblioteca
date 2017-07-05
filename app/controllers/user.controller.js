@@ -48,7 +48,8 @@ function processCreate (req, res) {
 	const errors = req.validationErrors();
 
 	if (errors) {
-		req.flash('errors', errors.map(err => err.msg));
+		req.flash('errors', 
+			errors.map(err => err.msg));
 		return res.redirect('/user/register');
 	}
 
@@ -65,7 +66,7 @@ function processCreate (req, res) {
 	User.createUser(newUser, (err) => {
   		if (err) {
   			return console.error(err);
-  		}
+  		},
 		req.flash('success', 'You are register and can login!' );
 		res.redirect('user/login');	
 	});
