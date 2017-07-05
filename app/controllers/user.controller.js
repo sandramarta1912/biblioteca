@@ -66,7 +66,7 @@ function processCreate (req, res) {
 	User.createUser(newUser, (err) => {
   		if (err) {
   			return console.error(err);
-  		},
+  		}
 		req.flash('success', 'You are register and can login!' );
 		res.redirect('user/login');	
 	});
