@@ -64,31 +64,10 @@ function showSingle(req,res) {
 			return res.send('Book not found!');
 		}
 
-		res.render('pages/books/single', {});
+		res.render('pages/books/single', {
+            book: book,
+            success: req.flash ('success') });
 	});
-}
-	/**
-	*show  a single book
-	*/
-	
-	function showSingle(req,res) {
-		//get a single book
-		Book.findOne({ description:req.params.slug }, (err, book) => {
-
-			if (err) {
-				res.status(404);
-				res.send('Book not found!');
-			}
-
-		res.render('pages/books/single', { 
-
-			book: book,
-			success: req.flash('success')
-		});
-
-	});
-
-
 }
 /**
 * Seed the database
@@ -120,12 +99,6 @@ function seedBooks(req, res) {
 */
 
 function showCreate(req, res) {
-	res.render('pages/books/create',{
-		errors: req.flash('errors')
-	});
-}
-
-	function showCreate(req, res) {
 		res.render('pages/books/create',{
 			errors: req.flash('errors')
 		});
@@ -170,55 +143,7 @@ function processCreate(req, res) {
 
 	}
 
-	/**
-	* show the edit form
-	*/
-	function showEdit (req, res) {
-		Book.findOne({description: req.params.slug },(err, book) => {
-			res.render('pages/books/edit', {
-				book: book,
-				errors: req.flash('errors')
-				
-			});
-		});
-		
-
-	}
-
-	/**
-	* process the edit form
-	*/
-
-	function processEdit (req, res) {
-		req.checkBody('name', 'Name is require.').notEmpty();
-		req.checkBody('author', 'Description is require.').notEmpty();
-
-
-		// if there are errors, redirect  and save eroors to flash
-		const errors = req.validationErrors();
-
-		if (errors) {
-			req.flash('errors', errors.map(err => err.msg));
-			return res.redirect(`/books/${req.params.slug}/edit`);
-		}
-		// finding a current book
-		Book.findOne({description: req.params.slug}, (err, book) => {
-			//updating that book
-			book.name = req.body.name;
-			book.author = req.body.author;
-
-			book.save((err) => {
-				if (err)
-					throw err;
-
-				//succes flash message
-
-			});
-		});
-	}
-
-
-			/**
+/**
 			 * Show the edit form
 			 */
 			function showEdit(req, res) {
@@ -228,7 +153,8 @@ function processCreate(req, res) {
 						return res.send('Oops... That book does not exist!');
 					}
 					res.render('pages/books/edit', {
-						book: book
+						book: book,
+                        errors: req.flash('errors')
 					});
 				});
 			}

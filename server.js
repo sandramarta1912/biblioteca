@@ -15,21 +15,13 @@ const express 		 = require('express'),
 	expressValidator = require('express-validator'),
 	MongoClient 	 = require('mongodb').MongoClient;
 
-var url = 'mongodb://localhost:27017';
-var findDocuments = function(db , callback) {
-	var collection = db.collection('tours');
-	collection.find().toArray(function(err, docs){
-		console.log(docs);
-		callback;
-	})
-};
-
-MongoClient.connect(url, function(err, db) {
-	console.log("Connected succefully to server!");
-	findDocuments(db, function () {
-		db.close();
-	});
-
+MongoClient.connect('mongodb://127.0.0.1:27017', function(err, db) {
+    if(err) {
+        throw err;
+    } else {
+        console.log("Connected");
+    }
+    db.close;
 });
 
 //set sessions and cookie parser
