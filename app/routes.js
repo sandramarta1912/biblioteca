@@ -95,6 +95,6 @@ router.post('/user/forgot-password', userController.forgotPasswordProcess);
 router.get('/user/reset-password', userController.resetPasswordShow);
 router.post('/user/reset-password', userController.resetPasswordProcess);
 
-router.post('/user/login', userController.processLogin);
+//router.post('/user/login', userController.processLogin);
 router.get('/change', userController.change);
 

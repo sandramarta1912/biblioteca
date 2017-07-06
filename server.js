@@ -15,13 +15,18 @@ const express 		 = require('express'),
 	expressValidator = require('express-validator'),
 	MongoClient 	 = require('mongodb').MongoClient;
 
-MongoClient.connect('mongodb://127.0.0.1:27017', function(err, db) {
+MongoClient.connect('mongodb://127.0.0.1:27017/admin', function(err, db) {
     if(err) {
         throw err;
     } else {
         console.log("Connected");
     }
     db.close;
+
+	app.listen( port, () => {
+		console.log(`App listening on http://localhost:${port}`);
+
+	});
 });
 
 //set sessions and cookie parser
@@ -63,7 +68,7 @@ app.set('view engine', 'ejs');
 app.use(expressLayouts);
 
 //connect to our database
-mongoose.connect(process.env.DB_URI);
+mongoose.connect('mongodb://localhost/admin');
 
 
 //use body parser to grab info from a form
@@ -98,7 +103,4 @@ app.use(function(req, res, next) {
 
 
 // start our server
-app.listen( port, () => {
-	console.log(`App listening on http://localhost:${port}`);
 
-});

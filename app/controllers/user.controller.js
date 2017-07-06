@@ -9,7 +9,7 @@ module.exports = {
 	showCreate: showCreate,
 	processCreate: processCreate,
 	showLogin: showLogin,
-    processLogin: processLogin,
+    //processLogin: processLogin,
 	forgotPasswordShow: forgotPasswordShow,
 	forgotPasswordProcess: forgotPasswordProcess,
     resetPasswordShow: resetPasswordShow,
@@ -81,14 +81,14 @@ function showLogin(req, res) {
 	});	
 }
 
-function processLogin(req, res) {
-    console.log('test');
-    passport.authenticate('login', {
-        successRedirect: '/',
-        failureRedirect: '/user/login',
-        failureFlash : true
-    })
-}
+//function processLogin(req, res) {
+    //console.log('test');
+   // passport.authenticate('login', {
+       // successRedirect: '/',
+        //failureRedirect: '/user/login',
+      //  failureFlash : true
+    //})
+//}
 
 function forgotPasswordShow(req, res) {
 	res.render('pages/users/forgot-password', {
