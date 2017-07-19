@@ -63,6 +63,8 @@ function processCreate (req, res) {
 		password: requestBody.password
 	});
 
+	
+
 	User.createUser(newUser, (err) => {
   		if (err) {
   			return console.error(err);

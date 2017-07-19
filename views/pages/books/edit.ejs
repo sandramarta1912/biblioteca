@@ -12,19 +12,20 @@
 			</div>
       	<% } %>
 
-<<<<<<< HEAD:views/pages/books/edit.ejs
-      	<form action="/books/<%= book.description %>" method="POST">
-=======
-      <% if (errors.length > 0) { %>
-          <div class="alert alert-danger">
-            <% for (error of errors) { %>
+
+      	<!--<form action="/books/<%= book.description %>" method="POST">-->
+			<!--<input type="hidden" name="_csrf" value=<%= csrfToken %>>-->
+
+      <!--<% if (errors.length > 0) { %>-->
+          <!--<div class="alert alert-danger">-->
+            <!--<% for (error of errors) { %>-->
               <%= error %><br>
-            <% } %>
-          </div>
-      <% } %>
+            <!--<% } %>-->
+          <!--</div>-->
+      <!--<% } %>-->
 
       <form action="/books/<%= book.descriptions %>" method="POST">
->>>>>>> nouu:views/pages/books/edit.ejs
+		  <input type="hidden" name="_csrf" value=<%= csrfToken %>>
 			 <div class="form-group">
         		<label>Name</label>
         		<input type="text" name="name" class="form-control" value="<%= book.name %>">

@@ -13,6 +13,7 @@
       	<% } %>
 
       	<form action="/readers/<%= reader.description %>" method="POST">
+			<input type="hidden" name="_csrf" value=<%= csrfToken %>>
 			 <div class="form-group">
         		<label>Name</label>
         		<input type="text" name="name" class="form-control" value="<%= reader.name %>">

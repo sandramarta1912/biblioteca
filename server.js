@@ -5,7 +5,7 @@ const express 		 = require('express'),
 	csrf			 = require('csurf'),
 	passport 		 = require('passport'),
 	app 			 = express(),
-	port 			 = process.env.PORT || 8080,
+	port 			 =  8080,
 	expressLayouts   = require('express-ejs-layouts'),
 	mongoose 		 = require('mongoose'),
 	bodyParser       = require('body-parser'),
@@ -15,7 +15,7 @@ const express 		 = require('express'),
 	expressValidator = require('express-validator'),
 	MongoClient 	 = require('mongodb').MongoClient;
 
-MongoClient.connect('mongodb://127.0.0.1:27017/admin', function(err, db) {
+MongoClient.connect('mongodb://127.0.0.1:27017', function(err, db) {
     if(err) {
         throw err;
     } else {
@@ -23,10 +23,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017/admin', function(err, db) {
     }
     db.close;
 
-	app.listen( port, () => {
-		console.log(`App listening on http://localhost:${port}`);
 
-	});
 });
 
 //set sessions and cookie parser
@@ -68,7 +65,7 @@ app.set('view engine', 'ejs');
 app.use(expressLayouts);
 
 //connect to our database
-mongoose.connect('mongodb://localhost/admin');
+mongoose.connect('mongodb://localhost');
 
 
 //use body parser to grab info from a form
@@ -103,4 +100,7 @@ app.use(function(req, res, next) {
 
 
 // start our server
+app.listen( port, () => {
+	console.log(`App listening on http://localhost:${port}`);
 
+});

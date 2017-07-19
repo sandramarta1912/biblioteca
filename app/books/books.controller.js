@@ -38,14 +38,15 @@ module.exports = {
 					res.send('Books not found!');
 				}
 				//return a view with data
-				res.render('pages/books/books', {books: books});
+				//res.render('pages/books/books', {books: books});
 
 
 				// return a view with data
 				res.render('pages/books/books', {
 					books: result.docs,
 					pagination: pagination.paginate(),
-					success: req.flash('success')
+					success: req.flash('success'),
+					csrfToken: req.csrfToken()
 				});
 
 			});
@@ -66,7 +67,9 @@ function showSingle(req,res) {
 
 		res.render('pages/books/single', {
             book: book,
-            success: req.flash ('success') });
+            success: req.flash ('success'),
+			csrfToken: req.csrfToken()
+		});
 	});
 }
 /**
@@ -100,7 +103,8 @@ function seedBooks(req, res) {
 
 function showCreate(req, res) {
 		res.render('pages/books/create',{
-			errors: req.flash('errors')
+			errors: req.flash('errors'),
+			csrfToken: req.csrfToken()
 		});
 	}
 
@@ -154,7 +158,8 @@ function processCreate(req, res) {
 					}
 					res.render('pages/books/edit', {
 						book: book,
-                        errors: req.flash('errors')
+                        errors: req.flash('errors'),
+						csrfToken: req.csrfToken()
 					});
 				});
 			}

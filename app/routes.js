@@ -20,7 +20,26 @@ var isAuthenticated = function (req, res, next) {
 	// if the user is not authenticated then redirect him to the login page
 	res.redirect('/');
 };
-	
+
+
+var isAuthenticatedOr403 = function(req, res, next) {
+	if (req.isAuthenticated()) {
+		return next();
+	}
+
+	res.status(403);
+	res.render('pages/error/403');
+};
+
+var isAdminOr403 = function(req, res, next) {
+	if (req.user.local.roles.includes('admin')) {
+		return next();
+	}
+
+	res.status(403);
+	res.render('pages/error/403');
+};
+
 //export router
 module.exports = router;
 
@@ -31,31 +50,22 @@ router.get('/', mainController.showHome);
 router.get('/books', 		 booksController.showBooks);
 router.get('/search',		 searchController.searchBook);
 
-router.get('/books/create', isAuthenticated, booksController.showCreate);
-router.post('/books/create', isAuthenticated, booksController.processCreate);
-router.get('/books/:slug/edit', isAuthenticated, booksController.showEdit);
+router.get('/books/create', [isAuthenticatedOr403, isAdminOr403], booksController.showCreate);
+router.post('/books/create', [isAuthenticatedOr403, isAdminOr403], booksController.processCreate);
+router.get('/books/:slug/edit', [isAuthenticatedOr403, isAdminOr403], booksController.showEdit);
 router.post('/books/:slug', isAuthenticated, booksController.processEdit);
-router.get('/books/:slug/delete',  isAuthenticated, booksController.deleteBook);
+router.get('/books/:slug/delete',  [isAuthenticatedOr403, isAdminOr403], booksController.deleteBook);
 
-router.get('/books/create',  booksController.showCreate);
-router.post('/books/create', booksController.processCreate);
-
-router.get('/books/:slug/edit', booksController.showEdit);
-router.post('/books/:slug/', 	booksController.processEdit);
-
-router.get('/books/:slug/delete', booksController.deleteBook);
-
-router.get('/books/:slug', booksController.showSingle);
 
 //router.get('/books/seed', 	 booksController.seedBooks);
 
 // Readers
 router.get('/readers',		 readersController.showReaders);
-router.get('/readers/create', isAuthenticated, readersController.showCreate);
-router.post('/readers/create', isAuthenticated, readersController.processCreate);
-router.get('/readers/:slug/edit', isAuthenticated, readersController.showEdit);
-router.post('/readers/:slug', isAuthenticated, readersController.processEdit);
-router.get('/readers/:slug/delete', isAuthenticated, readersController.deleteReader);
+router.get('/readers/create', [isAuthenticatedOr403, isAdminOr403], readersController.showCreate);
+router.post('/readers/create', [isAuthenticatedOr403, isAdminOr403], readersController.processCreate);
+router.get('/readers/:slug/edit', [isAuthenticatedOr403, isAdminOr403], readersController.showEdit);
+router.post('/readers/:slug', [isAuthenticatedOr403, isAdminOr403], readersController.processEdit);
+router.get('/readers/:slug/delete', [isAuthenticatedOr403, isAdminOr403], readersController.deleteReader);
 router.get('/readers/:slug', readersController.showSingle);
 
 // Users
@@ -84,6 +94,7 @@ router.get('/user/logout', function(req, res) {
 	req.logout();
 	res.redirect('/');
 });
+
 
 router.get('/program', mainController.showProgram);
 router.get('/contact', contactController.showContact);

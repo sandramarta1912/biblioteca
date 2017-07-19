@@ -35,7 +35,8 @@ function showReaders(req, res) {
 		res.render('pages/readers/readers', {
 			readers: result.docs,
 			pagination: pagination.paginate(),
-			success: req.flash('success')
+			success: req.flash('success'),
+			csrfToken: req.csrfToken()
 		});
 	});
 }
@@ -60,7 +61,8 @@ function showSingle(req,res) {
 
 		res.render('pages/readers/singl', { 
 			reader: reader,
-			success: req.flash('success')
+			success: req.flash('success'),
+			csrfToken: req.csrfToken()
 			 });
 
 		});
@@ -101,7 +103,8 @@ function seedReaders(req, res) {
 
 	function showCreate(req, res) {
 		res.render('pages/readers/creat',{
-			errors: req.flash('errors')
+			errors: req.flash('errors'),
+			csrfToken: req.csrfToken()
 		});
 	}
 
@@ -117,10 +120,7 @@ function processCreate(req, res) {
 
 
 
-		if (errors) {
-			req.flash('errors', errors.map(err => err.msg));
-			return res.redirect('/readers/create');
-		}
+		
 
 
 	// if there are errors, redirect  and save eroors to flash
@@ -163,7 +163,8 @@ function showEdit (req, res) {
 			return res.send('Oops... That reader does not exist!');
 		}
 		res.render('pages/readers/edit', {
-		reader: reader
+			reader: reader, 
+			csrfToken: req.csrfToken()
 	});
 });
 }
