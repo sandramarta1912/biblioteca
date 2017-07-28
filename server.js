@@ -90,6 +90,17 @@ app.use(function (req, res, next) {
 	next();
 });
 
+
+app.use(function (req, res, next) {
+	if (undefined != req.user && req.user.local.roles.includes('admin')) {
+		res.locals.isAdmin = true;
+	} else {
+		res.locals.isAdmin = false;
+	}
+	next();
+});
+
+
 // set the routes
 app.use(require('./app/routes'));
 

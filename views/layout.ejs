@@ -29,15 +29,9 @@
           <li class="nav-item">
             <a class="nav-link" href="/books">Bibliotecă</a>
           </li>
-          <% if (isAuthenticated) {%>
-            <li class="nav-item">
-              <a class="nav-link" href="/readers">Cititori</a>
-            </li>
-          <% } %>
 
-          <li class="nav-item">
-            <a class="nav-link" href="/readers/create">creaza cititori</a>
-          </li>
+
+
 
 
           <!--
@@ -65,14 +59,15 @@
           <li class="nav-item">
             <form action="/search">
               <input name="term" type="text" id="search" value="<%= typeof searchTerm!='undefined' ? searchTerm : '' %>">
-              <button onclick="">Search</button>
+              <button class="button button2" onclick="">Search</button>
             </form>
           </li>
+          <% if (isAdmin) {%>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin">Admin</a>
+          </li>
+          <% } %>
         </ul>
-
-
-
-
       </div>
     </nav>
   </header>

@@ -15,7 +15,8 @@ function searchBook (req, res) {
 			{ 
 				books: books,
 				searchTerm: searchTerm,
-				success: req.flash('success')
+				success: req.flash('success'),
+				csrfToken: req.csrfToken()
 			}
 		);
 	});	

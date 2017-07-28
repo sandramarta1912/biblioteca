@@ -13,10 +13,11 @@
 		<tr>
 			<th>Name</th>
 			<th>Age</th>
+			<th>Email</th>
 			<th>
 				<% if (isAuthenticated) { %>
 				<a href="/readers/create" class="btn btn-sm btn-primary">
-					Create a reader
+					Create a user
 				</a>
 				<% } %>
 			</th>
@@ -29,6 +30,7 @@
 			<tr>
 				<td><%= reader.name %></td>
 				<td><%= reader.age %></td>
+				<td><%= reader.email %></td>
 				<td>
 				
 					<a href="/readers/<%= reader.description %>" class="btn btn-sm btn-primary">View</a>

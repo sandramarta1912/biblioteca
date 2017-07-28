@@ -7,6 +7,7 @@ const express = require('express'),
 	readersController = require('./readers/readers.controller');
 	userController = require('./controllers/user.controller');
 	contactController = require('./controllers/contact.controller');
+	adminController= require('./controllers/admin.controller');
 
 
 const passport = require('passport');
@@ -55,12 +56,12 @@ router.post('/books/create', [isAuthenticatedOr403, isAdminOr403], booksControll
 router.get('/books/:slug/edit', [isAuthenticatedOr403, isAdminOr403], booksController.showEdit);
 router.post('/books/:slug', isAuthenticated, booksController.processEdit);
 router.get('/books/:slug/delete',  [isAuthenticatedOr403, isAdminOr403], booksController.deleteBook);
-
+router.get('/books/:slug', booksController.showSingle);
 
 //router.get('/books/seed', 	 booksController.seedBooks);
 
 // Readers
-router.get('/readers',		 readersController.showReaders);
+router.get('/readers', [isAuthenticatedOr403, isAdminOr403], readersController.showReaders);
 router.get('/readers/create', [isAuthenticatedOr403, isAdminOr403], readersController.showCreate);
 router.post('/readers/create', [isAuthenticatedOr403, isAdminOr403], readersController.processCreate);
 router.get('/readers/:slug/edit', [isAuthenticatedOr403, isAdminOr403], readersController.showEdit);
@@ -69,6 +70,13 @@ router.get('/readers/:slug/delete', [isAuthenticatedOr403, isAdminOr403], reader
 router.get('/readers/:slug', readersController.showSingle);
 
 // Users
+router.get('/admin',[isAuthenticatedOr403, isAdminOr403], adminController.admin);
+router.get('/admin/users', [isAuthenticatedOr403, isAdminOr403], adminController.showUsers);
+router.get('/admin/create/book', [isAuthenticatedOr403, isAdminOr403], adminController.showCreateBook);
+router.post('/admin/create/book', [isAuthenticatedOr403, isAdminOr403], adminController.processCreateBook);
+router.get('/admin/create/user', [isAuthenticatedOr403, isAdminOr403], adminController.showCreateUser);
+router.post('/admin/create/user', [isAuthenticatedOr403, isAdminOr403], adminController.processCreateUser);
+
 router.get('/user/register', userController.showCreate);
 router.post('/user/register', passport.authenticate('local-signup', {
 	successRedirect : '/', // redirect to the secure profile section
@@ -108,4 +116,6 @@ router.post('/user/reset-password', userController.resetPasswordProcess);
 
 //router.post('/user/login', userController.processLogin);
 router.get('/change', userController.change);
+
+
 

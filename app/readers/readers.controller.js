@@ -43,13 +43,7 @@ function showReaders(req, res) {
 
 function showSingle(req,res) {
 
-	//get a single reader
-	Reader.findOne({ description:req.params.slug }, (err, reader) => {
-		if (err) {
-			res.status(404);
-			return res.send('Reader not found!');
-		}
-	});
+
 
 		//get a single reader
 		Reader.findOne({ description:req.params.slug }, (err, reader) => {
@@ -59,7 +53,7 @@ function showSingle(req,res) {
 				res.send('Reader not found!');
 			}
 
-		res.render('pages/readers/singl', { 
+		res.render('pages/readers/single', {
 			reader: reader,
 			success: req.flash('success'),
 			csrfToken: req.csrfToken()
@@ -102,7 +96,7 @@ function seedReaders(req, res) {
 
 
 	function showCreate(req, res) {
-		res.render('pages/readers/creat',{
+		res.render('pages/readers/create',{
 			errors: req.flash('errors'),
 			csrfToken: req.csrfToken()
 		});
@@ -117,6 +111,8 @@ function processCreate(req, res) {
 	req.checkBody('name', `Name is required.`).notEmpty();
 	req.checkBody('age', `Description is required.`).notEmpty();
 	req.checkBody('age', `Age must be between 10 and 65`).isInt().gte(10).lte(65);
+	req.checkBody('email', 'Email is required.').notEmpty();
+	req.checkBody('email', 'Email is not valid.').isEmail();
 
 
 
@@ -135,7 +131,8 @@ function processCreate(req, res) {
 	const reader = new Reader({
 
 		name: req.body.name,
-		age: req.body.age
+		email: req.body.email,
+		age: req.body.age,
 
 	});
 	

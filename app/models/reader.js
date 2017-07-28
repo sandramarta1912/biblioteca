@@ -10,12 +10,14 @@ const readerSchema = new Schema({
 		type: String,
 		unique: true
 	},
+	email: String,
 	age: {
 		type: Number,
 		min: 10,
 		max: 65
 
 	}
+
 });
 
 // Middleware - make sure that the slug is created from the name

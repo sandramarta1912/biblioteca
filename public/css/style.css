@@ -26,7 +26,7 @@ body {
 /*main section*/
 
 #site-main {
-<<<<<<< HEAD
+
     padding-bottom: 50px;
     padding-top: 50px;
 
@@ -85,14 +85,6 @@ footer a:hover{
     display: inline-block;
     margin-bottom: -6px; /* Inline-block margin offffset HACK -Gilron */
 }
-=======
-	padding-bottom: 50px;
-	padding-top: 50px;
-}
-
-
-
->>>>>>> nouu
 
 
 
@@ -117,11 +109,20 @@ footer a:hover{
     background: #858784;
 }
 
-<<<<<<< HEAD
 .btn-primary:active, .btn-primary.active {
     background: rgba(50, 52, 49, 0.82);
     box-shadow: none;
 }
-=======
+.btn-group-vertical {
+    background: #999b98;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    font-size: 20px;
+    width: 600px;
+    cursor: pointer;
+    display: inline-block
+}
+.button4{
+    : content: '';;
+    color: white;
+}
 
->>>>>>> nouu

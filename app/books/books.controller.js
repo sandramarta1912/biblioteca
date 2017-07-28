@@ -58,19 +58,23 @@ module.exports = {
 */
 
 function showSingle(req,res) {
-	// get a single book
-	Book.findOne({ description:req.params.slug }, function (err, book) {
+	
+
+	Book.findOne({ description:req.params.slug }, (err, book) => {
+
 		if (err) {
 			res.status(404);
-			return res.send('Book not found!');
+			res.send('Reader not found!');
 		}
-
 		res.render('pages/books/single', {
-            book: book,
-            success: req.flash ('success'),
+			book: book,
+			success: req.flash('success'),
 			csrfToken: req.csrfToken()
 		});
 	});
+
+
+
 }
 /**
 * Seed the database

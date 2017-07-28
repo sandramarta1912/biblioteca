@@ -94,7 +94,8 @@ function showLogin(req, res) {
 
 function forgotPasswordShow(req, res) {
 	res.render('pages/users/forgot-password', {
-		errors: req.flash('errors')
+		errors: req.flash('errors'),
+		csrfToken: req.csrfToken()
 	});
 }
 
@@ -163,7 +164,8 @@ function resetPasswordShow(req, res) {
             return res.redirect('/user/forgot-password');
         }
         res.render('pages/reset-password', {
-            user: req.user
+            user: req.user,
+			csrfToken: req.csrfToken()
         });
     });
 }
