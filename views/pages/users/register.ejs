@@ -1,22 +1,14 @@
-<h2 class="page-header">Register</h2>
-<% if (errors.length > 0) { %>
-          <div class="alert alert-danger">
-            <% for (error of errors) { %>
-              <%= error %><br>
-            <% } %>
-          </div>
-      <% } %>
 
-	 
-	<form name="register" action="/user/register" method="POST">
+<h2 class="page-header">Register</h2>
+<form name="register" action="/user/register" method="POST">
 		<input type="hidden" name="_csrf" value=<%= csrfToken %> >
 		<div class="form-group">
 			<lable>Firstname</lable>
-				<input type="text" name="name" class="form-control" placeholder="Name">
+				<input type="text" name="name" class="form-control" placeholder="Firstname">
 		</div>
 		<div class="form-group">
 			<lable>Lastname</lable>
-				<input type="text" name="username" class="form-control" placeholder="Username">
+				<input type="text" name="username" class="form-control" placeholder="Lastname">
 		</div>
 		<div class="form-group">
 			<lable>Email</lable>

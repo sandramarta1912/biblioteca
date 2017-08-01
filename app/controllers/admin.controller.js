@@ -1,3 +1,16 @@
+const User = require('../models/user');
+const url = require('url');
+var Pagination = require('../utils/Pagination');
+
+const passport = require("passport");
+
+var ObjectID = require('mongodb').ObjectID;
+
+const async = require('async');
+const crypto = require('crypto');
+//const nodemailer = require('nodemailer');
+var createUser = require('../models/user').createUser;
+
 module.exports = {
     admin:admin,
     showUsers: showUsers,
@@ -88,9 +101,47 @@ function processCreateBook (req, res) {
 }
 
 function showCreateUser (req, res)  {
+    res.render('pages/admin/create',{
+        errors: req.flash('errors'),
+        csrfToken: req.csrfToken()
+    });
+}
+function processCreateUser (req, res) {
+    // Valiation
+    req.checkBody('name', 'Name is require.').notEmpty();
+    req.checkBody('username', 'Username is required.').notEmpty();
+    req.checkBody('email', 'Email is required.').notEmpty();
+    req.checkBody('email', 'Email is not valid.').isEmail();
+    req.checkBody('password', 'Password is required.').notEmpty();
+    req.checkBody('password2', ' Password confirmation is not the same.').equals(req.body.password);
+    // if there are errors, redirect  and save eroors to flash
+    const errors = req.validationErrors();
+
+    if (errors) {
+        req.flash('errors',
+            errors.map(err => err.msg));
+        return res.redirect('/admin/create/user');
+    }
+
+    var requestBody = req.body;
+
+    var newUser = new User({
+        _id: new ObjectID(),
+        name: requestBody.name,
+        email: requestBody.email,
+        username: requestBody.username,
+        password: requestBody.password
+    });
+
+    User.createUser(newUser, (err) => {
+        if (err) {
+            return console.error(err);
+        }
+        req.flash('success', 'You are register and can login!' );
+        res.redirect('user/login');
+    });
 
 }
-function processCreateUser (req, res)  {
 
-}
+
 

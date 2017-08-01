@@ -1,6 +1,7 @@
 const url = require('url');
 
 module.exports = class Pagination {
+
     constructor(urlString, itemsCount, itemsPerPage) {
         this.urlParts = url.parse(urlString, true);
         this.itemsCount = itemsCount;
@@ -13,6 +14,7 @@ module.exports = class Pagination {
             currentPage: this.getCurrentPage(),
             links: this.generateLinks()
         };
+
     }
 
     getCurrentPage() {
