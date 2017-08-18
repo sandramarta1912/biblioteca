@@ -199,7 +199,7 @@ function processCreate(req, res) {
 
 						// redirect back to the books
 						req.flash('success', 'Successfully updated book!');
-						res.redirect('/books');
+						res.redirect('/admin/books');
 					});
 
 				});
@@ -218,7 +218,7 @@ function processCreate(req, res) {
 					}
 					//redirect back to the book page
 					req.flash('success', 'Book deleted!');
-					res.redirect('/books');
+					res.redirect('/admin/books');
 				});
 			}
 

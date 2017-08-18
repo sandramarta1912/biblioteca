@@ -71,11 +71,14 @@ router.get('/readers/:slug', readersController.showSingle);
 
 // Users
 router.get('/admin',[isAuthenticatedOr403, isAdminOr403], adminController.admin);
-router.get('/admin/users', [isAuthenticatedOr403, isAdminOr403], adminController.showUsers);
+router.get('/admin/readers', [isAuthenticatedOr403, isAdminOr403], adminController.showReaders);
+router.get('/admin/books', [isAuthenticatedOr403, isAdminOr403], adminController.showBooks);
 router.get('/admin/create/book', [isAuthenticatedOr403, isAdminOr403], adminController.showCreateBook);
 router.post('/admin/create/book', [isAuthenticatedOr403, isAdminOr403], adminController.processCreateBook);
-router.get('/admin/create/user', [isAuthenticatedOr403, isAdminOr403], adminController.showCreateUser);
-router.post('/admin/create/user', [isAuthenticatedOr403, isAdminOr403], adminController.processCreateUser);
+router.get('/admin/create/reader', [isAuthenticatedOr403, isAdminOr403], adminController.showCreateReader);
+router.post('/admin/create/reader', [isAuthenticatedOr403, isAdminOr403], adminController.processCreateReader);
+
+
 
 router.get('/user/register', userController.showCreate);
 router.post('/user/register', passport.authenticate('local-signup', {

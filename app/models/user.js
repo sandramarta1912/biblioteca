@@ -1,5 +1,10 @@
-var mongoose = require('mongoose');
+const
+    mongodb = require('mongodb'),
+    mongoose = require('mongoose'),
+    mongoosePaginate = require('mongoose-paginate');
+
 var bcrypt = require('bcryptjs');
+
 
 
 
@@ -52,6 +57,8 @@ var UserSchema = mongoose.Schema({
 UserSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
+
+UserSchema.plugin(mongoosePaginate);
 
 // checking if password is valid
 UserSchema.methods.validPassword = function(password) {

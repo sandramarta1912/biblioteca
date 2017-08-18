@@ -28,15 +28,22 @@ function showReaders(req, res) {
 			return res.send('Reader not found!');
 		}
 
-		let pagination = new Pagination(req.url, result.total, itemsPerPage);
-		
-		//return a view with data
 
-		res.render('pages/readers/readers', {
-			readers: result.docs,
-			pagination: pagination.paginate(),
-			success: req.flash('success'),
-			csrfToken: req.csrfToken()
+		let pagination = new Pagination(req.url, result.total, itemsPerPage);
+
+		Reader.find({}, (err, readers) => {
+			if (err) {
+				res.status(404);
+				res.send('Books not found!');
+			}
+			//return a view with data
+
+			res.render('pages/readers/readers', {
+				readers: result.docs,
+				pagination: pagination.paginate(),
+				success: req.flash('success'),
+				csrfToken: req.csrfToken()
+			});
 		});
 	});
 }
@@ -145,7 +152,7 @@ function processCreate(req, res) {
 		//set a successful flash message
 		req.flash('success', 'Successfuly created reader!');
 		//redirect to the newly created reader
-		res.redirect(`/readers`);
+		res.redirect(`/admin/readers`);
 
 	});
 }
