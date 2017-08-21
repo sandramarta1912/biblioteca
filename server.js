@@ -15,7 +15,7 @@ const express 		 = require('express'),
 	expressValidator = require('express-validator'),
 	MongoClient 	 = require('mongodb').MongoClient;
 
-MongoClient.connect('mongodb://127.0.0.1:27017', function(err, db) {
+MongoClient.connect(process.env.DB_URI, function(err, db) {
     if(err) {
         throw err;
     } else {
