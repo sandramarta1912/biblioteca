@@ -1,0 +1,34 @@
+<div style="margin-left:25%">
+	<div class="jumbotron test-center">
+		<h1>Editing <%= reader.name %></h1>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<% if (typeof errors != 'undefined' && errors.length > 0) { %>
+				<div class="alert alert-danger">
+					<% for (error of errors) { %>
+					  <%= error %><br>
+					<% } %>
+				</div>
+			<% } %>
+
+			<form action="/admin/<%= reader.description %>" method="POST">
+				<input type="hidden" name="_csrf" value=<%= csrfToken %>>
+				 <div class="form-group">
+					<label>Name</label>
+					<input type="text" name="name" class="form-control" value="<%= reader.name %>">
+				</div>
+
+				 <div class="form-group">
+					<label>Age</label>
+					<textarea name="age" rows="1" class="form-control"><%= reader.age %></textarea>
+				</div>
+
+				 <div class="form-group">
+					 <button type="submit" class="btn btn-success btn-lg">Update</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

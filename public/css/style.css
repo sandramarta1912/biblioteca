@@ -1,0 +1,54 @@
+
+
+/*.navbar {*/
+
+    /*background:*/
+        /*!* color overlay *!*/
+            /*linear-gradient(*/
+                    /*rgba(21, 21, 21, 0.76),*/
+                    /*rgba(86, 49, 48, 0.45)*/
+            /*),*/
+                /*!* image to overlay *!*/
+            /*url(http://images.cdn.fotopedia.com/_avPIZmqM3w-7z161LH_268-hd.jpg);*/
+/*}*/
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 250px;
+    background:
+        /* color overlay */
+            linear-gradient(
+                    rgba(86, 49, 48, 0.51),
+                    rgba(21, 21, 21, 0.84)
+            ),
+                /* image to overlay */
+            url(http://images.cdn.fotopedia.com/_avPIZmqM3w-7z161LH_268-hd.jpg);
+}
+.footer h3 {
+    border-bottom: 1px solid #BAC1C8;
+    color: #54697E;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 27px;
+    padding: 40px 0 10px;
+    text-transform: uppercase;
+}
+
+/*a.nav-item {*/
+    /*color: #2B2922;*/
+
+}
+
+/*.container {*/
+    /*width: auto;*/
+    /*max-width: 680px;*/
+    /*padding: 0 15px;*/
+/*}*/
+/*.container .text-muted {*/
+    /*margin: 20px 0;*/
+/*}*/
+/*.footertext {*/
+    /*color: #ffffff;*/
+/*}*/
