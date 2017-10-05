@@ -1,5 +1,6 @@
-//load enviroment variables
+// load enviroment variables
 require('dotenv').config();
+
 // grab our dependencies
 const express 		 = require('express'),
 	csrf			 = require('csurf'),
@@ -17,24 +18,7 @@ const express 		 = require('express'),
 	pug 			 = require('pug'),
 	path = require('path');
 
-
-
-
- 
-
-
-MongoClient.connect('mongodb://127.0.0.1:27017', function(err, db) {
-    if(err) {
-        throw err;
-    } else {
-        console.log("Connected");
-    }
-    db.close;
-
-
-});
-
-//set sessions and cookie parser
+// set sessions and cookie parser
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(csrf({ cookie: true }));
@@ -77,8 +61,6 @@ app.get('/login/facebook/callback',
 	})
 );
 
-
-
 // Initialize Passport
 var initPassport = require('./app/authentication/init');
 initPassport(passport);
@@ -98,7 +80,7 @@ app.set("view engine", "pug");
 
 
 //connect to our database
-mongoose.connect('mongodb://localhost');
+mongoose.connect(process.env.MONGODB_URI);
 
 
 //use body.pug parser to grab info from a form
