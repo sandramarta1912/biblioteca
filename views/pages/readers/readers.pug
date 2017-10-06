@@ -1,47 +1,27 @@
-<% if (success.length > 0) { %>
-<div class="alert alert-success"><%= success %></div>
-<% } %>
+extends ../../layout.pug
 
-<div class="jumbotron text-center">
-	<h1>
-	Readers
-	</h1>
-</div>
-
-<table class="table table-border table-hover table-striped">
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Age</th>
-			<th>Email</th>
-			<th>
-				<% if (isAuthenticated) { %>
-				<a href="/readers/create" class="btn btn-sm btn-primary">
-					Create a user
-				</a>
-				<% } %>
-			</th>
-		</tr>
-	</thead>
-
-	<tbody>
-
-		<% for (var reader of readers) { %>
-			<tr>
-				<td><%= reader.name %></td>
-				<td><%= reader.age %></td>
-				<td><%= reader.email %></td>
-				<td>
-				
-					<a href="/readers/<%= reader.description %>" class="btn btn-sm btn-primary">View</a>
-
-				</td>
-			</tr>
-
-		<% } %>
-
-		<%- include('../../pagination', {pagination: pagination}) %>
-
-
-	</tbody>
-</table>
+block body
+    .container
+        if success.length > 0
+            .alert.alert-success #{success}
+        .jumbotron.text-center
+            h1 Readers
+        table.table.table-border.table-hover.table-striped
+            thead
+            tr
+                th Name
+                th Age
+                th Email
+                th
+                    if isAuthenticated
+                    a.btn.btn-sm.btn-primary(href="/admin/create/reader") Create a user
+            for(var reader of readers)
+            tr
+                td #{reader.name}
+                td #{reader.age }
+                td #{reader.email}
+                td
+                    //a.btn.btn-sm.btn-primary(href="/readers/#{reader.description}") View
+                    a.btn-btn-sm.btn-primary(href="/admin/#{reader.description}/edit") Edit
+                    a.btn.btn-sm.btn-danger(href="/admin/#{reader.description}/delete") Delete
+        #{-include('../../pagination', {pagination: pagination}) }

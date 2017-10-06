@@ -17,7 +17,6 @@ module.exports = {
 * show all books
 */
 	function showBooks(req, res) {
-
 		let itemsPerPage = 10;
 		let currentPage = req.query.page != undefined ? req.query.page : 1;
 		let offset = itemsPerPage * (currentPage - 1);
@@ -154,71 +153,71 @@ function processCreate(req, res) {
 /**
 			 * Show the edit form
 			 */
-			function showEdit(req, res) {
-				Book.findOne({description: req.params.slug}, (err, book) => {
-					if (err) {
-						res.status(404);
-						return res.send('Oops... That book does not exist!');
-					}
-					res.render('pages/books/edit', {
-						book: book,
-                        errors: req.flash('errors'),
-						csrfToken: req.csrfToken()
-					});
-				});
+function showEdit(req, res) {
+	Book.findOne({description: req.params.slug}, (err, book) => {
+		if (err) {
+			res.status(404);
+			return res.send('Oops... That book does not exist!');
+		}
+		res.render('pages/books/edit', {
+			book: book,
+			errors: req.flash('errors'),
+			csrfToken: req.csrfToken()
+		});
+	});
+}
+
+/**
+ * process the edit form
+ */
+
+function processEdit(req, res) {
+	req.checkBody('name', `Name is required.`).notEmpty();
+	req.checkBody('author', `Description is required.`).notEmpty();
+	req.checkBody('about', 'About is required.').notEmpty();
+
+	// if there are errors, redirect  and save errors to flash
+	const errors = req.validationErrors();
+
+	if (errors) {
+		req.flash('errors', errors.map(err => err.msg));
+		return res.redirect(`/books/${req.params.slug}/edit`);
+	}
+	// finding a current book
+	Book.findOne({description: req.params.slug}, (err, book) => {
+		// updating that book
+		book.name = req.body.name;
+		book.author = req.body.author;
+		book.about = req.body.about;
+
+		book.save((err) => {
+			if (err) {
+				req.flash('error', 'The book could not be updated!');
+				return res.redirect(`/books/${req.params.slug}/edit`);
 			}
 
-			/**
-			 * process the edit form
-			 */
+			// redirect back to the books
+			req.flash('success', 'Successfully updated book!');
+			res.redirect('/admin/books');
+		});
 
-			function processEdit(req, res) {
-				req.checkBody('name', `Name is required.`).notEmpty();
-				req.checkBody('author', `Description is required.`).notEmpty();
-				req.checkBody('about', 'About is required.').notEmpty();
-
-				// if there are errors, redirect  and save errors to flash
-				const errors = req.validationErrors();
-
-				if (errors) {
-					req.flash('errors', errors.map(err => err.msg));
-					return res.redirect(`/books/${req.params.slug}/edit`);
-				}
-				// finding a current book
-				Book.findOne({description: req.params.slug}, (err, book) => {
-					// updating that book
-					book.name = req.body.name;
-					book.author = req.body.author;
-					book.about = req.body.about;
-
-					book.save((err) => {
-						if (err) {
-							req.flash('error', 'The book could not be updated!');
-							return res.redirect(`/books/${req.params.slug}/edit`);
-						}
-
-						// redirect back to the books
-						req.flash('success', 'Successfully updated book!');
-						res.redirect('/admin/books');
-					});
-
-				});
-			}
+	});
+}
 
 
-			/**
-			 * Deletes a book
-			 */
-			function deleteBook(req, res) {
-				Book.remove({description: req.params.slug}, (err) => {
-					if (err) {
-						//redirect back to the book page
-						req.flash('error', 'The book could not be deleted!');
-						return res.redirect('/books');
-					}
-					//redirect back to the book page
-					req.flash('success', 'Book deleted!');
-					res.redirect('/admin/books');
-				});
-			}
+/**
+ * Deletes a book
+ */
+function deleteBook(req, res) {
+	Book.remove({description: req.params.slug}, (err) => {
+		if (err) {
+			//redirect back to the book page
+			req.flash('error', 'The book could not be deleted!');
+			return res.redirect('/books');
+		}
+		//redirect back to the book page
+		req.flash('success', 'Book deleted!');
+		res.redirect('/admin/books');
+	});
+}
 

@@ -51,8 +51,8 @@ router.get('/', mainController.showHome);
 router.get('/books', 		 booksController.showBooks);
 router.get('/search',		 searchController.searchBook);
 
-router.get('/books/create', [isAuthenticatedOr403, isAdminOr403], booksController.showCreate);
-router.post('/books/create', [isAuthenticatedOr403, isAdminOr403], booksController.processCreate);
+router.get('/books/create', booksController.showCreate);
+router.post('/books/create',  booksController.processCreate);
 router.get('/books/:slug/edit', [isAuthenticatedOr403, isAdminOr403], booksController.showEdit);
 router.post('/books/:slug', isAuthenticated, booksController.processEdit);
 router.get('/books/:slug/delete',  [isAuthenticatedOr403, isAdminOr403], booksController.deleteBook);

@@ -1,16 +1,20 @@
+html, body {
+    height: 100%; /*Fixes the height to 100% of the viewport*/
+}
 
 
-/*.navbar {*/
 
-    /*background:*/
-        /*!* color overlay *!*/
-            /*linear-gradient(*/
-                    /*rgba(21, 21, 21, 0.76),*/
-                    /*rgba(86, 49, 48, 0.45)*/
-            /*),*/
-                /*!* image to overlay *!*/
-            /*url(http://images.cdn.fotopedia.com/_avPIZmqM3w-7z161LH_268-hd.jpg);*/
-/*}*/
+.navbar {
+
+    background:
+        /* color overlay */
+            linear-gradient(
+                    rgba(21, 21, 21, 0.76),
+                    rgba(0, 0, 0, 0.31)
+            ),
+                /* image to overlay */
+            url(http://images.cdn.fotopedia.com/_avPIZmqM3w-7z161LH_268-hd.jpg);
+}
 .footer {
     position: absolute;
     bottom: 0;
@@ -20,7 +24,7 @@
     background:
         /* color overlay */
             linear-gradient(
-                    rgba(86, 49, 48, 0.51),
+                    rgba(0, 0, 0, 0.31),
                     rgba(21, 21, 21, 0.84)
             ),
                 /* image to overlay */
@@ -39,7 +43,7 @@
 /*a.nav-item {*/
     /*color: #2B2922;*/
 
-}
+
 
 /*.container {*/
     /*width: auto;*/
@@ -52,3 +56,4 @@
 /*.footertext {*/
     /*color: #ffffff;*/
 /*}*/
+

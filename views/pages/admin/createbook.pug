@@ -1,35 +1,23 @@
+extends ../../layout.pug
 
-<div style="margin-left:25%">
-    <div class="jumbotron test-center">
-        <h1>Create a Book</h1>
-    </div>
-
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-                <form action="/books/create" method="POST">
-                    <input type="hidden" name="_csrf" value=<%= csrfToken %>>
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" name="name" class="form-control">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Author</label>
-                        <textarea name="author" rows="1" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>About</label>
-                        <textarea name="about" rows="5" class="form-control"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success btn-lg">Create</button>
-                    </div>
-                    <div class="form-group">
-                        <a href="/admin" class="btn btn-lg btn-danger">Cancel</a>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-</div>
+block body
+    .container
+        .jumbotron.test-center
+            h1 Create a Book
+                .row
+                    .col-sm-6.col-sm-offset-3
+                        form(action="/books/create" method="POST")
+                            input(type="hidden" name="_csrf" value= {csrfToken})
+                            .form-group
+                                label Name
+                                input.form-control(type="text" name="name")
+                            .form-group
+                                label Author
+                                textarea.form-control(name="author" rows="1")
+                            .form-group
+                                label About
+                                textarea.form-control(name="about" rows="5")
+                            .form-group
+                                button.btn.btn-success(type="submit") Create
+                            .form-group
+                                a(href="/admin").btn.btn-lg.btn-danger Cancel

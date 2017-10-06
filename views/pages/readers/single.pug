@@ -1,16 +1,10 @@
-<% if (success.length > 0) { %>
-<div class="alert alert-success"><%= success %></div>
-<% } %>
+extends ../../layout.pug
 
-
-<div class="jumbotron text-center">
-	<h1> <%= reader.name %></h1>
-	<p> <%= reader.age %></p>
-	<p> <%= reader.email %></p>
-
-</div>
-
-
-
-
-
+block body
+	.container
+		if success.length > 0
+			.alert.alert-success#{success}
+		.jumbotron.text-center
+			h1 #{reader.name}
+			p #{reader.age}
+			p #{reader.email}

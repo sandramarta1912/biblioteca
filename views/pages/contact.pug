@@ -1,66 +1,36 @@
-<div style="margin-left:25%">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 ">
-                    <div class="well well-sm">
-                        <form class="form-horizontal" action="/contact" method="post">
-                            <input type="hidden" name="_csrf" value=<%= csrfToken %>>
-                                <fieldset>
-                                    <legend class="text-center">Contactati-ne!</legend>
+extends ../layout.pug
 
-                                    <% if(typeof flash != 'undefined') { %>
-                                    <div class="alert alert-danger">
-                                        <%= flash %>
-                                    </div>
-                                    <% } %>
-
-                                    <!-- Name input-->
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="name">Name</label>
-
-                                        <% if (typeof formErrors !== 'undefined' && formErrors.length) { %>
-                                            <% for (error of formErrors) { %>
-                                                <% if (error.param == 'name') { %>
-                                                    <div class="alert alert-danger">
-                                                        <%= error.msg %>
-                                                    </div>
-                                                <% } %>
-                                            <% } %>
-                                        <% } %>
-                                        <div class="col-md-9">
-                                            <input id="name" name="name" type="text" placeholder="Your name" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <!-- Email input-->
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="email">Your E-mail</label>
-                                        <div class="col-md-9">
-                                            <input id="email" name="email" type="text" placeholder="Your email" class="form-control">
-                                        </div>
-                                    </div>
-
-                                    <!-- Message body -->
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label" for="message">Your message</label>
-                                        <div class="col-md-9">
-                                            <textarea class="form-control" id="message" name="message" placeholder="Please enter your message here..." rows="5"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <!-- Form actions -->
-                                    <div class="form-group">
-                                        <div class="g-recaptcha" data-sitekey="6LeEoyQUAAAAAJgb3f1nYo7Svnpb0ZSVQWKGUr8P"></div>
-                                        <div class="col-md-12 text-right">
-                                            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-                                        </div>
-                                    </div>
-
-
-                                </fieldset>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-</div>
+block body
+    body
+        .container
+            .row
+                .col-md-6
+                    .well.well-sm
+                        form.form-horizontal(action="/contact" method="post")
+                            input(type="hidden" name="_csrf" value=#{csrfToken})
+                                fieldset
+                                    legend.text-center Contactati-ne!
+                                    if typeof flash != 'undefined'
+                                    .alert.alert-danger
+                                        #{flash}
+                                    .form-group
+                                        label.col-md-3.control-label Name
+                                            if typeof formErrors !== 'undefined' && formErrors.length
+                                                for(error of formErrors)
+                                                if error.param == 'name'
+                                                    .alert.alert-danger
+                                                        #{error.msg}
+                                        .col-md-9
+                                            input(id="name" name="name" type="text" placeholder="Your name").form-control
+                                    .form-group
+                                        label.col-md-3.control-label Your E-mail
+                                        .col-md-9
+                                            input(id="email" name="email" type="text" placeholder="Your email").form-control
+                                    .form-group
+                                        label.col-md-3.control-label Your message
+                                        .col-md-9
+                                            textarea.form-control(id="message" name="message" placeholder="Please enter your message here..." rows="5")
+                                    .form-group
+                                        .g-recaptcha(data-sitekey="6LeEoyQUAAAAAJgb3f1nYo7Svnpb0ZSVQWKGUr8P")
+                                        .col-md-12.text-right
+                                            button.btn.btn-lg.btn-primary(type="submit") Submit
