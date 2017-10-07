@@ -14,7 +14,6 @@ const express 		 = require('express'),
 	cookieParser	 = require('cookie-parser'),
 	flash			 = require('connect-flash'),
 	expressValidator = require('express-validator'),
-	MongoClient 	 = require('mongodb').MongoClient,
 	pug 			 = require('pug'),
 	path = require('path');
 
@@ -43,9 +42,6 @@ app.use(flash());
 //passport
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-
 
 // route for facebook authentication and login
 // different scopes while logging in
@@ -78,10 +74,8 @@ app.use(expressLayouts);*/
 app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "pug");
 
-
 //connect to our database
 mongoose.connect(process.env.MONGODB_URI);
-
 
 //use body.pug parser to grab info from a form
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -105,7 +99,6 @@ app.use(function (req, res, next) {
 	next();
 });
 
-
 app.use(function (req, res, next) {
 	if (undefined != req.user && req.user.local.roles.includes('admin')) {
 		res.locals.isAdmin = true;
@@ -115,7 +108,6 @@ app.use(function (req, res, next) {
 	next();
 });
 
-
 // set the routes
 app.use(require('./app/routes'));
 
@@ -123,9 +115,6 @@ app.use(function(req, res, next) {
 	res.status(400);
 	res.render('pages/error/404');
 });
-
-
-
 
 // start our server
 app.listen( port, () => {
