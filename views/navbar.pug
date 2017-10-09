@@ -1,12 +1,12 @@
-nav.navbar.navbar-expand-lg.navbar-light.bg-light
-    button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
+nav.navbar.sticky-top.navbar-expand-lg.navbar-light.bg-light
+    button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation")
         span.navbar-toggler-icon
-    .collapse.navbar-collapse#navbarSupportedContent
-        a.navbar-brand(href="#") Navbar
+    .collapse.navbar-collapse(id="navbarTogglerDemo01")
+        a.navbar-brand(href="#") Hidden brand
         ul.navbar-nav.mr-auto
             li.nav-item
                 a.nav-link(href="/") Acasa
-                    span.sr-only(current)
+                    span.sr-only #{current}
             li.nav-item
                 a.nav-link(href="/books") Carti
             li.nav-item

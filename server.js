@@ -111,6 +111,6 @@ app.use(function(req, res, next) {
 var port = process.env.SERVER_PORT;
 var hostname = process.env.SERVER_HOSTNAME;
 var appHost = hostname + ":" + port;
-app.listen(port, () => {
+app.listen(port,  () => {
 	console.log(`App listening on ` + appHost);
 });

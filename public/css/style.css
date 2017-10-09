@@ -1,9 +1,9 @@
-html, body {
-    height: 100%; /*Fixes the height to 100% of the viewport*/
+body {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
 }
-
-
-
 .navbar {
 
     background:
@@ -15,12 +15,19 @@ html, body {
                 /* image to overlay */
             url(http://images.cdn.fotopedia.com/_avPIZmqM3w-7z161LH_268-hd.jpg);
 }
+section.section1 {
+    padding: 60px 30px;
+    background: rgba(12, 4, 4, 0.26);
+}
+section.section2 {
+    background: rgba(12, 4, 4, 0.08);
+}
 .footer {
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
-    height: 250px;
+    height: 310px;
     background:
         /* color overlay */
             linear-gradient(
@@ -39,21 +46,3 @@ html, body {
     padding: 40px 0 10px;
     text-transform: uppercase;
 }
-
-/*a.nav-item {*/
-    /*color: #2B2922;*/
-
-
-
-/*.container {*/
-    /*width: auto;*/
-    /*max-width: 680px;*/
-    /*padding: 0 15px;*/
-/*}*/
-/*.container .text-muted {*/
-    /*margin: 20px 0;*/
-/*}*/
-/*.footertext {*/
-    /*color: #ffffff;*/
-/*}*/
-
