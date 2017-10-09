@@ -6,8 +6,6 @@ const express 		 = require('express'),
 	csrf			 = require('csurf'),
 	passport 		 = require('passport'),
 	app 			 = express(),
-	port 			 =  8080,
-/*	expressLayouts   = require('express-ejs-layouts'),*/
 	mongoose 		 = require('mongoose'),
 	bodyParser       = require('body-parser'),
 	session			 = require('express-session'),
@@ -64,13 +62,6 @@ initPassport(passport);
 //tell express where to look for static assets
 app.use(express.static(__dirname + '/public'));
 
-//set ejs our templating engine
-/*app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'ejs');
-app.use(expressLayouts);*/
-
-// set pug our templating engine
-
 app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "pug");
 
@@ -117,7 +108,9 @@ app.use(function(req, res, next) {
 });
 
 // start our server
-app.listen( port, () => {
-	console.log(`App listening on http://localhost:${port}`);
-
+var port = process.env.SERVER_PORT;
+var hostname = process.env.SERVER_HOSTNAME;
+var appHost = hostname + ":" + port;
+app.listen(port, () => {
+	console.log(`App listening on ` + appHost);
 });

@@ -14,5 +14,4 @@ module.exports = {
 			csrfToken: req.csrfToken()
 		});
 	}
-	
 };
