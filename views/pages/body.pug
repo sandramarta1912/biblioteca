@@ -1,8 +1,8 @@
 extends ../layout.pug
 
 block body
+    input(type='hidden', name='_csrf', value= {csrfToken})
     section.section1
-        h2.text-center Biserica Penticostala Emanuel
         #carouselExampleIndicators.carousel.slide(data-ride="carousel")
             ol.carousel-indicators
                 li(data-target="#carouselExampleIndicators" data-slide-to="0").active
@@ -21,10 +21,12 @@ block body
         a.carousel-control-next(href="#carouselExampleIndicators" role="button" data-slide="next")
             span.carousel-control-next-icon(aria-hidden="true")
             span.sr-only Next
+    section.section2
+        br
+        h2.text-center Biserica Penticostala Emanuel
         hr.my-4
         p.lead Lorem ipsum dolor sit amet, est te animal comprehensam, quot prompta mandamus nec te, laudem alterum ad vix. Eros primis vis in. Vidisse constituam eum ei, nulla error mei ad, sale nostrum usu ut. Mel ei illud nostrum tacimates.
         hr.my-4
         p.lead Ex vocibus interesset nam, atqui solet expetendis cum in, accumsan albucius usu ei. No pro quot dolorum, ex vim diam persequeris, ferri complectitur eam cu.
         a.btn.btn-primary.btn-lg(href="#" role="button") Citeste mai mult
-        input(type='hidden', name='_csrf', value= {csrfToken})
-    section.section2
+        br

@@ -20,6 +20,7 @@ section.section1 {
     background: rgba(12, 4, 4, 0.26);
 }
 section.section2 {
+    padding: 60px 30px;
     background: rgba(12, 4, 4, 0.08);
 }
 .footer {
