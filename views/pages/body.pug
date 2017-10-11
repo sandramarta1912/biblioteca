@@ -2,31 +2,42 @@ extends ../layout.pug
 
 block body
     input(type='hidden', name='_csrf', value= {csrfToken})
-    section.section1
-        #carouselExampleIndicators.carousel.slide(data-ride="carousel")
-            ol.carousel-indicators
-                li(data-target="#carouselExampleIndicators" data-slide-to="0").active
-                li(data-target="#carouselExampleIndicators" data-slide-to="1")
-                li(data-target="#carouselExampleIndicators" data-slide-to="2")
-            .carousel-inner
-                .carousel-item.active
-                    img.d-block.w-100(src="../images/tineri.jpg" alt="First slide")
-                .carousel-item
-                    img.d-block.w-100(src="../images/tineri.jpg" alt="Second slide")
-                .carousel-item
-                    img.d-block.w-100(src="../images/tineri.jpg" alt="Third slide")
-        a.carousel-control-prev(href="#carouselExampleIndicators" role="button" data-slide="prev")
-            span.carousel-control-prev-icon(aria-hidden="true")
-            span.sr-only Previous
-        a.carousel-control-next(href="#carouselExampleIndicators" role="button" data-slide="next")
-            span.carousel-control-next-icon(aria-hidden="true")
-            span.sr-only Next
-    section.section2
-        br
-        h2.text-center Biserica Penticostala Emanuel
-        hr.my-4
-        p.lead Lorem ipsum dolor sit amet, est te animal comprehensam, quot prompta mandamus nec te, laudem alterum ad vix. Eros primis vis in. Vidisse constituam eum ei, nulla error mei ad, sale nostrum usu ut. Mel ei illud nostrum tacimates.
-        hr.my-4
-        p.lead Ex vocibus interesset nam, atqui solet expetendis cum in, accumsan albucius usu ei. No pro quot dolorum, ex vim diam persequeris, ferri complectitur eam cu.
-        a.btn.btn-primary.btn-lg(href="#" role="button") Citeste mai mult
-        br
+    #startchange
+        section.section1
+            .row
+                .col-sm-4
+                    h3 Comunitatea noastra
+                    .card
+                        img.card-img-top(src="../../images/unitate.jpg" alt="Card image cap")
+                        .card-body
+                            p.card-text Comnuitatea noastra estejbhvgcfchjnkjkhjhfvfcrfhbjh.....
+                .col-sm-4
+                    h3 Misiunea bisericii
+                    .card
+                        img.card-img-top(src="../../images/biblia.jpg" alt="Card image cap")
+                        .card-body
+                            p.card-text Comnuitatea noastra estejbhvgcfchjnkjkhjhfvfcrfhbjh.....
+                .col-sm-4
+                    h3 Lorem ipsum
+                    .card
+                        img.card-img-top(src="../../images/lumina.jpg" alt="Card image cap")
+                        .card-body
+                            p.card-text Comnuitatea noastra estejbhvgcfchjnkjkhjhfvfcrfhbjh.....
+        section.section2
+            .row
+                .col-md-4.col-sm-5
+                    br
+                    h2.text-center Biserica Penticostala Emanuel
+                    hr.my-4
+                    p.lead Lorem ipsum dolor sit amet, est te animal comprehensam, quot prompta mandamus nec te, laudem alterum ad vix. Eros primis vis in. Vidisse constituam eum ei, nulla error mei ad, sale nostrum usu ut. Mel ei illud nostrum tacimates.
+                    hr.my-4
+                    p.lead Ex vocibus interesset nam, atqui solet expetendis cum in, accumsan albucius usu ei. No pro quot dolorum, ex vim diam persequeris, ferri complectitur eam cu.
+                    a.btn.btn-primary.btn-lg(href="#" role="button") Citeste mai mult
+
+                .col-md-8.col-sm-7
+                    h3 Lorem Ipsum
+                    ul.list-group
+                        li.list-group-item Cras justo odio
+                        li.list-group-item Dapibus ac facilisis in
+                        li.list-group-item Cras justo odio
+                        li.list-group-item Dapibus ac facilisis in
