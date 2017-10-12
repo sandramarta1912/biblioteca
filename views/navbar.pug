@@ -1,59 +1,52 @@
-script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous")
 
-header
-    nav#navbar.fixed-top.navbar-expand-lg.container-fluid
-        button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
-            span.navbar-toggler-icon
-        .collapse.navbar-collapse(id="navbarTogglerDemo01")
-            a#navbar-brand(href="#")
-                h3.text-color Biserica Emanuel
-            .navbar-nav.ml-auto.pull-right
-                .nav-item
-                    a.nav-link(href="/")
-                        h2 Acasa
-                        span.sr-only #{current}
-                .nav-item
-                    a.nav-link(href="/books")
-                        h2 Carti
-                .nav-item
-                    a.nav-link(href="/readers")
-                        h2 Cititori
-                .nav-item
-                    a.nav-link(href="/user/login")
-                        h2 Login
-                .nav-item
-                    a.nav-link(href="/user/register")
-                        h2 Inregistreaza-te
-            form.form-inline.my-2.my-lg-0
-                input.form-control.mr-sm-2(type="text" placeholder="Search" aria-label="Search")
-                button.btn.btn-outline-success.my-2.my-sm-0(type="submit") Search
-    #carouselExampleIndicators.carousel.slide(data-ride="carousel")
-        ol.carousel-indicators
-            li(data-target="#carouselExampleIndicators" data-slide-to="0").active
-            li(data-target="#carouselExampleIndicators" data-slide-to="1")
-            li(data-target="#carouselExampleIndicators" data-slide-to="2")
-            .carousel-inner
-                .carousel-item.active
-                    img(src="../images/muntele.jpg" alt="First slide" )
-                    .carousel-caption
-                        h1 Ioan 3:16
-                        h3.text-size Fiindcă atât de mult a iubit Dumnezeu lumea, încât L-a dat pe singurul Lui Fiu, pentru ca oricine crede în El să nu piară, ci să aibă viaţă veşnică.
-                .carousel-item
-                    img(src="../images/natura.jpg" alt="Second slide" )
-                    .carousel-caption.position
-                        h3 "Cerurile spun slava lui Dumnezeu,si intinderea lor vesteste lucrarea mainilor Lui. O zi istoriseste alteia acest lucru,o noapte da de stire alteia despre El. Si aceasta,fara vorbe,fara cuvinte,al caror sunet sa fie auzit: dar rasunetul lor strabate tot pamantul,si glasul lor merge pana la marginile lumii..."(Ps.19:1-4).
-                .carousel-item
-                    img(src="../images/natura2.jpg" alt="Third slide" )
-                    .carousel-caption.position1
-                        h3.text-size  "Domnul este pastorul meu.Nu voi duce lipsa de nimic."
-                        hr
-                        h5 Psalnmul 23
-            a.carousel-control-prev(href="#carouselExampleIndicators" role="button" data-slide="prev")
-                span.carousel-control-prev-icon(aria-hidden="true")
-                span.sr-only Previous
-            a.carousel-control-next(href="#carouselExampleIndicators" role="button" data-slide="next")
-                span.carousel-control-next-icon(aria-hidden="true")
-                span.sr-only Next
-
+nav#navbar.fixed-top.navbar-expand-lg.pt-3.border.border-top-0.border-right-0.border-left-0
+    button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
+        span.navbar-toggler-icon
+    .collapse.navbar-collapse(id="navbarTogglerDemo01")
+        a#navbar-brand.pl-5(href="#")
+            h3 Biserica Emanuel
+        .navbar-nav.ml-auto.pull-right
+            .nav-item
+                a.nav-link(href="/")
+                    h2 Acasa
+                    span.sr-only #{current}
+            .nav-item
+                a.nav-link(href="/books")
+                    h2 Carti
+            .nav-item
+                a.nav-link(href="/readers")
+                    h2 Cititori
+            .nav-item
+                a.nav-link(href="/user/login")
+                    h2 Login
+            .nav-item
+                a.nav-link(href="/user/register")
+                    h2 Inregistreaza-te
+        form.form-inline.my-2.my-lg-0.pr-5
+            input.form-control.mr-sm-2(type="text" placeholder="Search" aria-label="Search")
+            button.btn.btn-outline-success.my-2.my-sm-0(type="submit") Search
+#carouselExampleIndicators.carousel(data-ride="carousel")
+    .carousel-inner
+        .carousel-item.active
+            img.d-block.w-100(src="../images/muntele-resize.jpg" alt="First slide" )
+            .carousel-caption
+                h1.text-right Ioan 3:16
+                h3.text-right Fiindcă atât de mult a iubit Dumnezeu lumea, încât L-a dat pe singurul Lui Fiu, pentru ca oricine crede în El să nu piară, ci să aibă viaţă veşnică.
+        .carousel-item
+            img.d-block.w-100(src="../images/natura-resize.jpg" alt="Second slide" )
+            .carousel-caption.position
+                h3.text-left.font-italic "Cerurile spun slava lui Dumnezeu,si intinderea lor vesteste lucrarea mainilor Lui. O zi istoriseste alteia acest lucru,o noapte da de stire alteia despre El. Si aceasta,fara vorbe,fara cuvinte,al caror sunet sa fie auzit: dar rasunetul lor strabate tot pamantul,si glasul lor merge pana la marginile lumii..."(Ps.19:1-4).
+        .carousel-item
+            img.d-block.w-100(src="../images/natura2-resize.jpg" alt="Third slide" )
+            .carousel-caption.position1
+                h3 "Domnul este pastorul meu.Nu voi duce lipsa de nimic."
+                hr
+                h5 Psalnmul 23
+    a.carousel-control-prev(href="#carouselExampleIndicators" role="button" data-slide="prev")
+        span.carousel-control-prev-icon(aria-hidden="true")
+        span.sr-only Previous
+    a.carousel-control-next(href="#carouselExampleIndicators" role="button" data-slide="next")
+        span.carousel-control-next-icon(aria-hidden="true")
+        span.sr-only Next
 script
     include ../public/js/script.js
