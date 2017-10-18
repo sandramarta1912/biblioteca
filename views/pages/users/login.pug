@@ -3,17 +3,18 @@ extends ../../layout.pug
 block body
     .container
         form(action="/user/login" method="POST")
-        input(type="hidden" name="_csrf" value={csrfToken })
-        .form-group
-            label Email
-            input(class="form-control" placeholder="Enter email" type="text" name="email" required)
-        .form-group
-            lable Password
-            input.form-control(type="password" placeholder="Enter Password" name="password" required)
-        .form-group
-            button(type="submit" name="Login")
-            input(type="checkbox" checked="checked")
-            |Remember me
-        .form-group
-            span.pwd Forgot
-                a(href="/change") password?
+            input(type="hidden" name="_csrf" value=csrfToken)
+            .form-group
+                label Username
+                input(class="form-control" placeholder="Enter email" type="text" name="email" required)
+            .form-group
+                lable Password
+                input.form-control(type="password" placeholder="Enter Password" name="password" required)
+            .form-group
+                button(type="submit" name="Login")
+                input(type="checkbox" checked="checked")
+                |Remember me
+            .form-group
+                span.pwd Forgot
+                    a(href="/change") password?
+            button.btn.btn-default(type="submit" value="") Login

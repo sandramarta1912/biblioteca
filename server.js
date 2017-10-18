@@ -2,18 +2,18 @@
 require('dotenv').config();
 
 // grab our dependencies
-const express 		 = require('express'),
-	csrf			 = require('csurf'),
-	passport 		 = require('passport'),
-	app 			 = express(),
-	mongoose 		 = require('mongoose'),
-	bodyParser       = require('body-parser'),
-	session			 = require('express-session'),
-	cookieParser	 = require('cookie-parser'),
-	flash			 = require('connect-flash'),
-	expressValidator = require('express-validator'),
-	pug 			 = require('pug'),
-	path = require('path');
+const 	express 		 = require('express'),
+		csrf			 = require('csurf'),
+		passport 		 = require('passport'),
+		app 			 = express(),
+		mongoose 		 = require('mongoose'),
+		bodyParser       = require('body-parser'),
+		session			 = require('express-session'),
+		cookieParser	 = require('cookie-parser'),
+		flash			 = require('connect-flash'),
+		expressValidator = require('express-validator'),
+		pug 			 = require('pug'),
+		path = require('path');
 
 // set sessions and cookie parser
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,11 +22,13 @@ app.use(csrf({ cookie: true }));
 
 // error handler
 app.use(function (err, req, res, next) {
+	console.log(req);
+	console.log(err);
 	if (err.code !== 'EBADCSRFTOKEN') {return next(err)}
 
 	// handle CSRF token errors here
 	res.status(403);
-	res.render('pages/error/403');
+	res.render('pages/error/403.pug');
 });
 
 app.use(session({

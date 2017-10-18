@@ -1,25 +1,26 @@
 extends ../../layout.pug
 
-block body
-	h2.page-header Register
-	form(name="register" action="/user/register" method="POST")
-		input(type="hidden" name="_csrf" value={csrfToken })
-		.form-group
-			lable Firstname
-				input.form-control(type="text" name="name" placeholder="Firstname")
-		.form-group
-			lable Lastname
-				input.form-control(type="text" name="username" placeholder="Lastname")
-		.form-group
-			lable Email
-				input.form-control(type="text" name="email"	placeholder="Email")
-		.form-group
-			label Password
-				input(type="password" name="password" placeholder="Password")
-		.form-group
-			label Confirm Password
-				input.form-control(type="password" name="password2" placeholder="Password")
-		button.btn.btn-default(type="submit" value="") Submit
+block content
+	//input(type="hidden" name="_csrf" value=_csrfToken)
+	.container
+		h2.page-header.text-center Register
+		form(name="register" action="/user/register" method="POST")
+			.form-group
+				lable Name
+					input.form-control(type="text" name="name" placeholder="Firstname")
+			.form-group
+				lable Username
+					input.form-control(type="text" name="username" placeholder="Lastname")
+			.form-group
+				lable Email
+					input.form-control(type="text" name="email"	placeholder="Email")
+			.form-group
+				label Password
+					input.form-control(type="password" name="password" placeholder="Password")
+			.form-group
+				label Confirm Password
+					input.form-control(type="password" name="password2" placeholder="Password")
+			button.btn.btn-default(type="submit" value="") Submit
 
 
 

@@ -8,7 +8,7 @@ var bcrypt = require('bcryptjs');
 
 
 
-var PassportLocalStrategy = require('passport-local').Strategy;
+// var PassportLocalStrategy = require('passport-local').Strategy;
 
 var UserSchema = mongoose.Schema({
     local: {
