@@ -10,12 +10,6 @@ nav#navbar.fixed-top.navbar-expand-lg.pt-3
                 a.nav-link(href="/")
                     h2 Acasa
                     span.sr-only #{current}
-            .nav-item
-                a.nav-link(href="/books")
-                    h2 Carti
-            .nav-item
-                a.nav-link(href="/readers")
-                    h2 Cititori
             if isAuthenticated
                 .nav-item
                     a.nav-link(href="/user/logout")

@@ -9,3 +9,12 @@ block body
 					tr
 						th Books Name
 						th Author
+						if typeof books != 'undefined' && books.length> 0
+							each book, index in books
+								tr
+									td #{book.name}
+									td #{book.author}
+									td
+										a.btn.btn-sm.btn-primary(href='/books/#{book.slug}')
+						else
+							h1 Nu ai nici o carte

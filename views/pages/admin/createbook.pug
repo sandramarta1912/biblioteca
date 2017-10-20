@@ -1,13 +1,13 @@
-extends ../../layout.pug
+extends admin.pug
 
-block body
+block admin-content
     .container
         .jumbotron.test-center
             h1 Create a Book
                 .row
                     .col-sm-6.col-sm-offset-3
-                        form(action="/books/create" method="POST")
-                            input(type="hidden" name="_csrf" value= {csrfToken})
+                        form(action="/admin/create/book" method="POST")
+                            input(type="hidden" name="_csrf" value=csrfToken)
                             .form-group
                                 label Name
                                 input.form-control(type="text" name="name")

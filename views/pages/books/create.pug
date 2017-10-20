@@ -1,11 +1,11 @@
 extends ../../layout.pug
 
-block body
+block admin-content
 	.container
 		.jumbotron.text-center
 			h1 Create a Book
 			form(action="/books/create" method="POST")
-				input(type="hidden" name="_csrf" value={csrfToken})
+				input(type="hidden" name="_csrf" value=csrfToken)
 				.form-group
 					label Name
 					input(type="text" name="name").form-control

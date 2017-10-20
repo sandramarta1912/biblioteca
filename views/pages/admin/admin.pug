@@ -1,5 +1,39 @@
 extends ../../admin-layout.pug
 
 block content
-    h1
-        |Admin
+    .container-fluid
+        .row
+            .col-sm-3.col-md-2
+                .nav.flex-column.nav-pills#v-pills-tab(role="tablist" aria-orientation="vertical")
+                    a.nav-link.active#v-pills-home-tab(data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true") Home
+                    a.nav-link#v-pills-profile-tab(data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false") Carti
+                    a.nav-link#v-pills-messages-tab(data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false") Cititori
+                    a.nav-link#v-pills-settings-tab(data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false") Utilizatori
+            .col-sm-9.ml-sm-auto.col-md-10
+                .tab-content#v-pills-tabContent
+                .tab-pane.fade.show.active#v-pills-home(role="tabpanel" aria-labelledby="v-pills-home-tab")
+                    h1 Administrator
+                    section.row.text-center.placeholder
+                        .col-6.col-sm-3.placeholder
+                            img(src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail")
+                            h4 Lable
+                            .text-muted Something else
+                        .col-6.col-sm-3.placeholder
+                            img(src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail")
+                            h4 Lable
+                            .text-muted Something else
+                        .col-6.col-sm-3.placeholder
+                            img(src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail")
+                            h4 Lable
+                            .text-muted Something else
+                        .col-6.col-sm-3.placeholder
+                            img(src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail")
+                            h4 Lable
+                            .text-muted Something else
+                .tab-pane.fade#v-pills-profile(role="tabpanel" aria-labelledby="v-pills-profile-tab")
+                    include books.pug
+                .tab-pane.fade#v-pills-messages(role="tabpanel" aria-labelledby="v-pills-messages-tab")
+                    //include readers.pug
+                .tab-pane.fade#v-pills-settings(role="tabpanel" aria-labelledby="v-pills-settings-tab")
+                    //include users.pug
+

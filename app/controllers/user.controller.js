@@ -82,7 +82,6 @@ function showLogin(req, res) {
 }
 
 function processLogin(req, res) {
-    console.log('test');
    passport.authenticate('login', {
        successRedirect: '/',
         failureRedirect: '/user/login',
