@@ -14,15 +14,15 @@ const crypto = require('crypto');
 
 
 module.exports = {
-    admin:admin,
-    showReaders: showReaders,
-    showBooks: showBooks,
-    showCreateBook: showCreateBook,
-    processCreateBook: processCreateBook,
-    showCreateReader: showCreateReader,
-    processCreateReader: processCreateReader,
-    showEdit: showEdit,
-    processEdit: processEdit
+    admin:admin
+    // showReaders: showReaders,
+    // showBooks: showBooks,
+    // showCreateBook: showCreateBook,
+    // processCreateBook: processCreateBook,
+    // showCreateReader: showCreateReader,
+    // processCreateReader: processCreateReader,
+    // showEdit: showEdit,
+    // processEdit: processEdit
 };
 
 function admin (req, res)  {
