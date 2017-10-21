@@ -31,7 +31,7 @@ block content
 	.container
 		h2.page-header.text-center Register
 		form(name="register" action="/user/register" method="POST")
-			input(type="hidden" name="_csrf" value=_csrfToken)
+			input(type="hidden" name="_csrf" value=csrfToken)
 			.form-group
 				lable Name
 					input.form-control(type="text" name="name" placeholder="Firstname")
