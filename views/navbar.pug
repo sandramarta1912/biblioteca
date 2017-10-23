@@ -5,17 +5,11 @@ nav#navbar.fixed-top.navbar-expand-lg.pt-3
     .collapse.navbar-collapse#navbarSupportedContent
         a#navbar-brand.pl-5(href="#")
             h3 Biserica Emanuel
-        .navbar-nav.ml-auto.pull-right
+        .navbar-nav.ml-auto.mr-5
             .nav-item
                 a.nav-link(href="/")
                     h2 Acasa
                     span.sr-only #{current}
-            .nav-item
-                a.nav-link(href="/books")
-                    h2 Carti
-            .nav-item
-                a.nav-link(href="/readers")
-                    h2 Cititori
             if isAuthenticated
                 .nav-item
                     a.nav-link(href="/user/logout")
@@ -24,10 +18,10 @@ nav#navbar.fixed-top.navbar-expand-lg.pt-3
                 .nav-item
                     a.nav-link(href="/user/login")
                         h2 Login
-            .nav-item
-                a.nav-link(href="/user/register")
-                    h2 Inregistreaza-te
-        form.form-inline.my-2.my-lg-0.pr-5
-            input.form-control.mr-sm-2(type="text" placeholder="Search" aria-label="Search")
-            button.btn.btn-outline-success.my-2.my-sm-0(type="submit") Search
-    hr
+                .nav-item
+                    a.nav-link(href="/user/register")
+                        h2 Inregistreaza-te
+    //    form.form-inline.my-2.my-lg-0.pr-5
+    //        input.form-control.mr-sm-2(type="text" placeholder="Search" aria-label="Search")
+    //        button.btn.btn-outline-success.my-2.my-sm-0(type="submit") Search
+    //hr

@@ -15,7 +15,7 @@ module.exports = {
 		});
 	},
 	admin: (req, res) => {
-		res.render('pages/admin.pug', {
+		res.render('pages/admin/admin.pug', {
 
 		});
 	}

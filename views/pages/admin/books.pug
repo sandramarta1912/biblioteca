@@ -11,14 +11,16 @@ block admin-content
 							th Books Name
 							th Author
 							th
-								a.btn.btn-sm.btn-primary(href="books/create") Adauga un carte
+								a.btn.btn-lg.btn-primary.pull-right(href="books/create") Adauga un carte
 							if typeof books != 'undefined' && books.length > 0
 								each book, index in books
 									tr
 										td #{book.name}
 										td #{book.author}
 										td
-											a.btn.btn-sm.btn-primary(href='/books/#{book.slug}')
+											a.btn.btn-md.btn-primary.mr-3.pull-right(href='/books/#{book.slug}') View
+											a.btn.btn-md.btn-primary.mr-3.pull-right(href='/books/#{book.slug}/edit') Edit
+											a.btn.btn-md.btn-primary.mr-3.pull-right(href='/books/#{book.slug}/delete') Delete
 							else
 								h1 Nu ai nici o carte
 				//#{- include('../../pagination', {pagination: pagination}) }
