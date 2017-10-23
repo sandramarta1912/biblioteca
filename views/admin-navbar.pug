@@ -1,18 +1,18 @@
 
-nav#navbar.navbar-expand-lg.pt-3
+nav#navbar.navbar.navbar-dark.bg-dark.navbar-expand-lg.pt-3
     button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
         span.navbar-toggler-icon
     .collapse.navbar-collapse#navbarSupportedContent
         a#navbar-brand.pl-5(href="#")
             h3 Biserica Emanuel
         .navbar-nav.ml-auto.pull-right
-            .dropdown
+            .dropdown.pr-5
                 .btn.btn-info.btn-lg.dropdown-toggle(type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Dropdown
                 .dropdown-menu(aria-labelledby="dropdownMenuButton")
                     a.dropdown-item(href="/") Prima pagina
                     a.dropdown-item(href="books") Carti
                     a.dropdown-item(href="readers") Cititori
                     a.dropdown-item(href="user/logout") Logout
-            form.form-inline.my-2.my-lg-0.pr-5
-                input.form-control.mr-sm-2(type="text" placeholder="Search" aria-label="Search")
-                button.btn.btn-outline-success.my-2.my-sm-0(type="submit") Search
+            //form.form-inline.my-2.my-lg-0.pr-5
+            //    input.form-control.mr-sm-2(type="text" placeholder="Search" aria-label="Search")
+            //    button.btn.btn-outline-success.my-2.my-sm-0(type="submit") Search

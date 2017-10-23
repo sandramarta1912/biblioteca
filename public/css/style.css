@@ -1,4 +1,4 @@
-.card{
+.card.pozition{
     margin-top: -35px;
 }
 section.section1 {
@@ -17,7 +17,4 @@ img.img-opacity {
 img.img-opacity:hover {
     opacity: 1.0;
     filter: alpha(opacity=100); /* For IE8 and earlier */
-}
-.background {
-    background: azure;
 }
