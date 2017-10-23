@@ -5,9 +5,9 @@ const express = require('express'),
 	booksController = require('./books/books.controller');
 	searchController = require('./books/search.controller');
 	readersController = require('./readers/readers.controller');
-	userController = require('./controllers/user.controller');
-	contactController = require('./controllers/contact.controller');
-	adminController= require('./controllers/admin.controller');
+	userController = require('./users/user.controller');
+	contactController = require('./contact/contact.controller');
+	adminController= require('./controllers/main.controller');
 
 
 const passport = require('passport');
@@ -46,7 +46,7 @@ module.exports = router;
 
 //main routes
 router.get('/', mainController.showHome);
-
+router.get('/admin',[isAuthenticatedOr403, isAdminOr403], adminController.admin);
 // Books
 router.get('/books', 		 booksController.showBooks);
 router.get('/search',		 searchController.searchBook);
@@ -70,15 +70,15 @@ router.get('/readers/:slug/delete', [isAuthenticatedOr403, isAdminOr403], reader
 router.get('/readers/:slug', readersController.showSingle);
 
 // Users
-router.get('/admin',[isAuthenticatedOr403, isAdminOr403], adminController.admin);
-router.get('/admin/readers', [isAuthenticatedOr403, isAdminOr403], adminController.showReaders);
-router.get('/admin/books', [isAuthenticatedOr403, isAdminOr403], adminController.showBooks);
-router.get('/admin/create/book', [isAuthenticatedOr403, isAdminOr403], adminController.showCreateBook);
-router.post('/admin/create/book', [isAuthenticatedOr403, isAdminOr403], adminController.processCreateBook);
-router.get('/admin/create/reader', [isAuthenticatedOr403, isAdminOr403], adminController.showCreateReader);
-router.post('/admin/create/reader', [isAuthenticatedOr403, isAdminOr403], adminController.processCreateReader);
-router.get('/admin/:slug/edit', [isAuthenticatedOr403, isAdminOr403], adminController.showEdit);
-router.post('/admin/:slug', [isAuthenticatedOr403, isAdminOr403], adminController.processEdit);
+// router.get('/admin',[isAuthenticatedOr403, isAdminOr403], adminController.admin);
+// router.get('/admin/readers', [isAuthenticatedOr403, isAdminOr403], adminController.showReaders);
+// router.get('/admin/books', [isAuthenticatedOr403, isAdminOr403], adminController.showBooks);
+// router.get('/admin/create/book', [isAuthenticatedOr403, isAdminOr403], adminController.showCreateBook);
+// router.post('/admin/create/book', [isAuthenticatedOr403, isAdminOr403], adminController.processCreateBook);
+// router.get('/admin/create/reader', [isAuthenticatedOr403, isAdminOr403], adminController.showCreateReader);
+// router.post('/admin/create/reader', [isAuthenticatedOr403, isAdminOr403], adminController.processCreateReader);
+// router.get('/admin/:slug/edit', [isAuthenticatedOr403, isAdminOr403], adminController.showEdit);
+// router.post('/admin/:slug', [isAuthenticatedOr403, isAdminOr403], adminController.processEdit);
 
 
 router.get('/user/register', userController.showCreate);

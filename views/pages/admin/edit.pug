@@ -1,8 +1,9 @@
-extends ../../layout.pug
+extends admin.pug
 
-block body
-	.container
-		.jumbotron.test-center
+block admin-content
+	.container-fluid
+		.card.admin
+			.card-body.border.border-black.rounded
 			h1 Editing #{reader.name}
 			.row
 				.col-sm-6.col-sm-offset-3
@@ -10,11 +11,11 @@ block body
 					.alert.alert-danger
 						for(error of errors)
 							#{error}
-				form(action="/admin/{reader.description}" method="POST")
-					input(type="hidden" name="_csrf" value= {csrfToken})
+				form(action="/admin/#{reader.slug}" method="POST")
+					input(type="hidden" name="_csrf" value=csrfToken)
 					.form-group
 						label Name
-						input.form-control(type="text" name="name" value= {reader.name})
+						input.form-control(type="text" name="name" value= #{reader.name})
 					.form-group
 						label Age
 						textarea.form-class(name="age" rows="1") #{reader.age}

@@ -10,8 +10,8 @@ module.exports = {
 	seedreaders: seedReaders,
 	showCreate: showCreate,
 	processCreate: processCreate,
-	/*showEdit: showEdit,
-	processEdit: processEdit,*/
+	showEdit: showEdit,
+	processEdit: processEdit,
 	deleteReader: deleteReader
 	
 };
@@ -38,7 +38,7 @@ function showReaders(req, res) {
 			}
 			//return a view with data
 
-			res.render('pages/readers/readers', {
+			res.render('pages/admin/readers', {
 				readers: result.docs,
 				pagination: pagination.paginate(),
 				success: req.flash('success'),
@@ -53,7 +53,7 @@ function showSingle(req,res) {
 
 
 		//get a single reader
-		Reader.findOne({ description:req.params.slug }, (err, reader) => {
+		Reader.findOne({ slug:req.params.slug }, (err, reader) => {
 
 			if (err) {
 				res.status(404);
@@ -103,7 +103,7 @@ function seedReaders(req, res) {
 
 
 	function showCreate(req, res) {
-		res.render('pages/readers/create',{
+		res.render('pages/admin/create',{
 			errors: req.flash('errors'),
 			csrfToken: req.csrfToken()
 		});
@@ -116,7 +116,7 @@ function seedReaders(req, res) {
 function processCreate(req, res) {
 	//validate information
 	req.checkBody('name', `Name is required.`).notEmpty();
-	req.checkBody('age', `Description is required.`).notEmpty();
+	req.checkBody('age', `slug is required.`).notEmpty();
 	req.checkBody('age', `Age must be between 10 and 65`).isInt().gte(10).lte(65);
 	req.checkBody('email', 'Email is required.').notEmpty();
 	req.checkBody('email', 'Email is not valid.').isEmail();
@@ -139,7 +139,7 @@ function processCreate(req, res) {
 
 		name: req.body.name,
 		email: req.body.email,
-		age: req.body.age,
+		age: req.body.age
 
 	});
 	
@@ -152,7 +152,7 @@ function processCreate(req, res) {
 		//set a successful flash message
 		req.flash('success', 'Successfuly created reader!');
 		//redirect to the newly created reader
-		res.redirect(`/admin/readers`);
+		res.redirect(`/readers`);
 
 	});
 }
@@ -160,62 +160,57 @@ function processCreate(req, res) {
 /**
  * Show the edit form
  */
-/*
+
 function showEdit (req, res) {
-	Reader.findOne({description: req.params.slug }, (err, reader) => {
+	Reader.findOne({slug: req.params.slug}, (err, reader) => {
 		if (err) {
 			res.status(404);
 			return res.send('Oops... That reader does not exist!');
 		}
-		res.render('pages/readers/edit', {
-			reader: reader, 
+		res.render('pages/admin/edit', {
+			reader: reader,
 			csrfToken: req.csrfToken()
-	});
-});
-}
-
-/!**
- * process the edit form
- *!/
-
-function processEdit (req, res) {
-	req.checkBody('name', `Name is required.`).notEmpty();
-	req.checkBody('age', `Age is required.`).notEmpty();
-
-	// if there are errors, redirect  and save errors to flash
-	const errors = req.validationErrors();
-
-	if (errors) {
-		req.flash('errors', errors.map(err => err.msg));
-		return res.redirect(`/readers/${req.params.slug}/edit`);
-	}
-	Reader.findOne({ description: req.params.slug }, (err, reader) => {
-		// updating that book
-		reader.name   = req.body.pug.name;
-		reader.age = req.body.pug.age;
-
-		reader.save((err) => {
-			if(err) {
-				req.flash('error', 'The book could not be updated!');
-				return res.redirect(`/readers/${req.params.slug}/edit`);
-			}
-
-			// redirect back to the books
-			req.flash('success', 'Successfully updated book!');
-			res.redirect('/readers');
 		});
-
 	});
 }
-*/
+
+	function processEdit(req, res) {
+		req.checkBody('name', `Name is required.`).notEmpty();
+		req.checkBody('age', `Age is required.`).notEmpty();
+
+		// if there are errors, redirect  and save errors to flash
+		const errors = req.validationErrors();
+
+		if (errors) {
+			req.flash('errors', errors.map(err => err.msg));
+			return res.redirect(`/readers/${req.params.slug}/edit`);
+		}
+		Reader.findOne({slug: req.params.slug}, (err, reader) => {
+			// updating that book
+			reader.name = req.body.pug.name;
+			reader.age = req.body.pug.age;
+
+			reader.save((err) => {
+				if (err) {
+					req.flash('error', 'The book could not be updated!');
+					return res.redirect(`/readers/${req.params.slug}/edit`);
+				}
+
+				// redirect back to the books
+				req.flash('success', 'Successfully updated book!');
+				res.redirect('admin/readers');
+			});
+
+		});
+	}
 
 
-function deleteReader(req, res) {
-	Reader.remove({ description: req.params.slug }, ( err ) => {
-		//set flash data
-		//redirect back to the book page
-		req.flash('success', 'Reader deleted!');
-		res.redirect('/readers');
+	function deleteReader(req, res) {
+		Reader.remove({slug: req.params.slug}, (err) => {
+			//set flash data
+			//redirect back to the book page
+			req.flash('success', 'Reader deleted!');
+			res.redirect('admin/readers');
+		});
+	}
 
-	});
-}

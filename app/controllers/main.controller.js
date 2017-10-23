@@ -13,5 +13,10 @@ module.exports = {
 		res.render('pages/program.pug', {
 			// csrfToken: req.csrfToken()
 		});
+	},
+	admin: (req, res) => {
+		res.render('pages/admin.pug', {
+
+		});
 	}
 };

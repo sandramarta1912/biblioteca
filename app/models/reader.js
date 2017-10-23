@@ -6,7 +6,7 @@ const
 // create a schema
 const readerSchema = new Schema({
 	name: String,
-	description: {
+	slug: {
 		type: String,
 		unique: true
 	},
@@ -22,7 +22,7 @@ const readerSchema = new Schema({
 
 // Middleware - make sure that the slug is created from the name
 readerSchema.pre('save', function(next) {
-	this.description = slugify(this.name);
+	this.slug = slugify(this.name);
 	
 	next();
 });

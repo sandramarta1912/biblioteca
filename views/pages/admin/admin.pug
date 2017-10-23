@@ -1,5 +1,16 @@
 extends ../../admin-layout.pug
 
 block content
-    h1
-        |Admin
+    .container-fluid
+        .row
+            nav.col-sm-3.col-md-2.d-none.d-sm-block.bg-light.sidebar.pt-3
+                ul.nav.nav-pills.flex-column
+                    li.nav-item
+                        a.nav-link.active(href="/books") Carti
+                            span.sr-only(current)
+                    li.nav-item
+                        a.nav-link(href="/readers") Cititori
+                    li.nav-item
+                        a.nav-link(href="/users") Utilizatori
+            main.col-sm-9.ml-sm-auto.col-md-10.pt-3(role="main")
+                block admin-content

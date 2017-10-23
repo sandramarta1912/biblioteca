@@ -1,33 +1,23 @@
-extends ../../layout.pug
+extends admin.pug
 
-block body
-    .container
-        h2 Register
-        if errors.length > 0
-            .alert.alert-danger
-                for(error of errors)
-                    #{error}
-        form(name="register" action="/admin/create/reader" method="POST")
-        input(type="hidden" name="_csrf" value={csrfToken})
-            .form-group
-                lable Firstname
-                input(type="text" name="name" placeholder="Name" ).form-control
-            .form-group
-                lable Lastname
-                input(type="text" name="username" placeholder="Lastname").form-control
-            .form-group
-                lable Email
-                input(type="text" name="email" placeholder="Email").form-control
-            .form-group
-                label Password
-                input(type="password" name="password" placeholder="Password").form-control
-            .form-group
-                label Confirm Password
-                input(type="password" name="password2" placeholder="Password").form-control
-            .form-group
-                label Age
-                input(name="age" type="text" placeholder="Age").form-control
-            .form-group
-                button(type="submit").btn.btn-success.btn-lg Create
-            .form-group
-                a(href="/").btn.btn-lg.btn-danger Cancel
+block admin-content
+    .container-fluid
+        .card.admin
+            .card-body.border.border-black.rounded
+                h2 Cititor
+                if errors.length > 0
+                    .alert.alert-danger
+                       each error, index in errors
+                            #{error}
+                form(action="/readers/create" method="POST")
+                    input(type="hidden" name="_csrf" value=csrfToken)
+                    .form-group
+                        lable Name
+                        input(type="text" name="name").form-control
+                    .form-group
+                        lable Age
+                        input(type="text" name="age").form-control
+                    .form-group
+                        button(type="submit").btn.btn-success.btn-lg Create
+                    .form-group
+                        a(href="/admin").btn.btn-lg.btn-danger Cancel

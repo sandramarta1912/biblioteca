@@ -1,27 +1,27 @@
-extends ../../layout.pug
+extends admin.pug
 
-block body
-	.container
-		if success.length > 0
-			.alert.alert-success #{success}
-		.jumbotron.text-center
-			h1 Readers
-		table.table.table-border.table-hover.table-striped
-			thead
-			tr
-				th Name
-				th Age
-				th Email
-				th
-					if isAuthenticated
-					a.btn.btn-sm.btn-primary(href="/admin/create/reader") Create a user
-			for(var reader of readers)
-			tr
-				td #{reader.name}
-				td #{reader.age }
-				td #{reader.email}
-				td
-					//a.btn.btn-sm.btn-primary(href="/readers/#{reader.description}") View
-					a.btn-btn-sm.btn-primary(href="/admin/#{reader.description}/edit") Edit
-					a.btn.btn-sm.btn-danger(href="/admin/#{reader.description}/delete") Delete
-		#{- include('../../pagination', {pagination: pagination}) }
+block admin-content
+	.container-fluid
+		.card.admin
+			.card-body.border.border-black.rounded
+				if success.length > 0
+					.alert.alert-success #{success}
+				h1.text-center Cititori
+				table.table.table-striped
+					thead
+					tr
+						th Numele
+						th Varsta
+						th Email
+						th
+							a.btn.btn-sm.btn-primary(href="readers/create") Adauga un cititor
+					each reader, index in readers
+						tr
+							td #{reader.name}
+							td #{reader.age }
+							td #{reader.email}
+							td
+								a.btn.btn-sm.btn-primary(href="/readers/#{reader.slug}") View
+								a.btn-btn-sm.btn-primary(href="/admin/#{reader.slug}/edit") Edit
+								a.btn.btn-sm.btn-danger(href="/admin/#{reader.slug}/delete") Delete
+					//#{- include('../../pagination', {pagination: pagination}) }

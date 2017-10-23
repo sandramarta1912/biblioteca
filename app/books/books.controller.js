@@ -41,7 +41,7 @@ module.exports = {
 
 
 				// return a view with data
-				res.render('pages/books/books', {
+				res.render('pages/admin/books', {
 					books: result.docs,
 					pagination: pagination.paginate(),
 					success: req.flash('success'),
@@ -105,7 +105,7 @@ function seedBooks(req, res) {
 */
 
 function showCreate(req, res) {
-		res.render('pages/books/create',{
+		res.render('pages/admin/createbook',{
 			errors: req.flash('errors'),
 			csrfToken: req.csrfToken()
 		});
@@ -159,7 +159,7 @@ function showEdit(req, res) {
 			res.status(404);
 			return res.send('Oops... That book does not exist!');
 		}
-		res.render('pages/books/edit', {
+		res.render('pages/admin/edit', {
 			book: book,
 			errors: req.flash('errors'),
 			csrfToken: req.csrfToken()
