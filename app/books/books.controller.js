@@ -59,13 +59,13 @@ module.exports = {
 function showSingle(req,res) {
 	
 
-	Book.findOne({ description:req.params.slug }, (err, book) => {
+	Book.findOne({slug:req.params.slug }, (err, book) => {
 
 		if (err) {
 			res.status(404);
 			res.send('Reader not found!');
 		}
-		res.render('pages/books/single', {
+		res.render('pages/admin/singlebook', {
 			book: book,
 			success: req.flash('success'),
 			csrfToken: req.csrfToken()
@@ -118,7 +118,7 @@ function showCreate(req, res) {
 function processCreate(req, res) {
 	//validate information
 	req.checkBody('name', `Name is required.`).notEmpty();
-	req.checkBody('author', `Description is required.`).notEmpty();
+	req.checkBody('author', `Author is required.`).notEmpty();
 	req.checkBody('about', 'About is required.').notEmpty();
 
 	// if there are errors, redirect  and save errors to flash
@@ -154,12 +154,12 @@ function processCreate(req, res) {
 			 * Show the edit form
 			 */
 function showEdit(req, res) {
-	Book.findOne({description: req.params.slug}, (err, book) => {
+	Book.findOne({slug: req.params.slug}, (err, book) => {
 		if (err) {
 			res.status(404);
 			return res.send('Oops... That book does not exist!');
 		}
-		res.render('pages/admin/edit', {
+		res.render('pages/admin/editcarte', {
 			book: book,
 			errors: req.flash('errors'),
 			csrfToken: req.csrfToken()
@@ -173,7 +173,7 @@ function showEdit(req, res) {
 
 function processEdit(req, res) {
 	req.checkBody('name', `Name is required.`).notEmpty();
-	req.checkBody('author', `Description is required.`).notEmpty();
+	req.checkBody('author', `Author is required.`).notEmpty();
 	req.checkBody('about', 'About is required.').notEmpty();
 
 	// if there are errors, redirect  and save errors to flash
@@ -184,7 +184,7 @@ function processEdit(req, res) {
 		return res.redirect(`/books/${req.params.slug}/edit`);
 	}
 	// finding a current book
-	Book.findOne({description: req.params.slug}, (err, book) => {
+	Book.findOne({slug: req.params.slug}, (err, book) => {
 		// updating that book
 		book.name = req.body.name;
 		book.author = req.body.author;
@@ -209,7 +209,7 @@ function processEdit(req, res) {
  * Deletes a book
  */
 function deleteBook(req, res) {
-	Book.remove({description: req.params.slug}, (err) => {
+	Book.remove({slug: req.params.slug}, (err) => {
 		if (err) {
 			//redirect back to the book page
 			req.flash('error', 'The book could not be deleted!');

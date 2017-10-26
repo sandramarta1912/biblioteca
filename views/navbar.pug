@@ -12,8 +12,14 @@ nav#navbar.fixed-top.navbar-expand-lg.pt-3
                     span.sr-only #{current}
             if isAuthenticated
                 .nav-item
-                    a.nav-link(href="/user/logout")
-                        h2 Logout
+                    //a.nav-link(href="/user/logout")
+                    //    h2 Logout
+                    .dropdown
+                        button#dropdownMenuButton.btn.btn-secondary.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Bună, #{user.local.firstName}
+                        .dropdown-menu(aria-labelledby="dropdownMenuButton")
+                            if isAdmin
+                                a.dropdown-item(href="/admin") Admin
+                            a.dropdown-item(href="/user/logout") Logout
             else
                 .nav-item
                     a.nav-link(href="/user/login")

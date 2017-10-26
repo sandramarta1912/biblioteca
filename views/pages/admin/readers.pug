@@ -9,19 +9,19 @@ block admin-content
 				h1.text-center Cititori
 				table.table.table-striped
 					thead
-					tr
-						th Numele
-						th Varsta
-						th Email
-						th
-							a.btn.btn-lg.btn-primary.pull-right(href="readers/create") Adauga un cititor
-					each reader, index in readers
 						tr
-							td #{reader.name}
-							td #{reader.age }
-							td #{reader.email}
-							td
-								a.btn.btn-md.btn-primary.pull-right(href="/readers/#{reader.slug}") View
-								a.btn-btn-md.btn-primary.pull-right(href="/admin/#{reader.slug}/edit") Edit
-								a.btn.btn-md.btn-danger.pull-right(href="/admin/#{reader.slug}/delete") Delete
-					//#{- include('../../pagination', {pagination: pagination}) }
+							th Numele
+							th Varsta
+							th Email
+							th
+								a.btn.btn-lg.btn-primary.pull-right(href="readers/create") Adauga un cititor
+						each reader, index in readers
+							tr
+								td #{reader.name}
+								td #{reader.age }
+								td #{reader.email}
+								td
+									a.btn.btn-md.btn-primary.mr-3.pull-right(href="/readers/#{reader.slug}") View
+									a.btn.btn-md.btn-primary.mr-3.pull-right(href="/admin/#{reader.slug}/edit") Edit
+									a.btn.btn-md.btn-primary.mr-3.pull-right(href="/admin/#{reader.slug}/delete") Delete
+						//#{- include('../../pagination', {pagination: pagination}) }

@@ -18,9 +18,9 @@ block admin-content
 										td #{book.name}
 										td #{book.author}
 										td
-											a.btn.btn-md.btn-primary.mr-3.pull-right(href='/books/#{book.slug}') View
-											a.btn.btn-md.btn-primary.mr-3.pull-right(href='/books/#{book.slug}/edit') Edit
-											a.btn.btn-md.btn-primary.mr-3.pull-right(href='/books/#{book.slug}/delete') Delete
+											a.btn.btn-md.btn-primary.mr-3.pull-right(href=`/books/${book.slug}/`) View
+											a.btn.btn-md.btn-primary.mr-3.pull-right(href=`/books/${book.slug}/edit`) Edit
+											a.btn.btn-md.btn-primary.mr-3.pull-right(href=`/books/${book.slug}/delete`) Delete
 							else
 								h1 Nu ai nici o carte
 				//#{- include('../../pagination', {pagination: pagination}) }

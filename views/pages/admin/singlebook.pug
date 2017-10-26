@@ -1,0 +1,14 @@
+extends admin.pug
+
+block admin-content
+    .container-fluid
+        .card.admin
+            .card-body.border.border-black.rounded
+                if (success.length > 0)
+                    .alert.alert-success #{success}
+                .jumbotron.text-center
+                    h1 #{book.name}
+                    p #{book.author}
+                    p #{book.about}
+                a.btn(href="/books" role="button")
+                    h4 Inapoi la lista

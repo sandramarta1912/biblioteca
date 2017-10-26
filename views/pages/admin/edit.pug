@@ -9,13 +9,13 @@ block admin-content
 				.col-sm-6.col-sm-offset-3
 				if typeof errors != 'undefined' && errors.length > 0
 					.alert.alert-danger
-						for(error of errors)
+						each error, index in errors
 							#{error}
 				form(action="/admin/#{reader.slug}" method="POST")
 					input(type="hidden" name="_csrf" value=csrfToken)
 					.form-group
 						label Name
-						input.form-control(type="text" name="name" value= #{reader.name})
+						input.form-control(type="text" name="name" value=reader.name)
 					.form-group
 						label Age
 						textarea.form-class(name="age" rows="1") #{reader.age}

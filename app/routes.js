@@ -50,7 +50,7 @@ router.get('/admin',[isAuthenticatedOr403, isAdminOr403], adminController.admin)
 // Books
 router.get('/books', 		 booksController.showBooks);
 router.get('/search',		 searchController.searchBook);
-
+router.get('/books/:slug', booksController.showSingle);
 router.get('/books/create', booksController.showCreate);
 router.post('/books/create',  booksController.processCreate);
 router.get('/books/:slug/edit', [isAuthenticatedOr403, isAdminOr403], booksController.showEdit);
@@ -64,8 +64,8 @@ router.get('/books/:slug', booksController.showSingle);
 router.get('/readers', [isAuthenticatedOr403, isAdminOr403], readersController.showReaders);
 router.get('/readers/create', [isAuthenticatedOr403, isAdminOr403], readersController.showCreate);
 router.post('/readers/create', [isAuthenticatedOr403, isAdminOr403], readersController.processCreate);
-/*router.get('/readers/:slug/edit', [isAuthenticatedOr403, isAdminOr403], readersController.showEdit);
-router.post('/readers/:slug', [isAuthenticatedOr403, isAdminOr403], readersController.processEdit);*/
+router.get('/readers/:slug/edit', [isAuthenticatedOr403, isAdminOr403], readersController.showEdit);
+router.post('/readers/:slug', [isAuthenticatedOr403, isAdminOr403], readersController.processEdit);
 router.get('/readers/:slug/delete', [isAuthenticatedOr403, isAdminOr403], readersController.deleteReader);
 router.get('/readers/:slug', readersController.showSingle);
 

@@ -1,26 +1,99 @@
 extends ../../layout.pug
 
-block content
-	//input(type="hidden" name="_csrf" value=_csrfToken)
+block body
 	.container
-		h2.page-header.text-center Register
-		form(name="register" action="/user/register" method="POST")
-			.form-group
-				lable Name
-					input.form-control(type="text" name="name" placeholder="Firstname")
-			.form-group
-				lable Username
-					input.form-control(type="text" name="username" placeholder="Lastname")
-			.form-group
-				lable Email
-					input.form-control(type="text" name="email"	placeholder="Email")
-			.form-group
-				label Password
-					input.form-control(type="password" name="password" placeholder="Password")
-			.form-group
-				label Confirm Password
-					input.form-control(type="password" name="password2" placeholder="Password")
-			button.btn.btn-default(type="submit" value="") Submit
-
-
-
+		form.form-horizontal(role="form" method="POST" action="/user/register")
+			input(type="hidden" name="_csrf" value=csrfToken)
+			.row
+				.col-md-3.col-md-6
+					h3 Inregistreaza-te
+			.row
+				.col-md-3.field-label-responsive
+					label Name
+				.col-md-6
+					.form-group
+						.input-group.mb.mr-sm-2.mb-sm-0
+							.input-group-addon(style="width: 2.6rem")
+								i.fa.fa-user
+							input.form-control(type="text" name="name" placeholder="John" required autofocus)
+				.col-md-3
+					.form-control-feedback
+						span.text-danger.aling-middle
+						// put name validation error message here
+			.row
+				.col-md-3.field-label-responsive
+					label Prenume
+				.col-md-6
+					.form-group
+						.input-group.mb.mr-sm-2.mb-sm-0
+							.input-group-addon(style="width: 2.6rem")
+								i.fa.fa-user
+							input.form-control(type="text" name="first_name" id="first_name"
+							placeholder="Doen" required autofocus)
+					.col-md-3
+						.form-control-feedback
+							span.text-danger.aling-middle
+			.row
+				.col-md-3.field-label-responsive
+					label Email
+				.col-md-6
+					.form-group
+						.input-group.mb.mr-sm-2.mb-sm-0
+							.input-group-addon(style="width: 2.6rem")
+								i.fa.fa-at
+							input.form-control(type="text" name="email" id="email"
+							placeholder="you@example.com" required autofocus)
+					.col-md-3
+						.form-control-feedback
+							span.text-danger.aling-middle
+							// put name validation error message here
+			.row
+				.col-md-3.field-label-responsive
+					label Password
+				.col-md-6
+					.form-group
+						.input-group.mb.mr-sm-2.mb-sm-0
+							.input-group-addon(style="width: 2.6rem")
+								i.fa.fa-lock
+							input.form-control(type="password" name="password" id="password" placeholder="*********" required autofocus)
+					.col-md-3
+						.form-control-feedback
+							span.text-danger.aling-middle
+			.row
+				.col-md-3.field-label-responsive
+					label Password
+				.col-md-6
+					.form-group
+						.input-group.mb.mr-sm-2.mb-sm-0
+							.input-group-addon(style="width: 2.6rem")
+								i.fa.fa-lock
+							input.form-control(type="password" name="password2" placeholder="*********" required autofocus)
+					.col-md-3
+						.form-control-feedback
+							span.text-danger.aling-middle
+			.row
+				.col-md-3.field-label-responsive
+					button.btn.btn-default(type="submit" value="") Submit
+							// put name validation error message here
+							//h2.page-header.text-center Register
+							//form(name="register" action="/user/register" method="POST")
+							//	input(type="hidden" name="_csrf" value=csrfToken)
+							//	.form-group
+							//		lable Name
+							//			input.form-control(type="text" name="name" placeholder="Firstname")
+							//	.form-group
+							//		lable Username
+							//			input.form-control(type="text" name="username" placeholder="Lastname")
+							//	.form-group
+							//		lable Email
+							//			input.form-control(type="text" name="email"	placeholder="Email")
+							//	.form-group
+							//		label Password
+							//			input.form-control(type="password" name="password" placeholder="Password")
+							//	.form-group
+							//		label Confirm Password
+							//			input.form-control(type="password" name="password2" placeholder="Password")
+							//	button.btn.btn-default(type="submit" value="") Submit
+							//
+							//
+							//

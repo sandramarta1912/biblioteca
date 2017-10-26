@@ -60,7 +60,7 @@ function showSingle(req,res) {
 				res.send('Reader not found!');
 			}
 
-		res.render('pages/readers/single', {
+		res.render('pages/amin/single', {
 			reader: reader,
 			success: req.flash('success'),
 			csrfToken: req.csrfToken()

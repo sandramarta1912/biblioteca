@@ -1,0 +1,23 @@
+extends admin.pug
+
+block admin-content
+    .container-fluid
+        .card.admin
+            .card-body.border.border-black.rounded
+                h1.text-center Editeaza #{book.name}
+                .row.justify-content-md-center
+                    .col-6
+                        if typeof errors != 'undefined' && errors.length > 0
+                            .alert.alert-danger
+                                each error, index in errors
+                                    #{error}
+                        form(action="/books/:slug/edit" method="POST")
+                            input(type="hidden" name="_csrf" value=csrfToken)
+                            .form-group
+                                label Name
+                                input.form-control(type="text" name="name" value=`${book.name}`)
+                            .form-group
+                                label Author
+                                input.form-control(name="author" type="text"  value=`${book.author}`)
+                            .form-group
+                                button.btn-btn-success(type="submit") Update
