@@ -1,0 +1,26 @@
+extends ../../layout.pug
+
+block body
+.container-fluid
+    .card.admin
+        .card-body.border.border-black.rounded
+            h2 Predica
+            //if errors.length > 0
+            //    .alert.alert-danger
+            //       each error, index in errors
+            //            #{error}
+            form(action="/sermon/create" method="POST")
+                input(type="hidden" name="_csrf" value=csrfToken)
+                .form-group
+                    lable Titlu
+                    input(type="text" name="titlu").form-control
+                .form-group
+                    lable Predicator
+                    input(type="text" name="predicator").form-control
+                .form-group
+                    lable Data
+                    input(type="number" name="data").form-control
+                .form-group
+                    button(type="submit").btn.btn-success.btn-lg Create
+                .form-group
+                    a(href="/admin").btn.btn-lg.btn-danger Cancel

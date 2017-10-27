@@ -49,7 +49,12 @@ module.exports = router;
 
 //main routes
 router.get('/', mainController.showHome);
+
+//admin routes
 router.get('/admin',[isAuthenticatedOr403, isAdminOr403], adminController.admin);
+router.get('/admin/sermons', adminController.showSermons);
+router.get('/admin/preachers', adminController.showPreacher);
+
 // Books
 router.get('/books', 		 booksController.showBooks);
 router.get('/search',		 searchController.searchBook);
@@ -72,13 +77,14 @@ router.post('/readers/:slug', [isAuthenticatedOr403, isAdminOr403], readersContr
 router.get('/readers/:slug/delete', [isAuthenticatedOr403, isAdminOr403], readersController.deleteReader);
 router.get('/readers/:slug', readersController.showSingle);
 
-//Sermons & preachers
-router.get('/admin/sermons', adminController.showSermons);
-router.get('/admin/preachers', adminController.showPreacher);
-router.get('/sermons', sermonController.showSermons);
+// preachers
 router.get('/preachers', preacherController.showPreacher);
-
-
+router.get('/preacher/create', preacherController.showCreate);
+router.post('/preacher/create',  preacherController.processCreate);
+//sermons
+router.get('/sermons', sermonController.showSermons);
+router.get('/sermon/create', sermonController.showCreate);
+router.post('/sermon/create',  sermonController.processCreate);
 // Users
 // router.get('/admin',[isAuthenticatedOr403, isAdminOr403], adminController.admin);
 // router.get('/admin/readers', [isAuthenticatedOr403, isAdminOr403], adminController.showReaders);
