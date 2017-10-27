@@ -9,10 +9,8 @@ block body
                     thead
                         tr
                             th Nume
-                            th Prenume
                             th Varsta
                             th Predici
-                                a.btn.btn-lg.btn-primary.pull-right(href="preacher/create") Adauga un predicator
                             if typeof preachers != 'undefined' && preachers.length > 0
                                 each preacher, index in preachers
                                     tr

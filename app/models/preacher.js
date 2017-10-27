@@ -1,3 +1,4 @@
+
 const
     mongodb = require('mongodb'),
     mongoose = require('mongoose'),
@@ -6,16 +7,17 @@ const
 
 // create a schema
 const preacherSchema = new Schema({
-    first_name: {
+    name: {
         type: String
     },
-    last_name: {
-        type: String
+    slug: {
+        type: String,
+        unique: true
     },
-    sermons: [{type: ObjectId, ref:'sermon1'}],
-    most_recent_sermon_date: {
-        dateTime : date
-    }
+    sermons: [{}],
+    date: {
+        type: Date
+        }
 });
 
 // Middleware - make sure that the slug is created from the name
@@ -32,13 +34,12 @@ const preacherModel = mongoose.model('Preacher', preacherSchema);
 // export the model
 module.exports = preacherModel;
 
-//function to slugfy a name
-// function slugify(text) {
-//     return text.toString().toLowerCase()
-//         .replace(/\s+/g, '-')           // Replace spaces with -
-//         .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-//         .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-//         .replace(/^-+/, '')             // Trim - from start of text
-//         .replace(/-+$/, '');            // Trim - from end of text
-// };
+function slugify(text) {
+    return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+        .replace(/^-+/, '')             // Trim - from start of text
+        .replace(/-+$/, '');            // Trim - from end of text
+};
 

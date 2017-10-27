@@ -9,7 +9,7 @@ block body
             //    .alert.alert-danger
             //       each error, index in errors
             //            #{error}
-            form(action="/sermon/create" method="POST")
+            form(action="admin/sermon/create" method="POST")
                 input(type="hidden" name="_csrf" value=csrfToken)
                 .form-group
                     lable Titlu

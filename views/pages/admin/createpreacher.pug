@@ -1,0 +1,23 @@
+extends admin.pug
+
+block admin-content
+    .container-fluid
+        .card.admin
+            .card-body.border.border-black.rounded
+                h2 Adauga un predicator
+                //if errors.length > 0
+                //    .alert.alert-danger
+                //       each error, index in errors
+                //            #{error}
+                form(action="admin/preacher/create" method="POST")
+                    input(type="hidden" name="_csrf" value=csrfToken)
+                    .form-group
+                        lable Nume
+                        input(type="text" name="name").form-control
+                    .form-group
+                        lable Age
+                        input(type="number" name="age").form-control
+                    .form-group
+                        button(type="submit").btn.btn-success.btn-lg Create
+                    .form-group
+                        a(href="/admin").btn.btn-lg.btn-danger Cancel

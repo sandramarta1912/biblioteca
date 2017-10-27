@@ -1,14 +1,9 @@
+
+
 module.exports = {
-
-    //show the body.pug page
     showPreacher: (req, res) => {
-        res.render('pages/preacher&sermon/preacher.pug', {
-            // csrfToken: req.csrfToken()
-        });
-    },
-    showCreate: (req, res) => {
-        res.render('pages/preacher&sermon/createpreacher.pug', {
-
+        res.render('pages/preacher&sermon/preachers.pug', {
+            csrfToken: req.csrfToken()
         });
     }
 };
