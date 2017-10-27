@@ -7,7 +7,10 @@ const express = require('express'),
 	readersController = require('./readers/readers.controller');
 	userController = require('./users/user.controller');
 	contactController = require('./contact/contact.controller');
-	adminController= require('./controllers/main.controller');
+	adminController= require('./admin/admin.controller');
+	preacherController = require('./preacher/preacher.controller');
+	sermonController =	require('./preacher/sermon.controller');
+
 
 
 const passport = require('passport');
@@ -68,6 +71,13 @@ router.get('/readers/:slug/edit', [isAuthenticatedOr403, isAdminOr403], readersC
 router.post('/readers/:slug', [isAuthenticatedOr403, isAdminOr403], readersController.processEdit);
 router.get('/readers/:slug/delete', [isAuthenticatedOr403, isAdminOr403], readersController.deleteReader);
 router.get('/readers/:slug', readersController.showSingle);
+
+//Sermons & preachers
+router.get('/admin/sermons', adminController.showSermons);
+router.get('/admin/preachers', adminController.showPreacher);
+router.get('/sermons', sermonController.showSermons);
+router.get('/preachers', preacherController.showPreacher);
+
 
 // Users
 // router.get('/admin',[isAuthenticatedOr403, isAdminOr403], adminController.admin);

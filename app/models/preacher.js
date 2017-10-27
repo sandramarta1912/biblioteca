@@ -27,18 +27,18 @@ preacherSchema.pre('save', function(next) {
 preacherSchema.plugin(mongoosePaginate);
 
 // create the model
-const preacherModel = mongoose.model('Book', preacherSchema);
+const preacherModel = mongoose.model('Preacher', preacherSchema);
 
 // export the model
 module.exports = preacherModel;
 
 //function to slugfy a name
-function slugify(text) {
-    return text.toString().toLowerCase()
-        .replace(/\s+/g, '-')           // Replace spaces with -
-        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-        .replace(/^-+/, '')             // Trim - from start of text
-        .replace(/-+$/, '');            // Trim - from end of text
-};
+// function slugify(text) {
+//     return text.toString().toLowerCase()
+//         .replace(/\s+/g, '-')           // Replace spaces with -
+//         .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+//         .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+//         .replace(/^-+/, '')             // Trim - from start of text
+//         .replace(/-+$/, '');            // Trim - from end of text
+// };
 

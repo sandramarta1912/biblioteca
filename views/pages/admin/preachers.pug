@@ -1,0 +1,20 @@
+extends admin.pug
+
+block admin-content
+    .container-fluid
+        .card.admin
+            .card-body.border.border-black.rounded
+                h1.text-center Predicatori
+                table.table.table-striped
+                    thead
+                        tr
+                            th Nume
+                            th Prenume
+                            th Varsta
+                            th Predici
+                                a.btn.btn-lg.btn-primary.pull-right(href="preacher/create") Adauga un predicator
+                            if typeof preachers != 'undefined' && preachers.length > 0
+                                each preacher, index in preachers
+                                    tr
+                                        td #{preacher.name}
+                                        td #{preacher.author}
