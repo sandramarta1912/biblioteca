@@ -12,11 +12,11 @@ block admin-content
                 form(action="/admin/preacher/create" method="POST")
                     input(type="hidden" name="_csrf" value=csrfToken)
                     .form-group
-                        lable Nume
-                        input(type="text" name="name").form-control
+                        lable Prenume
+                        input(type="text" name="firstName").form-control
                     .form-group
-                        lable Age
-                        input(type="number" name="age").form-control
+                        lable Nume
+                        input(type="text" name="lastName").form-control
                     .form-group
                         button(type="submit").btn.btn-success.btn-lg Create
                     .form-group

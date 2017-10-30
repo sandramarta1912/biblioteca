@@ -8,13 +8,16 @@ block admin-content
                 table.table.table-striped
                     thead
                         tr
-                            th Nume
+                            th Numele
                             th Prenume
-                            th Varsta
-                            th Predici
+                            th Nr de predici
+                            th
                                 a.btn.btn-lg.btn-primary.pull-right(href="/admin/preacher/create") Adauga un predicator
                             if typeof preachers != 'undefined' && preachers.length > 0
                                 each preacher, index in preachers
                                     tr
-                                        td #{preacher.name}
-                                        td #{preacher.author}
+                                        td #{preacher.lastName}
+                                        td #{preacher.firstName}
+                                        td #{preacher.sermons}
+                                        td
+                                            a.link(href="/admin/preacher") Vezi toate predicile

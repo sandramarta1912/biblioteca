@@ -1,4 +1,4 @@
-extends ../admin/admin.pug
+extends admin.pug
 
 block admin-content
     .container-fluid
@@ -8,15 +8,18 @@ block admin-content
                 table.table.table-striped
                     thead
                         tr
-                            th Nume
-                            th Author
-                            th
-                                a.btn.btn-lg.btn-primary.pull-right(href="predici/create") Adauga o predica
+                            th Titlu
+                            th Preacher
+                            th Durata
+                            th Data
+                                a.btn.btn-lg.btn-primary.pull-right(href="/admin/sermon/create") Adauga o predica
                             if typeof sermins != 'undefined' && sermons.length > 0
                                 each sermon, index in sermons
                                     tr
-                                        td #{sermon.name}
-                                        td #{sermon.author}
+                                        td #{sermon.title}
+                                        td #{sermon.preacher}
+                                        td #{sermon.duration}
+                                        td #{sermon.date}
                                         //                        td
                                         //                            a.btn.btn-md.btn-primary.mr-3.pull-right(href=`/predici/${book.slug}/`) View
                                         //                            a.btn.btn-md.btn-primary.mr-3.pull-right(href=`/books/${book.slug}/edit`) Edit

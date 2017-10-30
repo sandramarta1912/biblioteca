@@ -56,6 +56,8 @@ router.get('/admin/sermons', adminController.showSermons);
 router.get('/admin/preachers', adminController.showPreacher);
 router.get('/admin/preacher/create', adminController.showCreate);
 router.post('/admin/preacher/create',  adminController.processCreate);
+router.get('/admin/sermon/create', adminController.showCreateSermon);
+router.post('/admin/sermon/create',  adminController.processCreateSermon);
 
 // Books
 router.get('/books', 		 booksController.showBooks);
