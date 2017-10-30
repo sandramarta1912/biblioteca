@@ -3,7 +3,7 @@ const crypto = require('crypto');
 //const nodemailer = require('nodemailer');
 
 const User = require('../models/user');
-var createUser = require('../models/user').createUser;
+// var createUser = require('../models/user').createUser;
 
 module.exports = {
 	showCreate: showCreate,
@@ -35,7 +35,8 @@ function showCreate (req, res) {
 
 function processCreate (req, res) {
 	// Valiation
-	req.checkBody('name', 'Name is require.').notEmpty();
+	req.checkBody('firstName', 'FirstName is require.').notEmpty();
+	req.checkBody('lastName', 'LastName is require.').notEmpty();
 	req.checkBody('username', 'Username is required.').notEmpty();
 	req.checkBody('email', 'Email is required.').notEmpty();
 	req.checkBody('email', 'Email is not valid.').isEmail();
@@ -55,11 +56,13 @@ function processCreate (req, res) {
 
 	var newUser = new User({
 		_id: new ObjectID(),
-		name: requestBody.name,
+		firstName: requestBody.firstName,
+		lastName: requestBody.lastName,
 		email: requestBody.email,
 		username: requestBody.username,
 		password: requestBody.password
 	});
+	console.log(newUser);
 
 	
 
@@ -82,12 +85,12 @@ function showLogin(req, res) {
 }
 
 function processLogin(req, res) {
-    console.log('test');
+    // console.log('test');
    passport.authenticate('login', {
        successRedirect: '/',
         failureRedirect: '/user/login',
        failureFlash : true
-    })
+    });
 }
 
 function forgotPasswordShow(req, res) {
