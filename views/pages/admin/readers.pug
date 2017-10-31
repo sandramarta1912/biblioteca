@@ -22,6 +22,6 @@ block admin-content
 								td #{reader.email}
 								td
 									a.btn.btn-md.btn-primary.mr-3.pull-right(href="/readers/#{reader.slug}") View
-									a.btn.btn-md.btn-primary.mr-3.pull-right(href="/admin/#{reader.slug}/edit") Edit
-									a.btn.btn-md.btn-primary.mr-3.pull-right(href="/admin/#{reader.slug}/delete") Delete
+									a.btn.btn-md.btn-primary.mr-3.pull-right(href="/readers/#{reader.slug}/edit") Edit
+									a.btn.btn-md.btn-primary.mr-3.pull-right(href="/readers/#{reader.slug}/delete") Delete
 						//#{- include('../../pagination', {pagination: pagination}) }

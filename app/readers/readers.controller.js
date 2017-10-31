@@ -196,7 +196,7 @@ function showEdit (req, res) {
 
 				// redirect back to the books
 				req.flash('success', 'Successfully updated book!');
-				res.redirect('admin/readers');
+				res.redirect('/readers');
 			});
 
 		});

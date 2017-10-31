@@ -11,7 +11,7 @@ block admin-content
                                 .alert.alert-danger
                                     each error, index in errors
                                         #{error}
-                            form(action="/admin/preacher/:slug/edit" method="POST")
+                            form(action=`/admin/preacher/${preacher.slug}` method="POST")
                                 input(type="hidden" name="_csrf" value=csrfToken)
                                 .form-group
                                     label FirstName

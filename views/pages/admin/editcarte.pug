@@ -11,7 +11,7 @@ block admin-content
                             .alert.alert-danger
                                 each error, index in errors
                                     #{error}
-                        form(action="/books/:slug/edit" method="POST")
+                        form(action=`/books/${book.slug}` method="POST")
                             input(type="hidden" name="_csrf" value=csrfToken)
                             .form-group
                                 label Name
@@ -19,5 +19,8 @@ block admin-content
                             .form-group
                                 label Author
                                 input.form-control(name="author" type="text"  value=`${book.author}`)
+                            .form-group
+                                label About
+                                input.form-control(name="about" type="text"  value=`${book.about}`)
                             .form-group
                                 button.btn-btn-success(type="submit") Update

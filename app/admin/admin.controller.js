@@ -103,7 +103,7 @@ function processEditPreacher (req, res) {
         return res.redirect(`/admin/preacher/${req.params.slug}/edit`);
     }
     // finding a current preacher
-    Preacher.findOne({slug: req.params.slug}, (err, preacher) => {
+    Preacher.findOne({ slug: req.params.slug }, (err, preacher) => {
         // updating that preacher
         preacher.firstName = req.body.firstName;
         preacher.lastName = req.body.lastName;
