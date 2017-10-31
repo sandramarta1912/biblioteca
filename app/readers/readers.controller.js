@@ -76,13 +76,11 @@ function showSingle(req,res) {
 * Seed the database
 */
 function seedReaders(req, res) {
-	//create some books
-	const books = [
+
+	const readers = [
 		{name: 'Sandra Marta', age: '23' },
 		{name: 'Sandra Cezar',  age: '25'}
 	];
-
-	// use the Book model to insert/save
 	Reader.remove({}, () => {
 		for(reader of readers) {
 			var newReader = new Reader(reader);

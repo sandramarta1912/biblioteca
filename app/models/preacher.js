@@ -13,10 +13,10 @@ const preacherSchema = new Schema({
     lastName: {
         type: String
     },
-    // slug: {
-    //     type: String,
-    //     unique: true
-    // },
+    slug: {
+        type: String,
+        unique: true
+    },
     sermons: [{
         count: Number
     }],
@@ -26,10 +26,10 @@ const preacherSchema = new Schema({
 });
 
 // Middleware - make sure that the slug is created from the name
-// preacherSchema.pre('save', function(next) {
-//     this.slug = slugify(this.name);
-//     next();
-// });
+preacherSchema.pre('save', function(next) {
+    this.slug = slugify(this.firstName);
+    next();
+});
 
 preacherSchema.plugin(mongoosePaginate);
 
@@ -39,12 +39,12 @@ const preacherModel = mongoose.model('Preacher', preacherSchema);
 // export the model
 module.exports = preacherModel;
 
-// function slugify(text) {
-//     return text.toString().toLowerCase()
-//         .replace(/\s+/g, '-')           // Replace spaces with -
-//         .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-//         .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-//         .replace(/^-+/, '')             // Trim - from start of text
-//         .replace(/-+$/, '');            // Trim - from end of text
-// };
+function slugify(text) {
+    return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+        .replace(/^-+/, '')             // Trim - from start of text
+        .replace(/-+$/, '');            // Trim - from end of text
+};
 

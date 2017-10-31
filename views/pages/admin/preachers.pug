@@ -20,4 +20,6 @@ block admin-content
                                         td #{preacher.firstName}
                                         td #{preacher.sermons}
                                         td
-                                            a.link(href="/admin/preacher") Vezi toate predicile
+                                            a.btn.btn-md.btn-primary.mr-3.pull-right(href=`/admin/preacher/${preacher.slug}/`) View
+                                            a.btn.btn-md.btn-primary.mr-3.pull-right(href=`/admin/preacher/${preacher.slug}/edit`) Edit
+                                            a.btn.btn-md.btn-primary.mr-3.pull-right(href=`/admin/preacher/${preacher.slug}/delete`) Delete

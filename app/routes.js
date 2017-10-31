@@ -53,11 +53,14 @@ router.get('/', mainController.showHome);
 //admin routes
 router.get('/admin',[isAuthenticatedOr403, isAdminOr403], adminController.admin);
 router.get('/admin/sermons', adminController.showSermons);
-router.get('/admin/preachers', adminController.showPreacher);
-router.get('/admin/preacher/create', adminController.showCreate);
-router.post('/admin/preacher/create',  adminController.processCreate);
+router.get('/admin/preachers', adminController.showPreachers);
+router.get('/admin/preacher/create', adminController.showCreatePreacher);
+router.post('/admin/preacher/create',  adminController.processCreatePreacher);
 router.get('/admin/sermon/create', adminController.showCreateSermon);
 router.post('/admin/sermon/create',  adminController.processCreateSermon);
+router.get('/admin/preacher/:slug/edit', adminController.showEditPreacher);
+router.post('/admin/preacher/:slug/edit', adminController.processEditPreacher);
+router.get('/admin/preacher/:slug/delete', adminController.deletePreacher);
 
 // Books
 router.get('/books', 		 booksController.showBooks);

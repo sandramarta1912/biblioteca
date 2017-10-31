@@ -13,7 +13,7 @@ const sermonSchema = new Schema({
         type: String,
         unique: true
     },
-    preacher: [{type: ObjectId, ref:'Preacher'}],
+    // preacher: [{}],
     date: {
         type: Date
     },
@@ -37,7 +37,7 @@ sermonSchema.pre('save', function(next) {
 sermonSchema.plugin(mongoosePaginate);
 
 // create the model
-const sermonModel = mongoose.model('Book', sermonSchema);
+const sermonModel = mongoose.model('Sermon', sermonSchema);
 
 // export the model
 module.exports = sermonModel;
