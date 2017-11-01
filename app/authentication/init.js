@@ -80,6 +80,13 @@ module.exports = function(passport){
                         return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
                     } else {
 
+                        req.checkBody('firstName', 'FirstName is require.').notEmpty();
+                        req.checkBody('lastName', 'LastName is require.').notEmpty();
+                        req.checkBody('email', 'Email is required.').notEmpty();
+                        req.checkBody('email', 'Email is not valid.').isEmail();
+                        req.checkBody('password', 'Password is required.').notEmpty();
+                        req.checkBody('password2', ' Password confirmation is not the same.').equals(req.body.password);
+
                         // if there is no user with that email
                         // create the user
                         var newUser = new User();
@@ -87,6 +94,17 @@ module.exports = function(passport){
                         // set the user's local credentials
                         newUser.local.email = email;
                         newUser.local.password = newUser.generateHash(password);
+                        newUser.local.firstName = req.body.firstName;
+                        newUser.local.lastName = req.body.lastName;
+
+                        // if there are errors, redirect  and save eroors to flash
+                        const errors = req.validationErrors();
+
+                        if (errors) {
+                            req.flash('errors', errors.map(err => err.msg))
+                            req.flash('user', newUser)
+                            return done(null, false);
+                        }
 
                         // save the user
                         newUser.save(function (err) {

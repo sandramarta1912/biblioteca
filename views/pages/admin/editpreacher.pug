@@ -5,19 +5,19 @@ block admin-content
         .card.admin
             .card-body.border.border-black.rounded
                 h1.text-center Editeaza #{preacher.slug}
-                    .row.justify-content-md-center
-                        .col-6
-                            if typeof errors != 'undefined' && errors.length > 0
-                                .alert.alert-danger
-                                    each error, index in errors
-                                        #{error}
-                            form(action=`/admin/preacher/${preacher.slug}` method="POST")
-                                input(type="hidden" name="_csrf" value=csrfToken)
-                                .form-group
-                                    label FirstName
-                                    input.form-control(type="text" name="firstName" value=`${preacher.firstName}`)
-                                .form-group
-                                    label LastName
-                                    input.form-control(name="lastName" type="text"  value=`${preacher.lastName}`)
-                                .form-group
-                                    button.btn-btn-success(type="submit") Update
+                .row.justify-content-md-center
+                    .col-6
+                        if typeof errors != 'undefined' && errors.length > 0
+                            .alert.alert-danger
+                                each error, index in errors
+                                    #{error}
+                        form(action=`/admin/preacher/${preacher.slug}` method="POST")
+                            input(type="hidden" name="_csrf" value=csrfToken)
+                            .form-group
+                                label Prenume
+                                input.form-control(type="text" name="firstName" value=`${preacher.firstName}`)
+                            .form-group
+                                label Nume
+                                input.form-control(name="lastName" type="text"  value=`${preacher.lastName}`)
+                            .form-group
+                                button.btn-btn-success(type="submit") Update

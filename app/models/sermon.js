@@ -13,7 +13,9 @@ const sermonSchema = new Schema({
         type: String,
         unique: true
     },
-    // preacher: [{}],
+    preacher: {
+        type: String
+    },
     date: {
         type: Date
     },

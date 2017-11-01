@@ -8,14 +8,18 @@ block body
                 table.table.table-striped
                     thead
                         tr
-                            th Nume
-                            th Author
-                            th
-                            if typeof sermins != 'undefined' && sermons.length > 0
+                            th Titlu
+                            th Predicator
+                            th Timp
+                            th Data
+                            if typeof sermons != 'undefined' && sermons.length > 0
                                 each sermon, index in sermons
                                     tr
-                                        td #{sermon.name}
-                                        td #{sermon.author}
+                                        td #{sermon.title}
+                                        td #{sermon.preacher}
+                                            a.link(href=`/admin/preacher/${preacher.slug}`)
+                                        td #{sermon.duration}
+                                        td #{sermon.date}
                                         //                        td
                                         //                            a.btn.btn-md.btn-primary.mr-3.pull-right(href=`/predici/${book.slug}/`) View
                                         //                            a.btn.btn-md.btn-primary.mr-3.pull-right(href=`/books/${book.slug}/edit`) Edit

@@ -8,11 +8,12 @@ block body
                 table.table.table-striped
                     thead
                         tr
-                            th Nume
-                            th Varsta
-                            th Predici
+                            th Numele
+                            th Prenume
+                            th Nr de predici
                             if typeof preachers != 'undefined' && preachers.length > 0
                                 each preacher, index in preachers
                                     tr
-                                        td #{preacher.name}
-                                        td #{preacher.author}
+                                        td #{preacher.lastName}
+                                        td #{preacher.firstName}
+                                        td #{preacher.sermons}

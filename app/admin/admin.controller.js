@@ -134,28 +134,41 @@ function deletePreacher (req, res) {
 }
 
 function showSermons (req, res) {
-    Sermon.find({}, (err, sermons) => {
+    let itemsPerPage = 10;
+    let currentPage = req.query.page != undefined ? req.query.page : 1;
+    let offset = itemsPerPage * (currentPage - 1);
+
+    Sermon.paginate({}, {offset: offset, limit: itemsPerPage}, function (err, result) {
         if (err) {
             res.status(404);
-            res.send('Sermon not found!');
+            return res.send('Oops... Something is awfully wrong!');
         }
-        res.render('pages/admin/preachers.pug', {
-            sermons: result.docs,
-            pagination: pagination.paginate(),
-            success: req.flash('success'),
-            csrfToken: req.csrfToken()
+
+        let pagination = new Pagination(req.url, result.total, itemsPerPage);
+        Sermon.find({}, (err, sermons) => {
+            if (err) {
+                res.status(404);
+                res.send('Sermon not found!');
+            }
+            res.render('pages/admin/sermons.pug', {
+                sermons: result.docs,
+                //pagination: pagination.paginate(),
+                success: req.flash('success'),
+                csrfToken: req.csrfToken()
+            });
         });
     });
 }
 function showCreateSermon  (req, res)  {
-    res.render('pages/admin/createsermon', {
+    res.render('pages/admin/createsermon.pug', {
         csrfToken: req.csrfToken()
     });
 }
 function processCreateSermon (req, res)  {
     req.checkBody('title', 'Title is required.').notEmpty();
-    req.checkBody('Duration', 'Duration is required').notEmpty();
     req.checkBody('Preacher', 'Preacher is required').notEmpty();
+    req.checkBody('Duration', 'Duration is required').notEmpty();
+    
 
     const errors = req.validationErrors();
     if (errors) {
@@ -166,10 +179,11 @@ function processCreateSermon (req, res)  {
     const sermon = new Sermon ({
         // _id: new ObjectID(),
         title: req.body.title,
-        preacher: req.body.preacher
+        preacher: req.body.preacher,
+        duration: req.body.duration
     });
     //save sermon
-    sermon.save((err, preacher) =>{
+    sermon.save((err, sermon) =>{
         if(err){
             req.flash('errors', 'The reader could not be created. There are errors!');
             return res.redirect('/admin/sermon/create');

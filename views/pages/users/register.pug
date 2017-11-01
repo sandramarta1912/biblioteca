@@ -2,6 +2,12 @@ extends ../../layout.pug
 
 block body
 	.container
+		if (errors)
+			each error, index in errors
+				#{index} #{error}
+		if (inputs)
+			each input, index in inputs
+				#{index} #{input}
 		form.form-horizontal(role="form" method="POST" action="/user/register")
 			input(type="hidden" name="_csrf" value=csrfToken)
 			.row
@@ -15,7 +21,7 @@ block body
 						.input-group.mb.mr-sm-2.mb-sm-0
 							.input-group-addon(style="width: 2.6rem")
 								i.fa.fa-user
-							input.form-control(type="text" name="firstName" placeholder="John" required autofocus)
+							input.form-control(type="text" name="firstName" placeholder="John" value=user.local.firstName required autofocus)
 				.col-md-3
 					.form-control-feedback
 						span.text-danger.aling-middle
