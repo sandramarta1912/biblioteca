@@ -93,18 +93,18 @@ module.exports = function(passport){
 
                         // set the user's local credentials
                         newUser.local.email = email;
-                        newUser.local.password = newUser.generateHash(password);
                         newUser.local.firstName = req.body.firstName;
                         newUser.local.lastName = req.body.lastName;
-
                         // if there are errors, redirect  and save eroors to flash
                         const errors = req.validationErrors();
 
+
                         if (errors) {
-                            req.flash('errors', errors.map(err => err.msg))
+                            req.flash('errors', errors.map(err => err.msg));
                             req.flash('user', newUser)
                             return done(null, false);
                         }
+                        newUser.local.password = newUser.generateHash(password);
 
                         // save the user
                         newUser.save(function (err) {

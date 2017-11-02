@@ -22,9 +22,12 @@ var ObjectID = require('mongodb').ObjectID;
 
 function showCreate (req, res) {
 
+	//var user = req.flash('user');
+	//console.log(user);
+
 	res.render('pages/users/register',{		
 		errors: req.flash('errors'),
-		user: new User(req.body),
+		user: req.flash('user'),
 		csrfToken: req.csrfToken()
 	});
 }
