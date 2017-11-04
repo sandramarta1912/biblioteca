@@ -13,6 +13,7 @@ const express = require('express'),
 
 const passport = require('passport');
 
+var User = require('./models/user');
 var isAuthenticatedOr403 = function(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next();
@@ -89,11 +90,43 @@ router.get('/sermons', sermonController.showSermons);
 
 
 router.get('/user/register', userController.showCreate);
-router.post('/user/register', passport.authenticate('local-signup', {
-	successRedirect : '/', // redirect to the secure profile section
-	failureRedirect : '/user/register', // redirect back to the signup page if there is an error
-	failureFlash : true // allow flash messages
-}));
+router.post(
+	'/user/register',
+	function(req, res) {
+		req.checkBody('firstName', 'FirstName is require.').notEmpty();
+		req.checkBody('lastName', 'LastName is require.').notEmpty();
+		req.checkBody('email', 'Email is required.').notEmpty();
+		req.checkBody('email', 'Email is not valid.').isEmail();
+		req.checkBody('password', 'Password is required.').notEmpty();
+		req.checkBody('password2', ' Password confirmation is not the same.').equals(req.body.password);
+
+		// if there are errors, redirect  and save eroors to flash
+		const errors = req.validationErrors();
+
+		if (errors) {
+			// if there is no user with that email
+			// create the user
+			var newUser = new User();
+
+			// set the user's local credentials
+			newUser.local.email = req.body.email;
+			newUser.local.firstName = req.body.firstName;
+			newUser.local.lastName = req.body.lastName;
+
+			res.render('pages/users/register',{
+				errors: errors,
+				user: newUser,
+				csrfToken: req.csrfToken()
+			});
+			return
+		}
+
+		passport.authenticate('local-signup', {
+			successRedirect : '/', // redirect to the secure profile section
+			failureRedirect : '/user/register', // redirect back to the signup page if there is an error
+			failureFlash : true // allow flash messages
+		})
+});
 
 router.get('/user/login', userController.showLogin);
 

@@ -27,7 +27,7 @@ function showCreate (req, res) {
 
 	res.render('pages/users/register',{		
 		errors: req.flash('errors'),
-		user: req.flash('user'),
+		user: new User,
 		csrfToken: req.csrfToken()
 	});
 }

@@ -1,19 +1,18 @@
 extends ../../layout.pug
 
 block body
-	| Local #{user.local}
 	.container
-		if (errors)
-			each error, index in errors
-				#{index} #{error}
-		if (inputs)
-			each input, index in inputs
-				#{index} #{input}
 		form.form-horizontal(role="form" method="POST" action="/user/register")
 			input(type="hidden" name="_csrf" value=csrfToken)
 			.row
 				.col-md-3.col-md-6
 					h3 Inregistreaza-te
+			if errors
+				.row
+					.col-md-3.col-md-6
+						ul
+							for error in errors
+								li!= error.msg
 			.row
 				.col-md-3.field-label-responsive
 					label FirstName
@@ -22,7 +21,8 @@ block body
 						.input-group.mb.mr-sm-2.mb-sm-0
 							.input-group-addon(style="width: 2.6rem")
 								i.fa.fa-user
-							input.form-control(type="text" name="firstName" placeholder="John" value=user.local required autofocus)
+							input.form-control(type="text" name="firstName" placeholder="John" value=user.local.firstName ? user.local.firstName :
+							required autofocus)
 				.col-md-3
 					.form-control-feedback
 						span.text-danger.aling-middle
@@ -35,8 +35,8 @@ block body
 						.input-group.mb.mr-sm-2.mb-sm-0
 							.input-group-addon(style="width: 2.6rem")
 								i.fa.fa-user
-							input.form-control(type="text" name="lastName" id="lastName"
-							placeholder="Doen" required autofocus)
+							input.form-control(type="text" name="lastName" placeholder="Doen" id="lastName" value=user.local.lastName ? user.local.lastName :
+							 required autofocus)
 					.col-md-3
 						.form-control-feedback
 							span.text-danger.aling-middle
@@ -48,8 +48,8 @@ block body
 						.input-group.mb.mr-sm-2.mb-sm-0
 							.input-group-addon(style="width: 2.6rem")
 								i.fa.fa-at
-							input.form-control(type="text" name="email" id="email"
-							placeholder="you@example.com" required autofocus)
+							input.form-control(type="text" name="email" id="email" placeholder="you@example.com" value=user.local.email ? user.local.email :
+							 required autofocus)
 					.col-md-3
 						.form-control-feedback
 							span.text-danger.aling-middle
