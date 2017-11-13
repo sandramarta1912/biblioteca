@@ -1,20 +1,24 @@
 extends ../../layout.pug
 
-block body
+block page
     .container
-        form(action="/user/login" method="POST")
-            input(type="hidden" name="_csrf" value=csrfToken)
-            .form-group
-                label Username
-                input(class="form-control" placeholder="Enter email" type="text" name="email" required)
-            .form-group
-                lable Password
-                input.form-control(type="password" placeholder="Enter Password" name="password" required)
-            .form-group
-                button(type="submit" name="Login")
-                input(type="checkbox" checked="checked")
-                |Remember me
-            .form-group
-                span.pwd Forgot
-                    a(href="/change") password?
-            button.btn.btn-default(type="submit" value="") Login
+        .row.justify-content-md-center.mt-5.pt-5
+            .card.col-5.pt-5.pb-5.border.border-secondary
+                form(action="/user/login" method="POST")
+                    input(type="hidden" name="_csrf" value=csrfToken)
+                    .form-group
+                        label Username
+                        input(class="form-control" placeholder="Enter email" type="text" name="email" required)
+                    .form-group
+                        lable Password
+                        input.form-control(type="password" placeholder="Enter Password" name="password" required)
+                    .form-group
+                        |Nu ai cont?
+                        a(href="/user/register") Inregistreaza-te
+                    .form-group
+                        input(type="checkbox" checked="checked")
+                        |Remember me
+                    .form-group
+                        span.pwd Forgot
+                            a(href="/change") password?
+                    button.btn.btn-default(type="submit" value="") Login

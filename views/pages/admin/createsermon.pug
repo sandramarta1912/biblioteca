@@ -12,16 +12,21 @@ block admin-content
                 form(action="/admin/sermon/create" method="POST")
                     input(type="hidden" name="_csrf" value=csrfToken)
                     .form-group
-                        lable Titlu
-                        input(type="text" name="titlu").form-control
+                        label Titlu
+                        input(type="text" name="title").form-control
                     .form-group
-                        lable Predicator
-                        input(type="text" name="predicator").form-control
-
+                        label(for="selectPreacher") Predicator
+                        select#selectPreacher.form-control
+                            each preacher,index in preachers
+                                option
+                                    `${preacher.firstName}`
                     .form-group
-                        lable Data
-                        input(type="number" name="data").form-control
+                        label Timp
+                        input(type="number" name="duration").form-control
+                    .form-group
+                        label Data
+                        input(type="number" name="date").form-control
                     .form-group
                         button(type="submit").btn.btn-success.btn-lg Create
                     .form-group
-                    a(href="/admin").btn.btn-lg.btn-danger Cancel
+                        a(href="/admin").btn.btn-lg.btn-danger Cancel

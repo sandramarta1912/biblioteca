@@ -7,6 +7,8 @@ const express = require('express'),
 	readersController = require('./readers/readers.controller'),
 	userController = require('./users/user.controller'),
 	contactController = require('./contact/contact.controller'),
+	preacherAdminController= require('./admin/preacher/preacher.controller'),
+	sermonAdminController= require('./admin/sermon/sermon.controller'),
 	adminController= require('./admin/admin.controller'),
 	preacherController = require('./preacher/preacher.controller'),
 	sermonController =	require('./preacher/sermon.controller');
@@ -40,15 +42,15 @@ router.get('/', mainController.showHome);
 
 //admin routes
 router.get('/admin',[isAuthenticatedOr403, isAdminOr403], adminController.admin);
-router.get('/admin/sermons',[isAuthenticatedOr403, isAdminOr403], adminController.showSermons);
-router.get('/admin/preachers',[isAuthenticatedOr403, isAdminOr403], adminController.showPreachers);
-router.get('/admin/preacher/create',[isAuthenticatedOr403, isAdminOr403], adminController.showCreatePreacher);
-router.post('/admin/preacher/create',[isAuthenticatedOr403, isAdminOr403],  adminController.processCreatePreacher);
-router.get('/admin/sermon/create',[isAuthenticatedOr403, isAdminOr403], adminController.showCreateSermon);
-router.post('/admin/sermon/create',[isAuthenticatedOr403, isAdminOr403],  adminController.processCreateSermon);
-router.get('/admin/preacher/:slug/edit',[isAuthenticatedOr403, isAdminOr403], adminController.showEditPreacher);
-router.post('/admin/preacher/:slug',[isAuthenticatedOr403, isAdminOr403], adminController.processEditPreacher);
-router.get('/admin/preacher/:slug/delete',[isAuthenticatedOr403, isAdminOr403], adminController.deletePreacher);
+router.get('/admin/sermons',[isAuthenticatedOr403, isAdminOr403], sermonAdminController.showSermons);
+router.get('/admin/preachers',[isAuthenticatedOr403, isAdminOr403], preacherAdminController.showPreachers);
+router.get('/admin/preacher/create',[isAuthenticatedOr403, isAdminOr403], preacherAdminController.showCreatePreacher);
+router.post('/admin/preacher/create',[isAuthenticatedOr403, isAdminOr403], preacherAdminController.processCreatePreacher);
+router.get('/admin/sermon/create',[isAuthenticatedOr403, isAdminOr403], sermonAdminController.showCreateSermon);
+router.post('/admin/sermon/create',[isAuthenticatedOr403, isAdminOr403],  sermonAdminController.processCreateSermon);
+router.get('/admin/preacher/:slug/edit',[isAuthenticatedOr403, isAdminOr403], preacherAdminController.showEditPreacher);
+router.post('/admin/preacher/:slug',[isAuthenticatedOr403, isAdminOr403], preacherAdminController.processEditPreacher);
+router.get('/admin/preacher/:slug/delete',[isAuthenticatedOr403, isAdminOr403], preacherAdminController.deletePreacher);
 
 // Books
 router.get('/books', [isAuthenticatedOr403, isAdminOr403],		 booksController.showBooks);

@@ -3,14 +3,14 @@ nav#navbar.fixed-top.navbar-expand-lg.pt-3
     button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
         span.navbar-toggler-icon
     .collapse.navbar-collapse#navbarSupportedContent
-        a#navbar-brand.pl-5(href="#")
+        a#navbar-brand.pl-5(href="/")
             h3 Biserica Emanuel
         .navbar-nav.ml-auto.mr-5
             .nav-item
                 a.nav-link(href="/") Acasa
                     span.sr-only #{current}
             .dropdown
-                button#dropdownMenuButton.btn.btn-secondary.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Predici
+                button#dropdownMenuButton.btn.btn-secondary.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Mesaje audio
                 .dropdown-menu(aria-labelledby="dropdownMenuButton")
                     a.dropdown-item(href="/sermons") Predici
                     a.dropdown-item(href="/preachers") Predicatori
@@ -19,10 +19,12 @@ nav#navbar.fixed-top.navbar-expand-lg.pt-3
                     //a.nav-link(href="/user/logout")
                     //    h2 Logout
                     .dropdown
-                        button#dropdownMenuButton.btn.btn-secondary.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Bună, #{user.local.firstName}
+                        button#dropdownMenuButton.btn.btn-secondary.dropdown-toggle(type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                            | Bună, #{user.local.firstName} #{user.local.lastName}
                         .dropdown-menu(aria-labelledby="dropdownMenuButton")
                             if isAdmin
                                 a.dropdown-item(href="/admin") Admin
+                            a.dropdown-item(href=`/user/${user.firstName}`) Profilul meu
                             a.dropdown-item(href="/user/logout") Logout
             else
                 .nav-item

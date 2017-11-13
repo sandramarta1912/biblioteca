@@ -6,8 +6,8 @@ nav#navbar.navbar.navbar-dark.bg-dark.navbar-expand-lg.pt-3
             h3 Biserica Emanuel
         .navbar-nav.ml-auto.pull-right
             .dropdown.pr-5
-                .btn.btn-info.btn-lg.dropdown-toggle(type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Bună,
-                #{user.local.firstName}
+                .btn.btn-info.btn-lg.dropdown-toggle(type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+                    | Bună, #{user.local.firstName} #{user.local.lastName}
                 .dropdown-menu(aria-labelledby="dropdownMenuButton")
                     a.dropdown-item(href="/") Prima pagina
                     a.dropdown-item(href="/user/logout") Logout
