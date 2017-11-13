@@ -3,22 +3,44 @@ extends ../../layout.pug
 block page
     .container
         .row.justify-content-md-center.mt-5.pt-5
-            .card.col-5.pt-5.pb-5.border.border-secondary
+            .card.col-5.pt-5.border.border-secondary
                 form(action="/user/login" method="POST")
                     input(type="hidden" name="_csrf" value=csrfToken)
-                    .form-group
-                        label Username
-                        input(class="form-control" placeholder="Enter email" type="text" name="email" required)
-                    .form-group
-                        lable Password
-                        input.form-control(type="password" placeholder="Enter Password" name="password" required)
-                    .form-group
-                        |Nu ai cont?
-                        a(href="/user/register") Inregistreaza-te
-                    .form-group
-                        input(type="checkbox" checked="checked")
-                        |Remember me
-                    .form-group
-                        span.pwd Forgot
-                            a(href="/change") password?
-                    button.btn.btn-default(type="submit" value="") Login
+                    .row
+                        .col-md-3.field-label-responsive
+                            label Email
+                        .col-md-6
+                            .form-group
+                                .input-group
+                                    .input-group-addon(style="width: 2.6rem")
+                                        i.fa.fa-at
+                                    input.form-control(type="text" name="email" id="email" placeholder="you@example.com"
+                                            required autofocus)
+                            .col-md-3
+                                .form-control-feedback
+                                    span.text-danger.aling-middle
+                                    // put name validation error message here
+                    .row
+                        .col-md-3.field-label-responsive
+                            label Password
+                        .col-md-6
+                            .form-group
+                                .input-group
+                                    .input-group-addon(style="width: 2.6rem")
+                                        i.fa.fa-lock
+                                    input.form-control(type="password" name="password" id="password" placeholder="*********" required autofocus)
+                            .col-md-3
+                                .form-control-feedback
+                                    span.text-danger.aling-middle
+                                    //put name validfdation error message here
+                    .row.justify-content-md-center
+                        .col-4
+                            button.btn.btn-default(type="submit" value="") Login
+                            hr
+                    .row.justify-content-md-center
+                        .col-8
+                            a(href="#") Ai uitat parola?
+                            a.pl-5(href="/user/register") Nu ai cont?
+                    .col
+                        i.pull-right.pt-5.pb-3.fa.fa-long-arrow-left(aria-hidden="true")
+                            a.back(href="/") Inapoi la prima pagina
