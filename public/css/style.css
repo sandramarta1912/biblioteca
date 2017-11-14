@@ -39,3 +39,13 @@ img.img-opacity:hover {
     padding: 50px 40px 10px 40px;
 
 }
+.register{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+.form-register{
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 50px 40px 10px 40px;
+}
