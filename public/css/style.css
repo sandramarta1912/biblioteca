@@ -27,3 +27,15 @@ img.img-opacity:hover {
 .back{
     color : #2B2922;
 }
+.login{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+
+}
+.formlog{
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 50px 40px 10px 40px;
+
+}

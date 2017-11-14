@@ -1,46 +1,42 @@
 extends ../../layout.pug
 
 block page
-    .container
-        .row.justify-content-md-center.mt-5.pt-5
-            .card.col-5.pt-5.border.border-secondary
-                form(action="/user/login" method="POST")
-                    input(type="hidden" name="_csrf" value=csrfToken)
-                    .row
-                        .col-md-3.field-label-responsive
-                            label Email
-                        .col-md-6
-                            .form-group
-                                .input-group
-                                    .input-group-addon(style="width: 2.6rem")
-                                        i.fa.fa-at
-                                    input.form-control(type="text" name="email" id="email" placeholder="you@example.com"
-                                            required autofocus)
-                            .col-md-3
-                                .form-control-feedback
-                                    span.text-danger.aling-middle
-                                    // put name validation error message here
-                    .row
-                        .col-md-3.field-label-responsive
-                            label Password
-                        .col-md-6
-                            .form-group
-                                .input-group
-                                    .input-group-addon(style="width: 2.6rem")
-                                        i.fa.fa-lock
-                                    input.form-control(type="password" name="password" id="password" placeholder="*********" required autofocus)
-                            .col-md-3
-                                .form-control-feedback
-                                    span.text-danger.aling-middle
-                                    //put name validfdation error message here
-                    .row.justify-content-md-center
-                        .col-4
-                            button.btn.btn-default(type="submit" value="") Login
-                            hr
-                    .row.justify-content-md-center
-                        .col-8
-                            a(href="#") Ai uitat parola?
-                            a.pl-5(href="/user/register") Nu ai cont?
-                    .col
-                        i.pull-right.pt-5.pb-3.fa.fa-long-arrow-left(aria-hidden="true")
-                            a.back(href="/") Inapoi la prima pagina
+    .login.pt-5.mt-5
+        form(action="/user/login" method="POST").formlog
+            input(type="hidden" name="_csrf" value=csrfToken)
+            .row
+                .col-md-3.field-label-responsive
+                    label Email
+                .col-md-9
+                    .form-group
+                        .input-group
+                            .input-group-addon(style="width: 2.6rem")
+                                i.fa.fa-at
+                            input.form-control(type="text" name="email" id="email" placeholder="you@example.com"
+                                    required autofocus)
+                    //.col-md-3
+                    //    .form-control-feedback
+                    //        span.text-danger.aling-middle
+                    //        // put name validation error message here
+            .row
+                .col-md-3.field-label-responsive
+                    label Password
+                .col-md-9
+                    .form-group
+                        .input-group
+                            .input-group-addon(style="width: 2.6rem")
+                                i.fa.fa-lock
+                            input.form-control(type="password" name="password" id="password" placeholder="*********" required autofocus)
+                    //.col-md-3
+                    //    .form-control-feedback
+                    //        span.text-danger.aling-middle
+                    //        //put name validfdation error message here
+            .row.justify-content-md-center
+                .col-4
+                    button.btn.btn-default(type="submit" value="") Login
+                    hr
+            .row.justify-content-md-center
+                    a.pull-left(href="#") Ai uitat parola?
+                    a.pull-right(href="/user/register") Nu ai cont?
+            i.pull-right.pt-5.fa.fa-long-arrow-left(aria-hidden="true")
+                    a.back(href="/") Inapoi la prima pagina
