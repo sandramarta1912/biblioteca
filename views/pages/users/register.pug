@@ -7,7 +7,7 @@ block page
 			h4 Inregistreaza-te
 			if errors
 				.row
-					.col-md-3.col-md-6
+					.col-md-3.col-md-12
 						ul
 							for error in errors
 								li!= error.msg
@@ -81,26 +81,3 @@ block page
 					button.btn.btn-default(type="submit" value="") Signup
 			i.pull-right.pt-5.fa.fa-long-arrow-left(aria-hidden="true")
 				a.back(href="/") Inapoi la prima pagina
-							// put name validation error message here
-							//h2.page-header.text-center Register
-							//form(name="register" action="/user/register" method="POST")
-							//	input(type="hidden" name="_csrf" value=csrfToken)
-							//	.form-group
-							//		lable Name
-							//			input.form-control(type="text" name="name" placeholder="Firstname")
-							//	.form-group
-							//		lable Username
-							//			input.form-control(type="text" name="username" placeholder="Lastname")
-							//	.form-group
-							//		lable Email
-							//			input.form-control(type="text" name="email"	placeholder="Email")
-							//	.form-group
-							//		label Password
-							//			input.form-control(type="password" name="password" placeholder="Password")
-							//	.form-group
-							//		label Confirm Password
-							//			input.form-control(type="password" name="password2" placeholder="Password")
-							//	button.btn.btn-default(type="submit" value="") Submit
-							//
-							//
-							//

@@ -34,13 +34,15 @@ function showCreate (req, res) {
 
 function showLogin(req, res) {
 	res.render('pages/users/login', {
-		
+		user: new User,
 		errors: req.flash('errors'),
 		csrfToken: req.csrfToken()
 	});	
 }
 
 function processLogin(req, res) {
+	
+
     // console.log('test');
    passport.authenticate('login', {
        successRedirect: '/',

@@ -4,6 +4,12 @@ block page
     .login.pt-5.mt-5
         form(action="/user/login" method="POST").formlog
             input(type="hidden" name="_csrf" value=csrfToken)
+            if errors
+                .row
+                    .col-md-3.col-md-12
+                        ul
+                            for error in errors
+                                li!= error.msg
             .row
                 .col-md-3.field-label-responsive
                     label Email

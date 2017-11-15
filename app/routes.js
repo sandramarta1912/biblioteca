@@ -97,10 +97,10 @@ router.post(
 	function(req, res) {
 		req.checkBody('firstName', 'FirstName is require.').notEmpty();
 		req.checkBody('lastName', 'LastName is require.').notEmpty();
-		req.checkBody('email', 'Email is required.').notEmpty();
-		req.checkBody('email', 'Email is not valid.').isEmail();
-		req.checkBody('password', 'Password is required.').notEmpty();
-		req.checkBody('password2', ' Password confirmation is not the same.').equals(req.body.password);
+		req.checkBody('email', 'Tastati emailul.').notEmpty();
+		req.checkBody('email', 'Email nu este valid.').isEmail();
+		req.checkBody('password', 'Tastati parola.').notEmpty();
+		req.checkBody('password2', ' Confirmarea parolei nu e aceesi.').equals(req.body.password);
 
 		// if there are errors, redirect  and save eroors to flash
 		const errors = req.validationErrors();
@@ -134,15 +134,58 @@ router.get('/user/login', userController.showLogin);
 
 router.post(
 	'/user/login',
-	passport.authenticate(
-		'local-login',
-		{
-			successRedirect: '/',
-			failureRedirect: '/user/login',
-			failureFlash: true
+	function (req, res) {
+		req.checkBody('email', 'Ati uitat sa tastati emailul.').notEmpty();
+		req.checkBody('email', 'Email nu este valid.').isEmail();
+		// req.checkBody('password', 'Password is required.').notEmpty();
+		// req.checkBody('password2', ' Password confirmation is not the same.').equals(req.body.password);
+
+		// if there are errors, redirect  and save eroors to flash
+		const errors = req.validationErrors();
+
+		// if there is no user with that email
+		// create the user
+		var user = new User();
+
+		// set the user's local credentials
+		user.local.email = req.body.email;
+		user.local.password = req.body.password;
+
+		if (errors) {
+			return res.render('pages/users/login', {
+				errors: errors,
+				user: user,
+				csrfToken: req.csrfToken()
+			});
+
 		}
-	)
-);
+
+		passport.authenticate('local-login', function(err, user, info) {
+			if (err || !user) {
+				return res.render('pages/users/login', {
+					errors: {"error": "inexistent user"},
+					user: user,
+					csrfToken: req.csrfToken()
+				});
+			}
+
+			req.logIn(user, function(err) {
+				if (err) {
+					return res.render('pages/users/login', {
+						errors: err,
+						user: user,
+						csrfToken: req.csrfToken()
+					});
+				}
+
+				// you can send a json response instead of redirecting the user
+				//res.status(200).json(user);
+
+				res.redirect('/');
+			});
+		})(req, res);
+
+	});
 
 router.get('/user/logout', function(req, res) {
 	req.logout();
